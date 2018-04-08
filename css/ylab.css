@@ -1,0 +1,8 @@
+body {background: #FED; margin-left:8em;}
+h1 {width:90%}
+h2 {}
+h3 {background:yellow;}
+div.cal {width:100%;}
+.link {background:#DA6; float:left; width:7em; margin-left:-7.5em; padding:0.2em; list-style:none;}
+.logo {float:right; width:10%; position:fixed; left: 87%;}
+iframe {width:70%; height:36em; frameborder:0; scrolling:no; background:white;}

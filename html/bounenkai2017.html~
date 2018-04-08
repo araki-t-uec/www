@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8"> 
+  <tytle></tytle>
+  <style type="text/css">
+    body {padding-left:3%; background:#FDB; border:dashed #E85 5px; color:navy;}
+    h1 {border-left:0.5em solid #E85; text-shadow:0.1em 0.1em 0.1em #48B;}
+    h2 {border-bottom:0.1em solid #E85; margin-top:25em;}
+    h3 {background:#E85; margin-top:25em;}
+    div.Q {width: 90%; display: inline-table; border:solid #E85 3px; border-radius:0.5em;  }
+    div.img {width:45%;float:left;}
+    div.img img{width:90%;}
+    p {text-indent:1em;}
+    .logo {float:right; width:10%;}
+    .note {color:#F55; font-size:0.8em; list-style:none;}
+    .note:before {content:"※";}
+    .ans {background:navy; color:naby; border-left:2em solid #FDB;}
+    .ans:before {content:"答: "; color:#F55;}
+</style>
+</head>
+<body>
+  <img class="logo" src="http://mm.cs.uec.ac.jp/kobaya-ha/img/yanailogo.png">
+  <h1>柳井研究室２０１７年 １２月忘年会！</h1>
+  <h2>プロローグ</h2>
+  <div class="Q">
+    <ul>
+      <li>「今年も一年間おつかれさまでした」という會下くんのあいさつ</li>
+    </ul>
+    <p class="note">これ以降は都合により、台本がすべて書かれています。</p>
+  </div>
+  <h2>コンテンツ</h2>
+  <div class="Q">
+    <ol start="0">
+      <li>プロローグ</li>
+      <li>忍び寄る魔の手</li>
+      <li>団結</li>
+      <li>試練</li>
+      <li>知力と運の果てに</li>
+      <li>儀式</li>
+      <li>浄化されるべきものども (エピローグ) </li>
+    </ol>
+  </div>
+  <h2>忍び寄る魔の手</h2>
+  <div class="Q">
+    <p>2017年12月、時は満ち、柳井研究室での一年が締めくくられようとしていた。</p>
+    <p>年を終える儀式のために集められた食材が広間に集められており、今にも儀式が始まろうとしている。</p>
+    <p>その時だった。あたりがどんよりとした空気に包まれ、どこからともなくうめき声が響いてきた。
+      勉学や研究が芳しくなかったものどもによる怨念が現れたのだ。</p>
+    <p>『まだ今年は終わらせない……』</p>
+    <p>そういうと怨念は<!--儀式の手順書[1]をバラバラにし、食材を-->来年を奪って去ってしまったのだった……！</p>
+    <ul>
+<!--      <li class="note">[1]:レシピ</li>-->
+      </ul>
+  </div>
+  <h2>団結</h2>
+  <div class="Q">
+    <p>あなた達は正義の心に目覚める。</p>
+    <!--    <p>2人〜4人の仲間を集めて討伐隊を組み、-->
+    <p>力をあわせて怨霊を追い詰め退治しなければならない。</p>
+    <!--<p>未来を担い旅立つ者が四人（I、K、T、N）、名乗りを上げてそれぞれの仲間を順番に選ぶ。<p>-->
+    <p>仲間の中には、とても頼りになる伝道者や、怨霊の情報を収集していた間者がいるかもしれない……。</p>
+
+  </div>
+  <h2>試練</h2>
+  <div class="Q">
+    <p>怨霊を追い詰めるたび、あなたたちは手痛い攻撃[1]を仕掛けられることになる。うまく反撃[2]して、怨霊から<!--食材-->来年を奪い返せ。</p>
+    <p class="note">早押しクイズ形式です。わかった人は挙手等してください。問題は全部で6問あります。</p>
+    <ul>
+      <li class="note">[1]：出題</li>
+      <li class="note">[2]：回答</li>
+    </ul>
+
+    <h3>問１：a〜dのGANの名前をひとつ答えろ</h3>
+<!--    <p>これをとくと、使う鍋とコンロを選ぶ権利が与えられる</p>-->
+  <div class="Q">
+    <div class="img">(a)<img src="./Img/modelCycleGAN.PNG"></div>
+    <div class="img">(b)<img src="./Img/modelD2GAN.png"></div>
+    <div class="img">(c)<img src="./Img/modelDeltaGAN.PNG"></div>
+    <div class="img">(d)<img src="./Img/modelIVEGAN.png"></div>
+  </div>
+    <p>選択肢：D2GAN, CycleGAN, IVE-GAN, ΔGAN</p>
+    <p class="ans">a=CycleGAN, d=IVE-GAN, c=ΔGAN, b=D2GAN</p>
+
+    <h3>問2：以下のうち、存在するものをひとつえらべ。正解はみっつある。（GAN Zooより）</h3>
+    <p>これをとくと、</p>
+  <div class="Q">
+    <div class="img">BGAN</div>
+    <div class="img">CGAN</div>
+    <div class="img">YGAN</div>
+    <div class="img">XGAN</div>
+  </div>
+    <p class="ans">YGANのみはずれ。YGANはいまのところない。</p>
+    
+    <h3>問3：以下のうち、存在しないものをひとつえらべ。正解はみっつある。（GAN Zooより）</h3>
+    <p></p>
+  <div class="Q">
+    <div class="img">JGAN</div>
+    <div class="img">MGAN</div>
+    <div class="img">NGAN</div>
+    <div class="img">QGAN</div>
+  </div>
+    <p class="ans">MGANのみはずれ。 Precomputed Real-Time Texture Synthesis with Markovian Generative Adversarial Networksという論文が自分をMGANと名乗っている。</p>
+    
+    <h3>問4：左から、Conditional,SemiSupervised,AdversarialAutoencorder,DR-GANの順により正しくならんでいる画像はa〜dのうちどれか。(それぞれ、完全正解、半分正解、4/1正解、全滅)</h3>
+    <p></p>
+  <div class="Q">
+    <div class="img">(a)<img src="./Img/model4_3.png"></div>
+    <div class="img">(b)<img src="./Img/model4_2.png"></div>
+    <div class="img">(c)<img src="./Img/model4_0.png"></div>
+    <div class="img">(d)<img src="./Img/model4_4.png"></div>
+  </div>
+    <p class="ans">c > b > a > d の順で正解に近い</p>
+
+    <h3>問5：a〜dの生成された結果に当てはまるGANをひとつ答えろ</h3>
+    <p></p>
+  <div class="Q">
+    <div class="img">(a)<img src="./Img/imageBEGAN.PNG"></div>
+    <div class="img">(b)<img src="./Img/imageCeleb_EBGAN.PNG"></div>
+    <div class="img">(c)<img src="./Img/imageCeleb_CramerGAN.PNG"></div>
+    <div class="img">(d)<img src="./Img/imageCeleb_Progressive.PNG"></div>
+  </div>
+    <p>選択肢：EBGAN, CramerGAN, ProgressiveGAN, BEGAN</p>
+    <p class="ans">a=BEGAN, b=EBGAN, c=CramerGAN, d=ProgressiveGAN</p>
+
+    <h3>問6：a〜dの生成された結果に当てはまるGANをひとつ答えろ</h3>
+    <p></p>
+  <div class="Q">
+    <div class="img">(a)<img src="./Img/imageMPMGAN.png"></div>
+    <div class="img">(b)<img src="./Img/imageMNIST_BCGAN.PNG"></div>
+    <div class="img">(c)<img src="./Img/imageMNIST_DeliGAN.PNG"></div>
+    <div class="img">(d)<img src="./Img/imageMNIST_IcGAN.PNG"></div>
+  </div>
+    <p>選択肢：MPMGAN, IcGAN, BCGAN, DeliGAN</p>
+    <p class="ans">a=MPMGAN, b=BCGAN, c=IcGAN, d=DeliGAN</p>
+
+
+  </div>
+  <h2>知力と運の果てに</h2>
+  <div class="Q">
+    <p>あなたたちは、正義の心で悪霊を退治した。悪霊は、<!--残りのすべての食材-->未来を残して消え去った。</p>
+<!--    <p>討伐隊で最後の食材たちを山分けにして、儀式の準備を始めよう。</p>-->
+  </div>
+  <h2>儀式</h2>
+  <div class="Q">
+    <p>儀式[3](済)</p>
+    <p>やないけんのおともだちは、おいしくおなべをつくることができたかな？</p>
+    <p class="note">[3]:鍋</p>
+  </div>
+  <h2>浄化されるべきものども (エピローグ)</h2>
+  <div class="Q">
+    <ul>
+      <li>「今年も一年間おつかれさまでした」という會下くんの〆のあいさつ</li>
+      <li>会費の徴収（まだの人）</li>
+      <li>おかたづけ</li>
+    </ul>
+  </div>
+  <br><br><br><br><br><br><br><br><br><br>
+<p>-よいお年を-</p>
+</body>
+</html>

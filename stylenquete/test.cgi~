@@ -1,0 +1,14 @@
+#!/usr/bin/python
+# -*- coding:utf-8 -*-
+
+import numpy as np
+import cgi, cgitb
+import copy
+import csv
+import sys, os
+from sys import argv
+cgitb.enable()
+
+
+print("<!DOCTYPE html><head></head><body><h1>hoge</h1><body></html>")
+
