@@ -14,7 +14,7 @@ cgitb.enable()
 #c = np.random.randint(0,len(category),1)[0]
 
 me = "./enq.cgi"
-dbfile = "./Data/enq_db_201801"
+dbfile = "./Data/enq_db_201804"
 imgdir = "./araki-t/Enquete/Ramen/Original/" #%s/"%category[c]
 #transferred = "./araki-t/Enquete/Transferred/" #%s/"%category[c]
 orgdir = "/export/space/araki-t/Enquete/Ramen/Original/" #%s"%category[c]
