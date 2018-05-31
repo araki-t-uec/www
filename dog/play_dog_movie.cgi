@@ -6,7 +6,7 @@ import cgi
 import cgitb
 import copy
 import csv
-import sys,os
+import sys,os,re
 cgitb.enable()
 myname = os.path.basename(__file__) # This file name.
 html_form_text = '''<form method="POST" action="./%s">\n'''%myname
@@ -79,10 +79,12 @@ body='''
 
 imglist = ""
 for i in giflist:
-    imglist +="<img src=\"%s\">\n"%i[0]
-
+    imgname = re.search(r'[A-Z]\S+_[0-9]+_[0-9]+_[0-9]+.gif', i[0])
+    imglist +="<img src=\"%s\">%s\n"%(i[0], imgname.group())
+    
 feet= '''</body>
 </html>
 '''
 
 print head, body, imglist, feet
+
