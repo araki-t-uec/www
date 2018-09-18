@@ -21,7 +21,8 @@ def defdir(pass)
 #  @list += `ls #{pass}*.html`
    @list += `ls #{pass}*`
   #public_html以下の深度2までのディレクトリ(public_html/*/*/)まで再帰
-  if /\*\/\*\// =~ pass
+  #if /\*\/\*\// =~ pass
+  if /\*\// =~ pass
   else
     defdir(pass += "*/")
   end
