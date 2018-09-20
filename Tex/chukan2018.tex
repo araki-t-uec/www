@@ -30,8 +30,18 @@
 
 
 \section{予備実験}
-データセットに犬の一人称視点動画DogCentric Activity Dataset~\cite{yumi2014first}を用い，これを分類する予備実験を行った．
-
+データセットに犬の一人称視点動画DogCentric Activity Dataset~\cite{yumi2014first}を用い，これを分類する予備実験を行った．動画ひとつにつき各フレームの平均を取り，
+画像として分類した．DogCentric Activity Dataset のみでの学習~\ref{model}と，VGG16\cite{vgg16}を用いたPre-trained model~\ref{vgg16model}のfine-tuningと二通り行った．
+\begin{figure}[b]
+ \includegraphics[width=10cm]{./Img/usemodel.eps}
+ \caption{利用したモデル}
+ \label{model}
+\end{figure}
+\begin{figure}[b]
+ \includegraphics[width=10cm]{./Img/vgg16model.eps}
+ \caption{VGG16モデル}
+ \label{vgg16model}
+\end{figure}
 
 \section{まとめ,今後の課題}
 \begin{itemize}
