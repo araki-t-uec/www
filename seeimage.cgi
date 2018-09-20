@@ -22,7 +22,7 @@ def defdir(pass)
   #passに入っているディレクトリ以下の.htmlファイルを@list配列へ代入
   @list += `ls #{pass}*.jpg`
   @list += `ls #{pass}*.png`
-  @list += `ls #{pass}*.mp4`
+  @list += `ls #{pass}*.pdf`
   #public_html以下の深度1までのディレクトリ(public_html/*/)まで再帰
 #  if /\*\/\*\// =~ pass #深度2まで
   if /\*\// =~ pass
@@ -37,7 +37,7 @@ defdir(dir)
 @list.each_line do |line|
    if /(\S+\/)(\S+:)/ =~ line
    #ディレクトリの時は無視
-   elsif /(\S+\/)(\S+.png)\Z/ =~ line || /(\S+\/)(\S+.jpg)\Z/ =~ line
+   elsif /(\S+\/)(\S+.png)\Z/ =~ line || /(\S+\/)(\S+.jpg)\Z/ =~ line || /(\S+\/)(\S+.pdf)\Z/ =~ line
 #   elsif /(\S+\/)(\S+.*)/ =~ line
     if passlist[$1] == "nil"
       passlist[$1] = Array.new
