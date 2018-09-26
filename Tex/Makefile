@@ -13,7 +13,7 @@ all: ./$(NAME).pdf
 $(NAME).dvi: $(TEX) $(BIB)
 	#通常
 	#platex $(NAME); jbibtex $(NAME); platex $(NAME); platex $(NAME)
-	platex $(NAME); bibtex $(NAME); platex $(NAME); platex $(NAME)
+	platex $(NAME); pbibtex $(NAME); platex $(NAME); platex $(NAME)
 	#bibファイルをまだ作成していない場合
 	#platex $(NAME); platex $(NAME); platex $(NAME)
 clean:
