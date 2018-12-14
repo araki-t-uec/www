@@ -1,0 +1,119 @@
+\documentclass[a4j,12pt]{jreport}
+\usepackage[dvipdfmx]{color}
+%\usepackage{color}
+%\usepackage[dvips]{graphicx}
+%\usepackage{multicol}
+\usepackage{amsmath, ascmac, amssymb}
+\usepackage{borderhead}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{multicol}
+\usepackage{color}
+\usepackage[dvipdfmx,breaklinks=true,a4paper=true,colorlinks,
+linkcolor=black,citecolor=black,urlcolor=black]{hyperref}
+\usepackage[dvipdfmx]{pxjahyper}
+
+\newcommand{\figref}[1]{\textgt{図 \ref{#1}}}
+\newcommand{\tableref}[1]{\textgt{表 \ref{#1}}}
+\newcommand{\chapterref}[1]{\textgt{第 \ref{#1} 章}}
+
+\newcommand{\parfrac}[2]{\frac{\partial #1}{\partial #2}}
+%\documentclass[a4j,12pt]{jarticle}
+%%%%%行間の幅を再定義
+\renewcommand{\baselinestretch}{1.15}
+\renewcommand{\bibname}{参考文献}
+%%%%%sectionで番号をつける深さ
+%\setcounter{secnumdepth}{2}
+%%%%%目次に書き出す深さ
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+\setlength{\footskip}{7mm}
+%%%%%%%%%%表紙
+\begin{titlepage}
+\vspace{-8cm}
+
+\title{
+	平成30年度 修士論文\vspace{1cm}\\
+	\huge たいとる\\たいとる\vspace{6cm}
+}
+
+\author{
+	電気通信大学大学院　情報理工学研究科\\
+	情報学専攻 メディア情報学コース\\
+	1730010\hspace{1cm}荒木 勇人\\
+	指導教員 柳井 啓司 教授
+}
+
+\date{
+平成31年1月30日
+}
+\end{titlepage}
+
+
+
+%%%%%%%%%%%%%%%%%%%%本文
+\begin{document}
+
+%%%%%%%%%%表紙
+\maketitle
+\thispagestyle{empty}
+\pagebreak
+
+\begin{abstract}
+
+亜付子とらくとあぶすとらくと
+亜付子とらくとあぶすとらくと
+亜付子とらくとあぶすとらくと
+亜付子とらくとあぶすとらくと
+亜付子とらくとあぶすとらくと
+
+
+\par
+
+
+\end{abstract}
+
+%%%%%%%%%%目次
+%\pagestyle{plain}
+\pagestyle{jgraduate}
+
+\pagenumbering{roman}
+
+\tableofcontents
+
+\pagebreak
+
+\pagenumbering{arabic}
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%% 1章
+\input{chapter-1.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%% 2章
+\input{chapter-2.tex}
+%%%%%%%%%% 3章
+\input{chapter-3.tex}
+%%%%%%%%%% 4章
+\input{chapter-4.tex}
+%%%%%%%%%% 5章
+\input{chapter-5.tex}
+%%%%%%%%%% 6章
+\input{chapter-6.tex}
+%%%%%%%%%% 7章
+\input{chapter-7.tex}
+%%%%%%%%%% 目次に参考文献を加える
+\addcontentsline{toc}{chapter}{参考文献}
+%%%%%%%%%% 参考文献
+\bibliographystyle{junsrt}
+\bibliography{bib}
+
+%付録があればここで書く
+%%%%%%%%%% 付録A
+%%%%%%%%%% 付録B
+%\input{}
+
+%%%%%
+
+\end{document}

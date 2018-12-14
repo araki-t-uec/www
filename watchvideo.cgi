@@ -33,9 +33,9 @@ defdir(dir)
 
 #@listからディレクトリとファイルを取り出し、キーとバリューでpasslistへ代入
 @list.each_line do |line|
-   if /(\S+\/)(\S+:)/ =~ line
+  if /(\S+\/)(\S+:)/ =~ line
    #ディレクトリの時は無視
-   elsif /(\S+\/)(\S+.mp4)\Z/ =~ line
+  elsif /(\S+\/)(\S+.mp4)\Z/ =~ line || /(\S+\/)(\S+.gif)\Z/ =~ line
 #   elsif /(\S+\/)(\S+.*)/ =~ line
     if passlist[$1] == "nil"
       passlist[$1] = Array.new
@@ -54,9 +54,7 @@ passlist.keys.each do |pass|
   text += "<h2> #{pass} </h2>\n <table>\n<tr>"
   passlist[pass].each do |file|
     n+=1
-#    text += "<td><a href=\"#{pass}#{file}\"><video src=\"#{pass}#{file}\"></video></a><br>#{file}</td>\n"
-    text += "<td><video controls src=\"#{pass}#{file}\" preload=\"none\"></video><br>#{file}</td>\n"
-#    text += "<video controls src=\"#{pass}#{file}\" preload=\"none\"></video><br>#{file}\n"
+    text += "<td><video controls src=\"#{pass}#{file}\" preload=\"metadata\"></video><br>#{file}</td>\n"
     if n%5 == 0
         text+="</tr><tr>"
     end
