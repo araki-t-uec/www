@@ -6,6 +6,7 @@ all: ./$(NAME).pdf
 
 ./$(NAME).pdf: $(NAME).dvi
 	dvipdfmx -o $@ $(NAME)
+	rm -f $(NAME).aux $(NAME).log $(NAME).out $(NAME).toc $(NAME).dvi
 
 $(NAME).dvi: $(TEX) $(BIB)
 	platex $(NAME); jbibtex $(NAME); platex $(NAME); platex $(NAME)

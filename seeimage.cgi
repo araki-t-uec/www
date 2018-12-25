@@ -7,9 +7,12 @@ dir = receive["dir"]
 if dir == ""
 	dir="./Img/"
 end
+
+extensions = ["png","jpg","pdf","mp4"]
+
 css = "./css/img.css"
 #pwd = `pwd | sed "s/ //g"` + "/"
-passlist = Hash.new("nil") #ディレクトリとファイルを多次元配列で格納する
+pathlist = Hash.new("nil") #ディレクトリとファイルを多次元配列で格納する
 dirlist = '<option value="./Img/">./Img</option>\n' 
 @list = ""      #HTMLファイルnameを格納する変数
 text = ""       #実際にHTMLに出力される中身を格納する変数
@@ -18,50 +21,62 @@ cols = 6
 
 c = CGI.new(:accept_charset => "UTF-8")
 
-def defdir(pass)
-  #passに入っているディレクトリ以下の.htmlファイルを@list配列へ代入
-  @list += `ls #{pass}*.jpg`
-  @list += `ls #{pass}*.png`
-  @list += `ls #{pass}*.pdf`
+def defdir(path, extends)
+  #pathに入っているディレクトリ以下の.htmlファイルを@list配列へ代入
+  @list += `ls #{path}| grep "/"`
+  for ext in extends
+   @list +=`ls #{path}*.#{ext}`
+  end
+##  @list += `ls #{path}*.jpg #{path}*.pdf #{path}*.png`
+#  @list += `ls #{path}*.jpg`
+#  @list += `ls #{path}*.png`
+#  @list += `ls #{path}*.pdf`
+#  @list += `ls #{path}*.mp4`
+  
   #public_html以下の深度1までのディレクトリ(public_html/*/)まで再帰
-#  if /\*\/\*\// =~ pass #深度2まで
-  if /\*\// =~ pass
+#  if /\*\/\*\// =~ path #深度2まで
+  if /\*\// =~ path
   else
-    defdir(pass += "*/")
+    defdir(path += "*/", extends)
   end
 end
 
-defdir(dir)
+defdir(dir, extensions)
 
-#@listからディレクトリとファイルを取り出し、キーとバリューでpasslistへ代入
+#print(@list)
+
+#@listからディレクトリとファイルを取り出し、キーとバリューでpathlistへ代入
 @list.each_line do |line|
-   if /(\S+\/)(\S+:)/ =~ line
-   #ディレクトリの時は無視
-   elsif /(\S+\/)(\S+.png)\Z/ =~ line || /(\S+\/)(\S+.jpg)\Z/ =~ line || /(\S+\/)(\S+.pdf)\Z/ =~ line
-#   elsif /(\S+\/)(\S+.*)/ =~ line
-    if passlist[$1] == "nil"
-      passlist[$1] = Array.new
+#  if /(\S+\/)(\S+.[png|jpg|pdf|mp4])\Z/ =~ line
+  if /(\S+\/)(\S+)\Z/ =~ line
+    firstname = $1
+    lastname = $2
+    if pathlist[firstname] == "nil"
+      pathlist[firstname] = Array.new
     end
-    passlist[$1] << $2
-    #  "../" => ["a.html", "b.html", "c.html"]
+    if /\S+\./ =~ lastname
+      # 拡張子あり（ふぁいる）なら配列へ
+      pathlist[firstname] << lastname
+    end
+    #  "../" => ["a.png", "b.png", "c.jpg"]
   end
 end
 
-
-#passlistからファイルを取り出し、htmlタグをつけてtext変数へ代入。
+#pathlistからファイルを取り出し、htmlタグをつけてtext変数へ代入。
 text += ""
-passlist.keys.each do |pass|
+pathlist.keys.each do |path|
   n=0
-  dirlist += "<option value=\"#{pass}\">#{pass}</option>\n"
-  text += "<h2> #{pass} </h2>\n <table>\n<tr>"
-  passlist[pass].each do |file|
+  dirlist += "<option value=\"#{path}\">#{path}</option>\n"
+  text += "<h2> #{path} </h2>\n <table>\n<tr>"
+  pathlist[path].each do |file|
     n+=1
-    text += "<td><a href=\"#{pass}#{file}\"><img src=\"#{pass}#{file}\"></a><br>#{file}</td>\n"
+    text += "<td><a href=\"#{path}#{file}\"><img src=\"#{path}#{file}\"></a><br>#{file}</td>\n"
     if n%cols == 0
         text+="</tr><tr>"
     end
   end
   text += "</tr></table><br>\n"
+
 end
 text += "\n"
 
