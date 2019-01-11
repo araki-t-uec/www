@@ -5,11 +5,12 @@ BIB  = ref.bib
 all: ./$(NAME).pdf
 
 ./$(NAME).pdf: $(NAME).dvi
-	dvipdfmx -o $@ $(NAME)
-	rm -f $(NAME).aux $(NAME).log $(NAME).out $(NAME).toc $(NAME).dvi
+##	dvipdfmx -o $@ $(NAME)
+	dvipdfmx $(NAME)
+	rm -f $(NAME).aux $(NAME).log $(NAME).out $(NAME).toc $(NAME).dvi $(NAME).bbl $(NAME).blg
 
 $(NAME).dvi: $(TEX) $(BIB)
-	platex $(NAME); jbibtex $(NAME); platex $(NAME); platex $(NAME)
+	platex $(NAME); jbibtex $(NAME); platex $(NAME); platex $(NAME); pbibtex $(NAME)
 
 clean:
 	touch $(NAME).tex ; \rm ./$(NAME).pdf
