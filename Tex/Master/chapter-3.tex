@@ -5,19 +5,17 @@
 4頭の犬の背中にGoProカメラを取り付けて散歩をした動画を単一クラス分けしたデータセット．動画は320 x 240 解像度，48 frames per secondで撮影されている．散歩する地域やコースは犬毎に異なり，アノテーションはそれぞれの犬に同じラベルのアクティビティをラベル付けしている．
 アクティビティは10クラス(
 横断前の待機: Car， 水分の摂取: Drink， 手渡しでの食事: Feed， 左を向く: Look at left， 右を向く: Look at right， 人間が犬を撫でる: Pet， ボールで遊ぶ: Play with ball， 身体をブルブルと振る: Shake， 何かの匂いを嗅ぐ: Sniff， 歩く: Walk
-)あり，それぞれ合わせて209クリップになる~\ref{DCAD_labels}．
+)あり，それぞれ合わせて209クリップになる~\ref{DCADlabel}．
 \begin{table}[tb]
-  \centering{
-    \caption{DogCentric Activity Dataset 内訳}\label{DCAD_labels}
-    \scalebox{1.00}[1.00]{
-      \begin{tabler}{|r|r|r|r|r|r|r|r|r|r|}
-        \hline
-        Car &Drink& Feed& Left&Right& Pet & Ball&Shake&Sniff&Walk \\
-        26  &   10&   25&   21&   17&   25&   14&   19&   27&   25\\
-        \hline
-      \end{tabler}
-      }
-  }
+ \centering
+ \caption{DogCentric Activity Dataset 内訳}\label{DCADlabel}
+ \scalebox{1.00}[1.00]{
+  \begin{tabular}{|l||c|c|c|c|c|c|c|c|c|c|}
+   \hline \hline
+   Activity& Car &Drink& Feed& Left&Right& Pet & Ball&Shake&Sniff&Walk \\ \hline
+   Clips   &   26&   10&   25&   21&   17&   25&   14&   19&   27&   25\\ \hline
+  \end{tabular}
+ }
 \end{table}
 \section{サイバーレスキュー犬 訓練データセット}
 
