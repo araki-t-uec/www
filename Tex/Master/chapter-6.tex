@@ -1,24 +1,45 @@
-\chapter{まとめ,今後の課題}
-動画の各フレームの平均を取り，画像として識別した．
-データの少ないクラスは精度が低いため，データを補う必要がある．
-予備実験では簡易的な方法を用いたが，今後は最新手法による分類を検討している．またレスキュー犬の行動を認識する際には複数クラスの出力にする必要がある．
+\chapter{実験結果}
+\section{予備実験}
+予備実験の結果を~(図\ref{vgg16_res},\ref{resnet_res})にそれぞれ示す．分類率は，VGG16モデルを利用したものが64.3\%,ResNetモデルを利用したものが59.5\%であった．
+全般的に，データの多いクラスは精度が高い傾向にあるが，データの少ないクラスは精度が低い傾向にある．
+加えて，~\(Car\)クラスは道路の進行方向に対して垂直に待機している10クラスの中で特殊なクラスであり，車などの写ったフレームの影響で分類精度が上昇していると考えられる．~\(Feed\)クラス,~\(Pet\)クラス,~\(Play\_with\_ball\)クラスは，それぞれフレーム内を人間が占める割合が多いクラスと言え，そのため混同が起こりやすいと考えられる.
+
+%\(Look_at_Left\)クラスは
 
 
-今後の課題として，時系列情報を特徴量抽出に使う．
-また，音声データから特徴量を抽出し，動画特徴量と併せたマルチモーダルな特徴量を利用し，レスキュー犬の行動分類を行う．
+\begin{figure}[htbp]
+ % \begin{tabular}{cc}
+ %  \begin{minipage}{0.5\textwidth}
+   \begin{center}
+    
+    \includegraphics[scale=0.3]{./Figures/vgg16_res.eps}
+    \caption{VGG16 pretrained modelによるfinetuningの結果}
+    \label{vgg16_res}
+   \end{center}
+  % \end{minipage}
+  % \begin{minipage}{0.5\textwidth}
+\end{figure}
+\begin{figure}[htbp]
+
+   \begin{center}
+
+    \includegraphics[scale=0.3]{./Figures/resnet_res.eps}
+  \caption{ResNet pretrained modelによるfinetuningの結果}
+  \label{resnet_res}
+   \end{center}
+ %  \end{minipage}
+ % \end{tabular}
+\end{figure}
+\section{シングルクラス分類}
+\subsection{動画像平均画像クラス認識}
+\subsection{オプティカルフロー画像クラス認識}
+\subsection{音声クラス認識}
+\subsection{音声と動画のマルチモーダル情報クラス認識}
 
 
-{\scriptsize % 7pt
-%{\footnotesize % 8pt
-%{\small % 9pt
-%\bibliographystyle{ieee}
-\bibliographystyle{junsrt}
-\bibliography{ref}
-}
-% \begin{footnotesize}
-% %{\small
-% \bibliography{ref}
-% \bibliographystyle{junsrt}
-% %}
-% \end{footnotesize}
-\end{document}
+\section{マルチクラス認識}
+\subsection{動画像平均画像クラス認識}
+\subsection{オプティカルフロー画像クラス認識}
+\subsection{音声クラス認識}
+\subsection{音声と動画のマルチモーダル情報クラス認識}
+
