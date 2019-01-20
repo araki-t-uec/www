@@ -14,16 +14,11 @@
 
 \begin{figure}[htbp]
  \begin{center}
-  \includegraphics[width=6cm]{./Figures/cyberdog.eps}
+  \includegraphics[width=9cm]{./Figures/cyberdog.eps}
   \caption{装着型計測・記録装置~\cite{dog01}より引用}
   \label{cyberdog}
  \end{center}
 \end{figure}
-
-また，Ehsanらによる犬の一人称視点動画からの犬行動予測の研究がある~\cite{whoretthedog}．これは，犬の行動をモデリングし，犬が次にどのような道をたどり行動するかを予測している．
-
-%\section{問題点}
-しかし，これらの研究は犬の行動のモデリングであり，犬の周辺環境の推定などは行っていない．また，入力は動画像のみであり，音声などのデータは利用していない．レスキュー犬の課題には，犬の周辺環境情報や動画像からだけでは判断できない情報の取得が含まれている．例えばレスキュー犬は要救助者を発見するとその場で待機し吠え続けるように訓練されている．このように，動画像データからだけではなく，音声データ，および慣性データ・GPSデータなどの情報を複合的に用いてレスキュー犬の状態を判断しなければならない．本研究は動画像と音声からなるマルチモーダルな情報を入力とした犬の行動の分類を目的としている． 
 
 \section{動画認識}
 犬一人称視点映像の動きや音声の特徴は，レスキュー犬の周辺環境を知るための重要な手掛かりの1つである．
@@ -40,7 +35,7 @@
 図~\ref{2st_network}にTwo-stream convolutionalのネットワーク構造を示す．
 \begin{figure}[htbp]
  \begin{center}
-  \includegraphics[width=6cm]{./Figures/two-stream.eps}
+  \includegraphics[width=12cm]{./Figures/two-stream.eps}
   \caption{Two-stream convolutional networks アーキテクチャ~(\cite{simonyan2014two}より引用)．切り出したRGB画像とoptical flow画像を個々のネットワークに入力し、出力を合わせている．}
   \label{2st_network}
  \end{center}
@@ -51,13 +46,42 @@
 図~\ref{3dconv_image}に3D Convolutionalの詳細を示す．
 \begin{figure}[htbp]
  \begin{center}
-  \includegraphics[width=6cm]{./Figures/3dconv.eps}
+  \includegraphics[width=15cm]{./Figures/3dconv.eps}
   \caption{3D Convolutionの詳細~(\cite{tran14}より引用)．2D Convolutionでは縦横方向の畳み込みを行っており，3D Convolutionでは加えて時間方向への畳み込みを行っている．}
   \label{3dconv_image}
  \end{center}
 \end{figure}
 
-\subsection{音声分類}
+\subsubsection{who}
 
+また，Ehsanらによる犬の一人称視点動画からの犬行動予測の研究がある~\cite{whoretthedog}．これは，犬の行動をモデリングし，犬が次にどのような道をたどり行動するかを予測している．
+
+%\section{問題点}
+しかし，これらの研究は犬の行動のモデリングであり，犬の周辺環境の推定などは行っていない．また，入力は動画像のみであり，音声などのデータは利用していない．レスキュー犬の課題には，犬の周辺環境情報や動画像からだけでは判断できない情報の取得が含まれている．例えばレスキュー犬は要救助者を発見するとその場で待機し吠え続けるように訓練されている．このように，動画像データからだけではなく，音声データ，および慣性データ・GPSデータなどの情報を複合的に用いてレスキュー犬の状態を判断しなければならない．本研究は動画像と音声からなるマルチモーダルな情報を入力とした犬の行動の分類を目的としている． 
+
+
+\subsection{音声分類}
+音声と画像から特徴を抽出する研究には以下のようなものがある．
 \subsubsection{Sound Net}
+音声をクラス分類する研究としてAyterらによるSound Netがある~\cite{aytar2016soundnet}．
+動画から音声と画像を取り出し，画像を教師データとし，音声は生徒データとして出力が等しくなるように学習している．
+図~\ref{soundnet_network}にSound Netのネットワーク構造を示す．
+\begin{figure}[htbp]
+ \begin{center}
+  \includegraphics[width=8cm]{./Figures/soundnet.eps}
+  \caption{Sound Netのアーキテクチャ~(\cite{aytar2016soundnet}より引用)．動画から映像と音声を切り分け，音声に対して1次元の畳み込みを行なっている．}
+  \label{soundnet_network}
+ \end{center}
+\end{figure}
+
 \subsubsection{Audio-Visual Scene Analysis}
+音声と動画を紐づけて，その関係を明らかにする研究としてOwensらによるAudio-Visual Scene Analysisがある~\ref{multisensory2018}．
+映像内の音源特定，音声からの動作認識，複数の話者が個々の画面にいる際の話者の特定を行なっており，音声と映像の関連性を示している．
+具体的な図を~\ref{audio_visual}に示す．
+\begin{figure}[htbp]
+ \begin{center}
+  \includegraphics[width=8cm]{./Figures/audio_visual.eps}
+  \caption{Audio-Visual Scene Analysis~(\cite{multisecsory2018}より引用)．}
+  \label{audio_visual}
+ \end{center}
+\end{figure}
