@@ -25,12 +25,39 @@
 %\section{問題点}
 しかし，これらの研究は犬の行動のモデリングであり，犬の周辺環境の推定などは行っていない．また，入力は動画像のみであり，音声などのデータは利用していない．レスキュー犬の課題には，犬の周辺環境情報や動画像からだけでは判断できない情報の取得が含まれている．例えばレスキュー犬は要救助者を発見するとその場で待機し吠え続けるように訓練されている．このように，動画像データからだけではなく，音声データ，および慣性データ・GPSデータなどの情報を複合的に用いてレスキュー犬の状態を判断しなければならない．本研究は動画像と音声からなるマルチモーダルな情報を入力とした犬の行動の分類を目的としている． 
 
-\section{画像認識}
 \section{動画認識}
-\subsection{Optical flow}
-\subsubsection{FlowNet2.0}
-\subsection{Two-stream}
-\subsection{3D Convolution}
-\section{音声分類}
-\subsection{Sound Net}
-\subsection{Audio-Visual Scene Analysis}
+犬一人称視点映像の動きや音声の特徴は，レスキュー犬の周辺環境を知るための重要な手掛かりの1つである．
+レスキュー犬の一人称動画に限らず，動画から特徴を取得してその内容を分類する類の研究は行われている．
+\subsection{動作認識}
+映像から動き特徴を抽出する手法は大きく分けて2つある．
+1つはあらかじめ動画を複数枚の画像に分割してから特徴量を抽出する手法である．
+もう1つは動画から直接特徴量を抽出する手法である．
+前者は既存の画像認識の技術を簡単に流用でき，入力データが比較的小さいので学習コストが低い．
+対して後者はフレーム間の情報を考慮できるが，動画を直接入力データとするため学習コストが非常に高い．
+\subsubsection{Two-stream}
+事前に動画から静止画を切り出してから特徴を抽出し学習する手法としてはSimonyanらによるTwo-stream convolutional networksがある~\cite{simonyan2014two}, \cite{wang2015towards}．
+これは，1つの動画から通常のRGB画像とoptical flow画像を抽出し，それぞれを入力とする個々のネットワークを学習することで動き情報を考慮して動画を分類する手法である．
+図~\ref{2st_network}にTwo-stream convolutionalのネットワーク構造を示す．
+\begin{figure}[htbp]
+ \begin{center}
+  \includegraphics[width=6cm]{./Figures/two-stream.eps}
+  \caption{Two-stream convolutional networks アーキテクチャ~(\cite{simonyan2014two}より引用)．切り出したRGB画像とoptical flow画像を個々のネットワークに入力し、出力を合わせている．}
+  \label{2st_network}
+ \end{center}
+\end{figure}
+
+\subsubsection{3D Convolution}
+動画から直接特徴を抽出して学習する手法としてはTranらによる3D Convolution がある~\cite{tran14}．画像に対して2次元であったフィルターを3次元形状に拡張することで，縦横の空間以外である時間方向への広がりを持って特徴抽出が可能になった．
+図~\ref{3dconv_image}に3D Convolutionalの詳細を示す．
+\begin{figure}[htbp]
+ \begin{center}
+  \includegraphics[width=6cm]{./Figures/3dconv.eps}
+  \caption{3D Convolutionの詳細~(\cite{tran14}より引用)．2D Convolutionでは縦横方向の畳み込みを行っており，3D Convolutionでは加えて時間方向への畳み込みを行っている．}
+  \label{3dconv_image}
+ \end{center}
+\end{figure}
+
+\subsection{音声分類}
+
+\subsubsection{Sound Net}
+\subsubsection{Audio-Visual Scene Analysis}
