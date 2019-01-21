@@ -1,3 +1,4 @@
+
 \chapter{データセット}
 既存の公開されている犬一人称視点動画データセットにDogCentric Actibity Dataset(DCAD)がある．
 本研究ではレスキュー犬向けにラベル付けされたレスキュー犬訓練動画が必要であるため，本実験ではレスキュー犬の訓練動画を用いた．訓練動画を用いる前に，犬一人称視点動画から行動分類が可能かどうかを確認するため簡易な予備実験を行なった．予備実験にはDCADを用いた．
@@ -100,9 +101,12 @@
 \end{figure}
 
 \section{サイバーレスキュー犬 訓練データセット}
-サイバーレスキュー犬訓練データセットは，訓練されているレスキュー犬に，専用の計測スーツを着用させ収集したデータセットである．現在も作成中であり，完成していないデータを含めた全てを使用することは困難である．そのため，本研究ではその一部の提供されたデータをこれとして取り扱うものとする．
+サイバーレスキュー犬訓練データは，訓練されているレスキュー犬に，専用の計測スーツを着用させ収集したデータ群である．現在も作成中であり，完成していないデータを含めた全てを使用することは困難である．そのため，本研究ではその一部の提供されたデータをこれとして取り扱うものとする．
 これは約2分から20分の7本の音声付き動画からなり，犬の一人称視点動画に加えてハンドラー視点動画，レスキュー犬とハンドラーを映す第三者視点動画が含まれる．本研究では犬の一人称視点動画のみを用いて推定を行う．
-総時間は57分40秒，秒間フレーム数は29.97，総フレーム数は103696枚である．分類クラスそれぞれについて時間範囲を指定する形で動画にアノテーションがされており，複数のクラスが同時刻に重なるマルチラベルデータセットである．犬一人称、ハンドラー視点、第三者視点毎にそれぞれラベル付けされているが、アノテーション情報に関してはでは全てを用いて学習を行った．
+総時間は57分40秒，秒間フレーム数は29.97，総フレーム数は103696枚である．分類クラスそれぞれについて時間範囲を指定する形で動画にアノテーションがされており，複数のクラスが同時刻に重なるためマルチラベルデータとして取り扱う．
+本研究ではこのデータを整形したものをサイバーレスキュー犬訓練データセットとして実験を行なった．
+動画は犬一人称視点のみを用いたが，犬一人称，ハンドラー視点，第三者視点毎にそれぞれラベル付けされたアノテーション情報に関しては全てを用いて学習を行った．
+以下にデータにラベル付けされたクラスと，整形したデータについて詳細を述べる．
 
 \subsection{分類クラス詳細}
 \subsubsection{bark}
@@ -113,12 +117,15 @@
 ハンドラーからの働きかけのある状態．待て/行け等の口頭指示，褒め，指差し指示など状況が多様．
 \subsubsection{eat-drink}
 何かを食べている/飲んでいる状態．訓練において被災者発見に対する成功報酬に餌が与えられる他，草を食む，地面/川の水を飲むなど状況が多様．
+以下，eatと表記する．特筆がない場合，eatという表記はeat（食事）とdrink（水分摂取）の両方の意，drinkという表記は水分摂取の意のみ表現する．
 \subsubsection{look at handler}
 犬がハンドラーを見ている状態．
+以下，handlerと表記する．
 \subsubsection{run}
 走っている状態．walk-trotと比較すると，画面に浮遊感があり，揺れや音が激しい．
 \subsubsection{see victim}
 カメラに被災者が映った状態．
+以下，victimと表記する．
 \subsubsection{shake}
 犬が激しく体を震わせている状態．振動に合わせてカラカラカラとカメラの揺れる音がする．
 \subsubsection{sniff}
@@ -127,10 +134,161 @@
 足を運んでいない状態．その場での足踏みは含む．方向転換は含まない．画面の動き情報が少なく特徴的である．
 \subsubsection{walk-trot}
 歩いており、runではない状態．
+以下，walkと表記する．
+
 \subsection{データ整形}
-本研究では，フレーム毎にラベルを対応づけた際のラベルのないフレームなどを排除し，過学習を防ぐ目的で6fpsとして整形したデータを用いた．
-そのため，学習および評価に使った総フレーム数は14581枚となった．この範囲でラベル付けされた回数をクラス毎に~表\ref{cyberdataset_label}に示す．
-画像のみでのクラス的特徴の図示は困難であるため、整形した動画的特徴，音声的特徴とをそれぞれ~図\ref{cyberdataset_img}に示す．
+本研究では，提供されたサイバーレスキュー犬訓練データを整形し，クラス毎に短く切り出したクリップセット/フレーム毎に切り出した画像セット/フレーム毎に計算したoptical flow画像セット/フレームに合わせて一定時間毎に切り出した音声セットをそれぞれ作成した．
+データを整形して複数セットを作成したのち，さらにラベルのないフレームなどを排除してから，動画に戻した際に6fpsとなる量に学習データを間引いた．
+30fps近い動画をフレーム毎に学習すると，直近のフレームに対して過度に反応する恐れがあるため，この処理で過学習を防ぐ狙いがある．
+整形・サンプリングによって，学習および評価に使った総フレーム数は14581枚となった．この範囲でラベル付けされた回数をクラス毎に~表\ref{cyberdataset_label}に示す．
+静止画のみでの音声付き動画のクラス特徴の表現は困難であるため、整形した動画的特徴，音声的特徴とをそれぞれ~図\ref{cyberdataset_img}に示す．
+\subsubsection{動画整形}
+提供されたデータ映像は犬一人称視点映像，ハンドラー視点映像，第三者視点映像が横並びに結合（図~\ref{concat_movie}）されていたため，これは犬一人称視点映像のみを切り出した．
+また，提供された7本の動画にはハンドラー視点がないものや，加えて，結合時にノイズが入ったと思われるものが混在したものがそれぞれ存在したため画像サイズが不揃いであった．ノイズの入った第三者視点のない動画について，図~\ref{noizy_movie}にその例を示す．
+これについて，ノイズ部分は切り取ったが比率は揃えなかった．
+ノイズは学習に悪影響を与えること，微細なアスペクト比のずれは学習の際に吸収されること，アスペクト比をそろえる際に必要性の有無を判断できない情報が切り取られることをその判断理由とする．
+このようにして整形した動画を$V$とする．
+\begin{figure}[htbp]
+%  \begin{center}
+    \begin{tabular}{c}
+      \begin{minipage}{0.18\hsize}
+        \begin{center}
+          \includegraphics[clip, width=12cm]{./Figures/2016_gonta_1.eps}
+          %\hspace{0.3cm} { }
+        \end{center}
+      \end{minipage}
+\\
+      \begin{minipage}{0.18\hsize}
+        \begin{center}
+          \includegraphics[clip, width=12cm]{./Figures/2016_gonta_2.eps}
+          %\hspace{0.3cm} { }
+        \end{center}
+      \end{minipage}
+\\
+      \begin{minipage}{0.18\hsize}
+        \begin{center}
+          \includegraphics[clip, width=12cm]{./Figures/2016_gonta_3.eps}
+          %\hspace{0.3cm} { }
+        \end{center}
+      \end{minipage}
+\\
+      \begin{minipage}{0.18\hsize}
+        \begin{center}
+          \includegraphics[clip, width=12cm]{./Figures/2016_gonta_4.eps}
+          %\hspace{0.3cm} { }
+        \end{center}
+      \end{minipage}
+\\
+      \begin{minipage}{0.18\hsize}
+        \begin{center}
+          \includegraphics[clip, width=12cm]{./Figures/2016_gonta_5.eps}
+          %\hspace{0.3cm} { }
+        \end{center}
+      \end{minipage}
+    \end{tabular}
+    \caption{提供時のデータ．左から，犬一人称視点，ハンドラー視点，第三者視点の動画が結合されている．合わせて1280x240pixelで，犬一人称視点だけ切り出しても通常カメラで撮影される比率にはならない．}
+    \label{concat_movie}
+%  \end{center}
+\end{figure}
+
+
+\begin{figure}[htbp]
+%  \begin{center}
+    \begin{tabular}{c}
+      \begin{minipage}{0.18\hsize}
+        \begin{center}
+          \includegraphics[clip, width=12cm]{./Figures/2015_gonta_1.eps}
+          %\hspace{0.3cm} { }
+        \end{center}
+      \end{minipage}
+\\
+      \begin{minipage}{0.18\hsize}
+        \begin{center}
+          \includegraphics[clip, width=12cm]{./Figures/2015_gonta_2.eps}
+          %\hspace{0.3cm} { }
+        \end{center}
+      \end{minipage}
+\\
+      \begin{minipage}{0.18\hsize}
+        \begin{center}
+          \includegraphics[clip, width=12cm]{./Figures/2015_gonta_3.eps}
+          %\hspace{0.3cm} { }
+        \end{center}
+      \end{minipage}
+    \end{tabular}
+    \caption{犬一人称視点，第三者視点の結合された動画．ハンドラー視点がなく，犬一人称視点の動画の画面左端一帯に黒いノイズが入っているパターン．ノイズを合わせて1280x360pixelで，犬一人称視点を切り出すと比率は16:9だがノイズを取り除くと比率は崩れる．}
+    \label{noizy_movie}
+%  \end{center}
+\end{figure}
+
+
+
+
+
+
+\subsubsection{クリップセット}
+$V$からラベル毎にクリップ群を切り出すと，アノテーションが単一のフレームと複数被るフレームが同じクリップを介して存在する．
+ただし，同じ箇所から別々のラベルを切り出した際に全く等しく被ることはない．
+本研究において，クリップ群を作成する目的はそのフレーム間の平均画像を作成することにある．
+フレーム間の平均をとる際にそのフレームの多少の前後で結果が異なるため，その差異の学習を期待して別クリップに同じフレームが重複して現れる問題を無視した．
+このクリップセットから計算したフレーム間平均画像を図~\ref{resque_mean}に示す．
+
+
+\begin{figure}[htbp]
+%  \begin{center}
+    \begin{tabular}{c}
+     % 0
+      \begin{minipage}{0.18\hsize}
+        \begin{center}
+          \includegraphics[clip, width=2.5cm]{./Figures/resque_mean1.eps}
+          \hspace{0.3cm} { }
+        \end{center}
+      \end{minipage}
+      \begin{minipage}{0.18\hsize}
+        \begin{center}
+          \includegraphics[clip, width=2.5cm]{./Figures/resque_mean1.eps}
+          \hspace{0.3cm} { }
+        \end{center}
+      \end{minipage}
+      \begin{minipage}{0.18\hsize}
+        \begin{center}
+          \includegraphics[clip, width=2.5cm]{./Figures/resque_mean1.eps}
+          \hspace{2.0cm} {Car}
+        \end{center}
+      \end{minipage}
+      \begin{minipage}{0.18\hsize}
+        \begin{center}
+          \includegraphics[clip, width=2.5cm]{./Figures/resque_mean1.eps}
+          \hspace{0.1cm} { }
+        \end{center}
+      \end{minipage}
+      \begin{minipage}{0.18\hsize}
+        \begin{center}
+          \includegraphics[clip, width=2.5cm]{./Figures/resque_mean5.eps}
+          \hspace{0.2cm} { }
+        \end{center}
+      \end{minipage}
+    \end{tabular}
+    \caption{クリップセットから計算したフレーム間平均画像．}
+    \label{resque_mean}
+%  \end{center}
+\end{figure}
+
+\subsubsection{フレーム毎切り抜き画像セット・optical flow画像セット}
+フレーム毎に切り出した画像には，そのフレームの時間点にアノテーションされているラベルをそのまま用いた．
+
+optical flowの計算にはPythonのオープンソースライブラリであるOpenCVを用いた．なお，利用したバージョンはpython3.6，OpenCV3.3.1である．
+元のRGB動画のフレーム$F_t$と$F_{t+1}$から求まるoptical frame画像を$O_t$とした際に，$O_t$には$F_t$と同じラベルを紐付けた．
+
+
+\subsubsection{音声セット}
+フレーム毎切り抜き画像セットに対応する音声を切り出した．
+音声データ$S_t$は，$F_t$を中央において前後15フレーム分の長さとした．
+\[S_t = f(F_{t-15}, F_{t+15})\]
+動画は29.97fpsであるため，31フレームのこれは約1秒に当たる．
+動画あるいは音声から実際に犬の行動を推定する場合を想定すると，1秒は短すぎず現実的で取り扱いやすい時間であり，特徴を取り出すにもコストが低いため実験にも適している．
+
+
 \begin{table}[tb]
  \centering
  \caption{サイバーレスキュー犬 訓練データセット 利用範囲内での出現回数}\label{cyberdataset_label}
