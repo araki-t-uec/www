@@ -1,16 +1,24 @@
 \chapter{実験}
-予備実験を含め、実験は5種類行なった．
-
-\section{予備実験}
+予備実験を含め，行なった実験は8種類ある．
+予備実験として，DCADとレスキュー犬訓練データセットの2種類のクラス分類を行なった．
+本実験では，
+静止画像からのマルチラベル推定，
+optical flow画像からのマルチラベル推定，
+音声データからのマルチラベル推定，
+Sound based Two-stream networkを用いた音声データと静止画像からのマルチクラス推定，
+同じくSound based Two-stream networkを用いた音声データとoptical flow画像からのマルチクラス推定，
+そしてSound based Three-stream networkを用いた音声データと静止画像とoptical flow画像からのマルチクラス推定の3種類を行なった．
+\section{予備実験：クラス分類}
 \subsection{動画像平均画像クラス分類}
-DCAD，レスキュー犬訓練データセットで分類を行なった．
+DCADとレスキュー犬訓練データセットについて，それぞれクラス分類を行なった．
 DCADはクリップ毎にフレーム間の平均をとり，画像として扱ってVGG16のpretrained modelを用いてfinetuningを行なった．
 レスキュー犬訓練データセットは動画をラベル毎に切り出して短いクリップ群を作り，そのクリップ毎に同様にフレーム間の平均を取った画像を作成しVGG16のpretrained modelを用いてfinetuningした．
 
 %\section{オプティカルフロー動画平均画像クラス分類}
 %動画像のフレーム間の平均を取った手法と同様に，クリップ毎にoptical flowの平均画像を作成しVGG16のpretrained modelを用いてfinetuningを行なった．
 
-\section{動画像からのマルチクラス推定}
+\section{マルチラベル推定}
+\subsection{動画像からのマルチクラス推定}
 
 \begin{table}[tb]
  \centering
@@ -32,7 +40,7 @@ Jaccard   & 0.299& 0.081& 0.028& 0.028& 0.025& 0.0& 0.222& 0.29& 0.0& 0.586& 0.5
 \end{table}
 
 
-\section{オプティカルフロー画像からのマルチクラス推定}
+\subsection{オプティカルフロー画像からのマルチクラス推定}
 \begin{table}[tb]
  \centering
  \caption{数}\label{label}
@@ -41,8 +49,8 @@ Jaccard   & 0.299& 0.081& 0.028& 0.028& 0.025& 0.0& 0.222& 0.29& 0.0& 0.586& 0.5
    \hline \hline
    クラス   & \rotatebox{90}{bark}& \rotatebox{90}{cling}&\rotatebox{90}{command}& \rotatebox{90}{eat}&\rotatebox{90}{handler}& \rotatebox{90}{run}&\rotatebox{90}{victim}& \rotatebox{90}{shake}& \rotatebox{90}{sniff}& \rotatebox{90}{stop}& \rotatebox{90}{walk} & \rotatebox{90}{全体}\\ \hline
    Precision & 0.54& 0.027& 0.017& 0.183& 0.239& nan& 0.166& 0.787& 0.0& 0.761& 0.537&  0.462 \\ \hline
-Recall    & 0.198& 0.052& 0.011& 0.007& 0.042& 0.0& 0.121& 0.185& 0.0& 0.64& 0.719&  0.578 \\ \hline
-Jaccard   & 0.17& 0.018& 0.007& 0.007& 0.037& 0.0& 0.075& 0.176& 0.0& 0.533& 0.444&  0.345 \\ \hline
+   Recall    & 0.198& 0.052& 0.011& 0.007& 0.042& 0.0& 0.121& 0.185& 0.0& 0.64& 0.719&  0.578 \\ \hline
+   Jaccard   & 0.17& 0.018& 0.007& 0.007& 0.037& 0.0& 0.075& 0.176& 0.0& 0.533& 0.444&  0.345 \\ \hline
 
 
    % seven80_6fps_optic_bc-32_lr-0
@@ -60,7 +68,7 @@ Jaccard   & 0.17& 0.018& 0.007& 0.007& 0.037& 0.0& 0.075& 0.176& 0.0& 0.533& 0.4
 %  \label{cyberdog}
 % \end{center}
 %\end{figure}
-\section{音声からのマルチクラス推定}
+\subsection{音声からのマルチクラス推定}
 \begin{table}[tb]
  \centering
  \caption{1d数}\label{label}
@@ -102,7 +110,7 @@ Jaccard   & 0.563& 0.04& 0.188& 0.001& 0.059& 0.0& 0.201& 0.304& 0.524& 0.744& 0
   \end{tabular}
  }
 \end{table}
-\section{Two-stream}
+\subsection{Two-stream}
 \begin{table}[tb]
  \centering
  \caption{数}\label{label}
@@ -118,7 +126,7 @@ Jaccard   & 0.11& 0.018& 0.043& 0.0& 0.155& 0.0& 0.259& 0.0& 0.426& 0.705& 0.668
 
   \end{tabular}
  }
-\section{Sound based Two-stream}
+\subsection{Sound based Two-stream}
 \end{table}
 \begin{table}[tb]
  \centering
@@ -151,7 +159,7 @@ Jaccard   & 0.667& 0.054& 0.234& 0.014& 0.123& 0.01& 0.223& 0.356& 0.487& 0.759&
   \end{tabular}
  }
 \end{table}
-\section{Sound based Three-stream}
+\subsection{Sound based Three-stream}
 \begin{table}[tb]
  \centering
  \caption{数}\label{label}

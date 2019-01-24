@@ -6,14 +6,14 @@
 この際に，音声をフレームと同じサイズで切り出すと特徴が著しく失われるため入力音声には$F_t$の前後0.5秒ずつを用いた．動画あるいは音声から実際に犬の行動を推定する場合を想定し，現実的で取り扱いやすい時間としてこれを設定した．
 
 分類はフレーム毎に行った．
-\section{動画像平均画像クラス分類}
-\section{オプティカルフロー画像クラス分類}
-\section{動画像からのマルチクラス推定}
-\section{オプティカルフロー画像からのマルチクラス推定}
-\section{音声からのマルチクラス推定}
-\section{マルチモーダル情報マルチクラス推定}
-\subsection{Two-stream}
-\subsection{Sound based Two-stream}
+\section{音声と画像を用いたSound based Two-stream network}
+1つ目の提案手法として，音声を用いたTwo-stream networkを提案する．
+既存のTwo-stream networkを改造し，静止画と音声からの動画分類の手法である．
+Two-stream networkと違い音声を用いるため，これをSound based Two-stream networkと呼称する．
+本研究ではこのネットワークをクラス分類ではなくマルチクラス推定に用いる．
+%音声と静止画を用いたマルチクラス分類
+%音声とoptical flow画像を用いたマルチクラス分類
+
 \begin{figure}[htbp]
  \begin{center}
   \includegraphics[width=9cm]{./Figures/cyberdog.eps}
@@ -21,7 +21,11 @@
   \label{sound-two-stream}
  \end{center}
 \end{figure}
-\subsection{Sound based Three-stream}
+
+
+
+\section{音声・静止画・optical flow画像を用いたSound based Three-stream network}
+
 \begin{figure}[htbp]
  \begin{center}
   \includegraphics[width=9cm]{./Figures/cyberdog.eps}
