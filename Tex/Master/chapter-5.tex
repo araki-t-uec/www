@@ -1,28 +1,42 @@
 \chapter{実験}
-予備実験を含め，行なった実験は8種類ある．
+予備実験を含め，行なった実験は9種類ある．
 予備実験として，DCADとレスキュー犬訓練データセットの2種類のクラス分類を行なった．
 本実験では，
 静止画像からのマルチラベル推定，
 optical flow画像からのマルチラベル推定，
-音声データからのマルチラベル推定，
+音声データからのマルチラベル推定2種，
 Sound based Two-stream networkを用いた音声データと静止画像からのマルチクラス推定，
 同じくSound based Two-stream networkを用いた音声データとoptical flow画像からのマルチクラス推定，
-そしてSound based Three-stream networkを用いた音声データと静止画像とoptical flow画像からのマルチクラス推定の3種類を行なった．
+そしてSound based Three-stream networkを用いた音声データと静止画像とoptical flow画像からのマルチクラス推定の7種類を行なった．
 \section{予備実験：クラス分類}
-\subsection{動画像平均画像クラス分類}
+\subsection{DCAD動画像平均画像クラス分類}
 DCADとレスキュー犬訓練データセットについて，それぞれクラス分類を行なった．
 DCADはクリップ毎にフレーム間の平均をとり，画像として扱ってVGG16のpretrained modelを用いてfinetuningを行なった．
 レスキュー犬訓練データセットは動画をラベル毎に切り出して短いクリップ群を作り，そのクリップ毎に同様にフレーム間の平均を取った画像を作成しVGG16のpretrained modelを用いてfinetuningした．
+\subsection{DCAD動画像平均画像クラス分類}
+\subsection{レスキュー犬訓練データセット動画像平均画像クラス分類}
 
 %\section{オプティカルフロー動画平均画像クラス分類}
 %動画像のフレーム間の平均を取った手法と同様に，クリップ毎にoptical flowの平均画像を作成しVGG16のpretrained modelを用いてfinetuningを行なった．
 
 \section{マルチラベル推定}
-\subsection{動画像からのマルチクラス推定}
+レスキュー犬訓練データセットのマルチラベル推定を行なった．動画で見たデータセットの前半70\%を学習、後半30\%を評価に用いた．
+モデル毎にそれぞれチューニングを行い，モデル内で最も精度の良いものを示す．
+各表ではクラス毎の精度と全体を合計しての精度をPrecision（適合性），Recall（再現率），Jaccard係数で示している．
+なお，Jaccard係数とは\[\tfrac{TP}{FP+FN+TP}\]で表され，PrecisionとRecallの両者についてF尺度と比較してより厳格な値が求まる．
+レスキュー犬の行動分類にあたり，PrecisionとRecallを共に重視するためにこの係数を採用した．
+よって，本研究ではJaccard係数がより大きいモデルは精度がより良いと表現する．
 
+\subsection{静止画像からのマルチクラス推定}
+静止画像からのマルチクラス推定では，ImageNetで学習したVGG16のpretrained modelを用いてのfinetuningを行なった．
+推定精度を表~\ref{still_result}に示す．
+%表~\ref{cyberdataset_label}と照らしあわせると，データ数の少ないものは精度が低い傾向にある．
+%eatクラス，runクラスが特にその傾向を反映している．傾向とは異なるものとして，
+eatクラス，runクラスが特に精度が低く，データ数の少なさと関係していると考察できる．
+データ数が少ないにも関わらずPrecisionの高いshakeクラス，反対にデータ数が十分にも関わらず精度の低いsniffクラスからは，図~\ref{cyberdataset_img}に示したように画像特徴の取りやすさ、取りにくさに依存していることが確認できる．
 \begin{table}[tb]
  \centering
- \caption{数}\label{label}
+ \caption{静止画像を用いたVGG16のfinetuning結果}\label{still_result}
  \scalebox{0.95}[1.00]{
   \begin{tabular}{|l||c|c|c|c|c|c|c|c|c|c|c|c|}
    \hline \hline
@@ -40,10 +54,14 @@ Jaccard   & 0.299& 0.081& 0.028& 0.028& 0.025& 0.0& 0.222& 0.29& 0.0& 0.586& 0.5
 \end{table}
 
 
-\subsection{オプティカルフロー画像からのマルチクラス推定}
+\subsection{optical flow画像からのマルチクラス推定}
+optical flow画像からのマルチクラス推定では，静止画像からのマルチラベル推定と同じようにImageNetで学習したVGG16のpretrained modelを用いてのfinetuningを行なった．
+推定精度を表~\ref{optic_result}に示す．
+静止画像と比較して，shakeクラス，stopクラスなどの動き特徴の現れやすそうなクラスの精度が高くなることを期待していたが，それらを含め全体的に精度が下がった．
+画像特徴が失われたため，推定が困難になった様子がうかがえる．
 \begin{table}[tb]
  \centering
- \caption{数}\label{label}
+ \caption{optical_flow画像を用いたVGG16のfinetuning結果}\label{optic_result}
  \scalebox{0.95}[1.00]{
   \begin{tabular}{|l||c|c|c|c|c|c|c|c|c|c|c|c|}
    \hline \hline
@@ -69,9 +87,17 @@ Jaccard   & 0.299& 0.081& 0.028& 0.028& 0.025& 0.0& 0.222& 0.29& 0.0& 0.586& 0.5
 % \end{center}
 %\end{figure}
 \subsection{音声からのマルチクラス推定}
+動画の音声データのみを用いてマルチクラス推定を行なった．
+ネットワークは\cite{soundnet}の音声分類ネットワークを参考に構成した．
+メル周波数スペクトラム係数を用いて音声データから特徴を取り出し，その値をネットワークへの入力とした．
+29.97fpsの動画31フレーム分の音声を48000Hzとして扱い，(20, 94)次元の入力を得た．
+\subsubsection{1D Convolutional network}
+図~\ref{sound_network}に示したネットワークの2D Convolutionレイヤを1D Convolutionレイヤに置き換えたネットワークを用いて推定を行なった．
+推定制度を表~\ref{sound_1d_result}に示す．全体を通して，静止画像からのマルチクラス推定よりも精度が上昇した．
+特に，barkクラス，commandクラス，shakeクラス，sniffクラスの精度上昇が顕著であり，音特徴がクラス推定に重要であることが示された．
 \begin{table}[tb]
  \centering
- \caption{1d数}\label{label}
+ \caption{音声データを用いた1d Convolutional networkの推定結果}\label{sound_1d_result}
  \scalebox{0.95}[1.00]{
   \begin{tabular}{|l||c|c|c|c|c|c|c|c|c|c|c|c|}
    \hline \hline
@@ -90,9 +116,15 @@ Jaccard   & 0.661& 0.051& 0.215& 0.019& 0.131& 0.0& 0.187& 0.359& 0.48& 0.731& 0
  }
 \end{table}
 
+\subsubsection{2D Convolutional network}
+音声データから得た(20, 94)次元の入力にチャネルを追加し，(20, 94, 1)の画像としてネットワークへ入力した．
+1D Convolutional networkと比較し特徴量が増え，精度がわずかに上昇した．
+推定精度を表~\ref{sound_2d_label}に示す．
+全体としての精度は上昇したものの，クラス別に比較した際に1D Convolutional networkで学習したモデルに劣るクラスが半数近くを占める．
+学習コストなどを含めるなど評価指標を変えた際には2D Convolutional networkが劣る可能性がある．
 \begin{table}[tb]
  \centering
- \caption{2d数}\label{label}
+ \caption{音声データを用いた1d Convolutional networkの推定結果}\label{sound_2d_result}
  \scalebox{0.95}[1.00]{
   \begin{tabular}{|l||c|c|c|c|c|c|c|c|c|c|c|c|}
    \hline \hline
@@ -110,10 +142,16 @@ Jaccard   & 0.563& 0.04& 0.188& 0.001& 0.059& 0.0& 0.201& 0.304& 0.524& 0.744& 0
   \end{tabular}
  }
 \end{table}
-\subsection{Two-stream}
+
+\subsection{Two-stream　network}
+静止画像とoptical flow画像を学習していないVGG16ネットワークにそれぞれ入力し，得られた2つの出力を結合した結果からマルチクラス推定を行なった．
+推定結果を表~\ref{stilloptic_result}に示す．
+静止画像単体，optical flow画像単体からの推定と比較して精度がわずかに上昇している．
+特にsniffクラスなどが劇的に精度が上昇している．動画から得られた静止画像の画像特徴に加えて，optical flowから得られる動き特徴をそれぞれ用いた学習ができていると考えられる．
+ただし，shakeクラスなど，静止画像とoptical flow画像がお互いに悪影響を与え全く分類できなくなってしまったクラスも存在している．
 \begin{table}[tb]
  \centering
- \caption{数}\label{label}
+ \caption{Two-stream networkの推定結果}\label{stilloptic_result}
  \scalebox{0.95}[1.00]{
   \begin{tabular}{|l||c|c|c|c|c|c|c|c|c|c|c|c|}
    \hline \hline
@@ -126,11 +164,15 @@ Jaccard   & 0.11& 0.018& 0.043& 0.0& 0.155& 0.0& 0.259& 0.0& 0.426& 0.705& 0.668
 
   \end{tabular}
  }
-\subsection{Sound based Two-stream}
+\subsection{Sound based Two-stream　network}
+音声データに静止画像，optical flow画像を個別に組み合わせ，マルチクラス推定を行なった．
+音声の特徴を取り出すネットワークには2D Convolutional networkを用いた．
+\subsubsection{音声データと静止画像からのマルチクラス推定}
+音声と静止画像を組み合わせたマルチクラス推定の結果を表~\ref{stillsound_result}に示す．
 \end{table}
 \begin{table}[tb]
  \centering
- \caption{soundstill数}\label{label}
+ \caption{音声と静止画像からのマルチクラス推定結果}\label{stillsound_result}
  \scalebox{0.95}[1.00]{
   \begin{tabular}{|l||c|c|c|c|c|c|c|c|c|c|c|c|}
    \hline \hline
@@ -144,9 +186,11 @@ Jaccard   & 0.662& 0.031& 0.195& 0.018& 0.115& 0.002& 0.308& 0.402& 0.498& 0.726
   \end{tabular}
  }
 \end{table}
+\subsubsection{音声データとoptidcal flow画像からのマルチクラス推定}
+音声とoptical flow画像を組み合わせたマルチクラス推定の結果を表~\ref{opticsound_result}に示す．
 \begin{table}[tb]
  \centering
- \caption{soundoptic数}\label{label}
+ \caption{音声とoptical flow画像からのマルチクラス推定結果}\label{opticsound_result}
  \scalebox{0.95}[1.00]{
   \begin{tabular}{|l||c|c|c|c|c|c|c|c|c|c|c|c|}
    \hline \hline
@@ -159,10 +203,11 @@ Jaccard   & 0.667& 0.054& 0.234& 0.014& 0.123& 0.01& 0.223& 0.356& 0.487& 0.759&
   \end{tabular}
  }
 \end{table}
-\subsection{Sound based Three-stream}
+\subsection{Sound based Three-stream network}
+表~\ref{stillopticsound_result}に示す．
 \begin{table}[tb]
  \centering
- \caption{数}\label{label}
+ \caption{still optic sound}\label{stillopticsound_result}
  \scalebox{0.95}[1.00]{
   \begin{tabular}{|l||c|c|c|c|c|c|c|c|c|c|c|c|}
    \hline \hline
