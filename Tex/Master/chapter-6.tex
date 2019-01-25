@@ -1,32 +1,25 @@
 \section{マルチラベル推定}
-レスキュー犬訓練データセットのマルチラベル推定を行なった．動画で見たデータセットの前半70\%を学習、後
-半30\%を評価に用いた．
+レスキュー犬訓練データセットのマルチラベル推定を行なった．動画で見たデータセットの前半70\%を学習、後半30\%を評価に用いた．
 モデル毎にそれぞれチューニングを行い，モデル内で最も精度の良いものを示す．
-各表ではクラス毎の精度と全体を合計しての精度をPrecision（適合性），Recall（再現率），Jaccard係数で示
-している．
-なお，Jaccard係数とは\[tfrac{TP}{FP+FN+TP}\]で表され，PrecisionとRecallの両者についてF尺度と比較し
-てより厳格な値が求まる．
+各表ではクラス毎の精度と全体を合計しての精度をPrecision（適合性），Recall（再現率），Jaccard係数で示している．
+なお，Jaccard係数とは\[tfrac{TP}{FP+FN+TP}\]で表され，PrecisionとRecallの両者についてF尺度と比較してより厳格な値が求まる．
 レスキュー犬の行動分類にあたり，PrecisionとRecallを共に重視するためにこの係数を採用した．
 よって，本研究ではJaccard係数がより大きいモデルは精度がより良いと表現する．
 
 \subsection{静止画像からのマルチクラス推定}
-静止画像からのマルチクラス推定では，ImageNetで学習したVGG16のpretrained modelを用いてのfinetuningを
-行なった．
+静止画像からのマルチクラス推定では，ImageNetで学習したVGG16のpretrained modelを用いてのfinetuningを行なった．
 推定精度を表~\ref{still_result}に示す．
 %表~\ref{cyberdataset_label}と照らしあわせると，データ数の少ないものは精度が低い傾向にある．
 %eatクラス，runクラスが特にその傾向を反映している．傾向とは異なるものとして，
 eatクラス，runクラスが特に精度が低く，データ数の少なさと関係していると考察できる．
-データ数が少ないにも関わらずPrecisionの高いshakeクラス，反対にデータ数が十分にも関わらず精度の低いsn
-iffクラスからは，図~\ref{cyberdataset_img}に示したように画像特徴の取りやすさ、取りにくさに依存してい
-ることが確認できる．
+データ数が少ないにも関わらずPrecisionの高いshakeクラス，反対にデータ数が十分にも関わらず精度の低いsniffクラスからは，図~\ref{cyberdataset_img}に示したように画像特徴の取りやすさ、取りにくさに依存していることが確認できる．
 \begin{table}[tb]
  \centering
  \caption{静止画像を用いたVGG16のfinetuning結果}\label{still_result}
  \scalebox{0.95}[1.00]{
   \begin{tabular}{|l||c|c|c|c|c|c|c|c|c|c|c|c|}
    \hline \hline
-   クラス   & \rotatebox{90}{bark}& \rotatebox{90}{cling}&\rotatebox{90}{command}& \rotatebox{90}{ea
-t}&\rotatebox{90}{handler}& \rotatebox{90}{run}&\rotatebox{90}{victim}& \rotatebox{90}{shake}& \rotatebox{90}{sniff}& \rotatebox{90}{stop}& \rotatebox{90}{walk} & \rotatebox{90}{全体}\\ \hline
+   クラス   & \rotatebox{90}{bark}& \rotatebox{90}{cling}&\rotatebox{90}{command}& \rotatebox{90}{eat}&\rotatebox{90}{handler}& \rotatebox{90}{run}&\rotatebox{90}{victim}& \rotatebox{90}{shake}& \rotatebox{90}{sniff}& \rotatebox{90}{stop}& \rotatebox{90}{walk} & \rotatebox{90}{全体}\\ \hline
 Precision & 0.626& 0.112& 0.046& 0.23& 0.249& nan& 0.347& 0.896& 0.0& 0.777& 0.602&  0.576 \\ \hline
 Recall    & 0.363& 0.227& 0.067& 0.031& 0.027& 0.0& 0.38& 0.3& 0.0& 0.704& 0.753&  0.605 \\ \hline
 Jaccard   & 0.299& 0.081& 0.028& 0.028& 0.025& 0.0& 0.222& 0.29& 0.0& 0.586& 0.503&  0.418 \\ \hline
@@ -50,8 +43,7 @@ optical flow画像からのマルチクラス推定では，静止画像から�
  \scalebox{0.95}[1.00]{
   \begin{tabular}{|l||c|c|c|c|c|c|c|c|c|c|c|c|}
    \hline \hline
-   クラス   & \rotatebox{90}{bark}& \rotatebox{90}{cling}&\rotatebox{90}{command}& \rotatebox{90}{ea\
-t}&\rotatebox{90}{handler}& \rotatebox{90}{run}&\rotatebox{90}{victim}& \rotatebox{90}{shake}& \rotatebox{90}{sniff}& \rotatebox{90}{stop}& \rotatebox{90}{walk} & \rotatebox{90}{全体}\\ \hline
+   クラス   & \rotatebox{90}{bark}& \rotatebox{90}{cling}&\rotatebox{90}{command}& \rotatebox{90}{eat}&\rotatebox{90}{handler}& \rotatebox{90}{run}&\rotatebox{90}{victim}& \rotatebox{90}{shake}& \rotatebox{90}{sniff}& \rotatebox{90}{stop}& \rotatebox{90}{walk} & \rotatebox{90}{全体}\\ \hline
    Precision & 0.54& 0.027& 0.017& 0.183& 0.239& nan& 0.166& 0.787& 0.0& 0.761& 0.537&  0.462 \\ \hline
    Recall    & 0.198& 0.052& 0.011& 0.007& 0.042& 0.0& 0.121& 0.185& 0.0& 0.64& 0.719&  0.578 \\ \hline
    Jaccard   & 0.17& 0.018& 0.007& 0.007& 0.037& 0.0& 0.075& 0.176& 0.0& 0.533& 0.444&  0.345 \\ \hline
@@ -88,8 +80,7 @@ t}&\rotatebox{90}{handler}& \rotatebox{90}{run}&\rotatebox{90}{victim}& \rotateb
  \scalebox{0.95}[1.00]{
   \begin{tabular}{|l||c|c|c|c|c|c|c|c|c|c|c|c|}
    \hline \hline
-   クラス   & \rotatebox{90}{bark}& \rotatebox{90}{cling}&\rotatebox{90}{command}& \rotatebox{90}{ea\
-t}&\rotatebox{90}{handler}& \rotatebox{90}{run}&\rotatebox{90}{victim}& \rotatebox{90}{shake}& \rotatebox{90}{sniff}& \rotatebox{90}{stop}& \rotatebox{90}{walk} & \rotatebox{90}{全体}\\ \hline
+   クラス   & \rotatebox{90}{bark}& \rotatebox{90}{cling}&\rotatebox{90}{command}& \rotatebox{90}{eat}&\rotatebox{90}{handler}& \rotatebox{90}{run}&\rotatebox{90}{victim}& \rotatebox{90}{shake}& \rotatebox{90}{sniff}& \rotatebox{90}{stop}& \rotatebox{90}{walk} & \rotatebox{90}{全体}\\ \hline
 
 Precision & 0.916& 0.073& 0.345& 0.074& 0.268& 0.0& 0.294& 0.645& 0.546& 0.871& 0.77&  0.665 \\ \hline
 Recall    & 0.704& 0.144& 0.362& 0.025& 0.203& 0.0& 0.338& 0.448& 0.799& 0.819& 0.893&  0.652 \\ \hline
@@ -116,24 +107,16 @@ Jaccard   & 0.661& 0.051& 0.215& 0.019& 0.131& 0.0& 0.187& 0.359& 0.48& 0.731& 0
  \scalebox{0.95}[1.00]{
   \begin{tabular}{|l||c|c|c|c|c|c|c|c|c|c|c|c|}
    \hline \hline
-   クラス   & \rotatebox{90}{bark}& \rotatebox{90}{cling}&\rotatebox{90}{command}& \rotatebox{90}{ea\
-t}&\rotatebox{90}{handler}& \rotatebox{90}{run}&\rotatebox{90}{victim}& \rotatebox{90}{shake}& \rota\
-tebox{90}{sniff}& \rotatebox{90}{stop}& \rotatebox{90}{walk} & \rotatebox{90}{全体}\\ \hline
-Precision & 0.844& 0.094& 0.357& 0.013& 0.192& nan& 0.407& 0.794& 0.588& 0.917& 0.808&  0.639 \\ \hl\
-ine
-Recall    & 0.628& 0.064& 0.285& 0.002& 0.079& 0.0& 0.284& 0.33& 0.83& 0.797& 0.898&  0.721 \\ \hlin\
-e
-Jaccard   & 0.563& 0.04& 0.188& 0.001& 0.059& 0.0& 0.201& 0.304& 0.524& 0.744& 0.74&  0.512 \\ \hlin\
-e
+   クラス   & \rotatebox{90}{bark}& \rotatebox{90}{cling}&\rotatebox{90}{command}& \rotatebox{90}{eat}&\rotatebox{90}{handler}& \rotatebox{90}{run}&\rotatebox{90}{victim}& \rotatebox{90}{shake}& \rotatebox{90}{sniff}& \rotatebox{90}{stop}& \rotatebox{90}{walk} & \rotatebox{90}{全体}\\ \hline
+Precision & 0.844& 0.094& 0.357& 0.013& 0.192& nan& 0.407& 0.794& 0.588& 0.917& 0.808&  0.639 \\ \hline
+Recall    & 0.628& 0.064& 0.285& 0.002& 0.079& 0.0& 0.284& 0.33& 0.83& 0.797& 0.898&  0.721 \\ \hline
+Jaccard   & 0.563& 0.04& 0.188& 0.001& 0.059& 0.0& 0.201& 0.304& 0.524& 0.744& 0.74&  0.512 \\ \hline
 
 
    % seven80_6fps_sound_bc-64_lr-0
-%Precision & 0.86& 0.116& 0.243& 0.032& 0.194& 0.0& 0.375& 0.733& 0.565& 0.909& 0.766&  0.65 \\ \hli\
-ne
-   %Recall & 0.754& 0.333& 0.226& 0.006& 0.128& 0.0& 0.48& 0.524& 0.824& 0.742& 0.867&  0.642 \\ \hl\
-ine
-   %Jaccard & 0.672& 0.094& 0.133& 0.005& 0.083& 0.0& 0.267& 0.44& 0.504& 0.691& 0.686&  0.477 \\ \h\
-line
+%Precision & 0.86& 0.116& 0.243& 0.032& 0.194& 0.0& 0.375& 0.733& 0.565& 0.909& 0.766&  0.65 \\ \hline
+   %Recall & 0.754& 0.333& 0.226& 0.006& 0.128& 0.0& 0.48& 0.524& 0.824& 0.742& 0.867&  0.642 \\ \hline
+   %Jaccard & 0.672& 0.094& 0.133& 0.005& 0.083& 0.0& 0.267& 0.44& 0.504& 0.691& 0.686&  0.477 \\ \hline
 
   \end{tabular}
  }
