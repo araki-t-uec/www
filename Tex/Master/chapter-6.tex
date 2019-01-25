@@ -11,6 +11,7 @@
 推定精度を表~\ref{still_result}に示す．
 %表~\ref{cyberdataset_label}と照らしあわせると，データ数の少ないものは精度が低い傾向にある．
 %eatクラス，runクラスが特にその傾向を反映している．傾向とは異なるものとして，
+
 eatクラス，runクラスが特に精度が低く，データ数の少なさと関係していると考察できる．
 データ数が少ないにも関わらずPrecisionの高いshakeクラス，反対にデータ数が十分にも関わらず精度の低いsniffクラスからは，図~\ref{cyberdataset_img}に示したように画像特徴の取りやすさ、取りにくさに依存していることが確認できる．
 \begin{table}[tb]
@@ -35,12 +36,12 @@ Jaccard   & 0.299& 0.081& 0.028& 0.028& 0.025& 0.0& 0.222& 0.29& 0.0& 0.586& 0.5
 \subsection{optical flow画像からのマルチクラス推定}
 optical flow画像からのマルチクラス推定では，静止画像からのマルチラベル推定と同じようにImageNetで学習したVGG16のpretrained modelを用いてのfinetuningを行なった．
 推定精度を表~\ref{optic_result}に示す．
+
 静止画像と比較して，shakeクラス，stopクラスなどの動き特徴の現れやすそうなクラスの精度が高くなることを期待していたが，それらを含め全体的に精度が下がった．
 画像特徴が失われたため，推定が困難になった様子がうかがえる．
 \begin{table}[tb]
  \centering
- \caption{静止画像を用いたVGG16のfinetuning結果}\label{still_result}
- \caption{optical_flow画像を用いたVGG16のfinetuning結果}\label{optic_result}
+ \caption{optical flow画像を用いたVGG16のfinetuning結果}\label{optic_result}
  \scalebox{0.95}[1.00]{
   \begin{tabular}{|l||c|c|c|c|c|c|c|c|c|c|c|c|}
    \hline \hline
@@ -73,7 +74,9 @@ optical flow画像からのマルチクラス推定では，静止画像から�
 29.97fpsの動画31フレーム分の音声を48000Hzとして扱い，(20, 94)次元の入力を得た．
 \subsubsection{1D Convolutional network}
 図~\ref{sound_network}に示したネットワークの2D Convolutionレイヤを1D Convolutionレイヤに置き換えたネットワークを用いて推定を行なった．
-推定制度を表~\ref{sound_1d_result}に示す．全体を通して，静止画像からのマルチクラス推定よりも精度が上昇した．
+推定制度を表~\ref{sound_1d_result}に示す．
+
+全体を通して，静止画像からのマルチクラス推定よりも精度が上昇した．
 特に，barkクラス，commandクラス，shakeクラス，sniffクラスの精度上昇が顕著であり，音特徴がクラス推定に重要であることが示された．
 \begin{table}[tb]
  \centering
@@ -100,6 +103,7 @@ Jaccard   & 0.661& 0.051& 0.215& 0.019& 0.131& 0.0& 0.187& 0.359& 0.48& 0.731& 0
 音声データから得た(20, 94)次元の入力にチャネルを追加し，(20, 94, 1)の画像としてネットワークへ入力した．
 1D Convolutional networkと比較し特徴量が増え，精度がわずかに上昇した．
 推定精度を表~\ref{sound_2d_label}に示す．
+
 全体としての精度は上昇したものの，クラス別に比較した際に1D Convolutional networkで学習したモデルに劣るクラスが半数近くを占める．
 学習コストなどを含めるなど評価指標を変えた際には2D Convolutional networkが劣る可能性がある．
 \begin{table}[tb]
@@ -126,6 +130,7 @@ Jaccard   & 0.563& 0.04& 0.188& 0.001& 0.059& 0.0& 0.201& 0.304& 0.524& 0.744& 0
 \subsection{Two-stream　network}
 静止画像とoptical flow画像を学習していないVGG16ネットワークにそれぞれ入力し，得られた2つの出力を結合した結果からマルチクラス推定を行なった．
 推定結果を表~\ref{stilloptic_result}に示す．
+
 静止画像単体，optical flow画像単体からの推定と比較して精度がわずかに上昇している．
 特にsniffクラスなどが劇的に精度が上昇している．動画から得られた静止画像の画像特徴に加えて，optical flowから得られる動き特徴をそれぞれ用いた学習ができていると考えられる．
 ただし，shakeクラスなど，静止画像とoptical flow画像がお互いに悪影響を与え全く分類できなくなってしまったクラスも存在している．
