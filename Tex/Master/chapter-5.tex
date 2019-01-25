@@ -33,8 +33,7 @@ DCADはクリップ毎にフレーム間の平均をとり，画像として扱�
 %表~\ref{cyberdataset_label}と照らしあわせると，データ数の少ないものは精度が低い傾向にある．
 %eatクラス，runクラスが特にその傾向を反映している．傾向とは異なるものとして，
 eatクラス，runクラスが特に精度が低く，データ数の少なさと関係していると考察できる．
-データ数が少ないにも関わらずPrecisionの高いshakeクラス，反対にデータ数が十分にも関わらず精度の低いsniffクラスからは，
-%図~\ref{cyberdataset_img}に示したように画像特徴の取りやすさ、取りにくさに依存していることが確認できる．
+データ数が少ないにも関わらずPrecisionの高いshakeクラス，反対にデータ数が十分にも関わらず精度の低いsniffクラスからは，図~\ref{cyberdataset_img}に示したように画像特徴の取りやすさ、取りにくさに依存していることが確認できる．
 \begin{table}[tb]
  \centering
  \caption{静止画像を用いたVGG16のfinetuning結果}\label{still_result}
@@ -62,7 +61,7 @@ optical flow画像からのマルチクラス推定では，静止画像から�
 画像特徴が失われたため，推定が困難になった様子がうかがえる．
 \begin{table}[tb]
  \centering
- \caption{optical_flow画像を用いたVGG16のfinetuning結果}\label{optic_result}
+% \caption{optical_flow画像を用いたVGG16のfinetuning結果}\label{optic_result}
  \scalebox{0.95}[1.00]{
   \begin{tabular}{|l||c|c|c|c|c|c|c|c|c|c|c|c|}
    \hline \hline
