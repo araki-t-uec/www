@@ -2,7 +2,7 @@
 レスキュー犬訓練データセットのマルチラベル推定を行なった．動画で見たデータセットの前半70\%を学習、後半30\%を評価に用いた．
 モデル毎にそれぞれチューニングを行い，モデル内で最も精度の良いものを示す．
 各表ではクラス毎の精度と全体を合計しての精度をPrecision（適合性），Recall（再現率），Jaccard係数で示している．
-なお，Jaccard係数とは\[tfrac{TP}{FP+FN+TP}\]で表され，PrecisionとRecallの両者についてF尺度と比較してより厳格な値が求まる．
+なお，Jaccard係数とは\[\tfrac{TP}{FP+FN+TP}\]で表され，PrecisionとRecallの両者についてF尺度と比較してより厳格な値が求まる．
 レスキュー犬の行動分類にあたり，PrecisionとRecallを共に重視するためにこの係数を採用した．
 よって，本研究ではJaccard係数がより大きいモデルは精度がより良いと表現する．
 
@@ -224,7 +224,8 @@ Jaccard   & 0.667& 0.054& 0.234& 0.014& 0.123& 0.01& 0.223& 0.356& 0.487& 0.759&
 \end{table}
 
 \subsection{Sound based Three-stream network}
-表~\ref{stillopticsound_result}に示す．
+静止画像・optical flow画像・音声を用いてSound based Three-streamでレスキュー犬行動のマルチラベル推定を行なった．
+結果を表~\ref{stillopticsound_result}に示す．
 
 音声単体，Sound based Two-streamと比較して精度が上昇した．
 3つのデータから得られた特徴が民主主義的に出力を得るため，どれか1つのストリームが誤った推定をしても他2つがカバーしていると考えられる．
