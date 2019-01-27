@@ -1,4 +1,4 @@
-\section{マルチラベル推定}
+section{マルチラベル推定}
 レスキュー犬訓練データセットのマルチラベル推定を行なった．動画で見たデータセットの前半70\%を学習、後半30\%を評価に用いた．
 モデル毎にそれぞれチューニングを行い，モデル内で最も精度の良いものを示す．
 各表ではクラス毎の精度と全体を合計しての精度をPrecision（適合性），Recall（再現率），Jaccard係数で示している．
@@ -124,7 +124,7 @@ Jaccard   & 0.563& 0.04& 0.188& 0.001& 0.059& 0.0& 0.201& 0.304& 0.524& 0.744& 0
  }
 \end{table}
 
-\subsection{Two-stream　network}
+\subsection{Two-stream network}
 静止画像とoptical flow画像を学習していないVGG16ネットワークにそれぞれ入力し，得られた2つの出力を結合した結果からマルチクラス推定を行なった．
 推定結果を表~\ref{stilloptic_result}に示す．
 
@@ -148,7 +148,7 @@ Jaccard   & 0.11& 0.018& 0.043& 0.0& 0.155& 0.0& 0.259& 0.0& 0.426& 0.705& 0.668
  }
 \end{table}
 
-\subsection{Sound based Two-stream　network}
+\subsection{Sound based Two-stream network}
 音声データに静止画像，optical flow画像を個別に組み合わせ，マルチクラス推定を行なった．
 音声の特徴を取り出すネットワークには2D Convolutional networkを用いた．
 \subsubsection{音声データと静止画像からのマルチクラス推定}
