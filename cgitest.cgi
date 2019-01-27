@@ -85,7 +85,7 @@ def html_code():
     print '''<h2>Results</h2>'''
     print body_content()
     hoge = '<input type=\"text\" name=\"text\" value="EGE">'
-    print('''<form action="./ege.cgi" method="POST">''')
+    print('''<form action="./cgitest.cgi" method="POST">''')
     print(hoge )
     print('''<p>
     <input type="checkbox" name="chbx" value="1" checked="checked"> 1

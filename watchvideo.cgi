@@ -23,6 +23,7 @@ def defdir(path)
   #pathに入っているディレクトリ以下の.htmlファイルを@list配列へ代入
   @list += `ls #{path}| grep "/"`
   @list += `ls #{path}*.mp4`
+  @list += `ls #{path}*.avi`
   #public_html以下の深度1までのディレクトリ(public_html/*/)まで再帰
 #  if /\*\/\*\// =~ path #深度2まで
   if /\*\// =~ path
@@ -74,7 +75,7 @@ printf(<<_EOS_, css, text)
 
 <!DOCTIPE html>
 <head>
-<title>output work</title>
+<title>VIDEOs</title>
 <link rel="stylesheet" type="text/css" href="%s">
 </head>
 <body>
