@@ -25,28 +25,36 @@ DCADはクリップ毎にフレーム間の平均をとり，画像として扱�
    \begin{center}
 
     \includegraphics[scale=0.5]{./Figures/vgg16_res.eps}
-    \caption{VGG16 pretrained modelによるfinetuningの結果}
+    \caption{VGG16 pretrained modelとDCADによるfinetuningの結果}
     \label{vgg16_res}
    \end{center}
   % \end{minipage}
   % \begin{minipage}{0.5\textwidth}
 \end{figure}
 
-%% \subsection{レスキュー犬訓練データセット動画像平均画像クラス分類}
-%% \begin{figure}[htbp]
-
-%%    \begin{center}
-
-%%     \includegraphics[scale=0.3]{./Figures/resnet_res.eps}
-%%   \caption{ResNet pretrained modelによるfinetuningの結果}
-%%   \label{resnet_res}
-%%    \end{center}
-%%  %  \end{minipage}
-%%  % \end{tabular}
-%% \end{figure}
-%\section{オプティカルフロー動画平均画像クラス分類}
-%動画像のフレーム間の平均を取った手法と同様に，クリップ毎にoptical flowの平均画像を作成しVGG16のpretrained modelを用いてfinetuningを行なった．
 \subsection{レスキュー犬訓練データセット動画像平均画像クラス分類}
+レスキュー犬訓練データセットでの予備実験の結果を図~\ref{sub_resque_res}に示す．
 
-%TODO
-（（まだです））
+データ数の多いwalkクラスやstopクラスだけでなく，shakeクラスやeatクラスなどのデータ数の少ないクラスも大まかに分類できていることが分かる．
+この結果によって，レスキュー犬訓練データセットからクラス分類・推定が可能であることが示された．
+\begin{figure}[htbp]
+  \begin{center}
+    \includegraphics[scale=0.5]{./Figures/resque_mean_reslut.eps}
+    \caption{ResNet pretrained modelとレスキュー犬訓練データセットによるfinetuningの結果}
+    \label{sub_resque_res}
+  \end{center}
+\end{figure}
+
+\subsection{オプティカルフロー動画平均画像クラス分類}
+動画像のフレーム間の平均を取った手法と同様に，クリップ毎にoptical flowの平均画像を作成しVGG16のpretrained modelを用いてfinetuningを行なった．
+結果を図~\ref{sub_optresque_res}に示す．
+
+やはりデータ数の影響を受けているものの，通常の動画のフレーム平均画像とは異なる傾向が得られた．
+この結果によって，optical flow画像から得られる特徴の有用性が示された．
+\begin{figure}[htbp]
+  \begin{center}
+    \includegraphics[scale=0.5]{./Figures/resque_optmean_reslut.eps}
+    \caption{ResNet pretrained modelとレスキュー犬訓練データセットによるfinetuningの結果}
+    \label{sub_optresque_res}
+  \end{center}
+\end{figure}
