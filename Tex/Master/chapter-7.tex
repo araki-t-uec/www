@@ -1,19 +1,23 @@
 \chapter{考察}
+全体の結果を表~\ref{expetiments_result}に示す．
+
+%TODO
+（（まだです））
 \begin{table}[tb]
  \centering
  \caption{各実験比較表}\label{expetiments_result}
- \scalebox{0.90}[1.00]{
+ \scalebox{0.80}[0.80]{
   \begin{tabular}{|l||c|c|c|c|c|c|c|c|c|c|c|c|}
    \hline \hline
    & \rotatebox{90}{bark}& \rotatebox{90}{cling}&\rotatebox{90}{command}& \rotatebox{90}{eat}&\rotatebox{90}{handler}& \rotatebox{90}{run}&\rotatebox{90}{victim}& \rotatebox{90}{shake}& \rotatebox{90}{sniff}& \rotatebox{90}{stop}& \rotatebox{90}{walk} & \rotatebox{90}{全体}\\ \hline
 静止画像   & 0.244& 0.066& 0.0& 0.024& 0.057& 0.0& 0.204& 0.0& 0.0& 0.588& 0.51&  0.436 \\ \hline
 optical flow   & 0.141& 0.0& 0.0& 0.0& 0.017& 0.0& 0.017& 0.0& 0.0& 0.586& 0.476&  0.406 \\ \hline
-音声 (Conv1D)   & 0.669& 0.078& 0.22& 0.023& 0.138& 0.0& 0.274& 0.44& 0.502& 0.745& 0.704&  0.512 \\ \hline
+音声 (Conv1D)   & {\bf 0.669}& 0.078& 0.22& 0.023& 0.138& 0.0& 0.274& {\bf 0.44}& 0.502& 0.745& 0.704&  0.512 \\ \hline
 音声 (Conv2D)   & 0.563& 0.04& 0.188& 0.001& 0.059& 0.0& 0.201& 0.304& 0.524& 0.744& 0.74&  0.512 \\ \hline
 静止画像+optical flow   & 0.11& 0.018& 0.043& 0.0& 0.155& 0.0& 0.259& 0.0& 0.426& 0.705& 0.668&  0.435 \\ \hline
 静止画像+音声   & 0.662& 0.031& 0.195& 0.018& 0.115& 0.002& 0.308& 0.402& 0.498& 0.726& 0.694&  0.5 \\ \hline
-optical flow+音声   & 0.667& 0.054& 0.234& 0.014& 0.123& 0.01& 0.223& 0.356& 0.487& 0.759& 0.692&  0.493 \\ \hline
-静止画像+optical+音声   & 0.577& 0.135& 0.186& 0.066& 0.183& 0.026& 0.433& 0.409& 0.53& 0.779& 0.725&  0.518 \\ \hline
+optical flow+音声   & 0.667& 0.054& {\bf 0.234}& 0.014& 0.123& 0.01& 0.223& 0.356& 0.487& 0.759& 0.692&  0.493 \\ \hline
+静止画像+optical+音声   & 0.577& {\bf 0.135}& 0.186& {\bf 0.066}& {\bf 0.183}& {\bf 0.026}& {\bf 0.433}& 0.409& {\bf 0.53}& {\bf 0.779}& {\bf 0.725}&  textcolor{red}{0.518} \\ \hline
   \end{tabular}
  }
 \end{table}
