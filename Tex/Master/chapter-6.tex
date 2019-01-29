@@ -17,7 +17,7 @@ eatクラス，runクラスが特に精度が低く，データ数の少なさ�
 \begin{table}[tb]
  \centering
  \caption{静止画像を用いたVGG16のfinetuning結果}\label{still_result}
- \scalebox{0.95}[1.00]{
+ \scalebox{0.85}[0.85]{
   \begin{tabular}{|l||c|c|c|c|c|c|c|c|c|c|c|c|}
    \hline \hline
    クラス   & \rotatebox{90}{bark}& \rotatebox{90}{cling}&\rotatebox{90}{command}& \rotatebox{90}{eat}&\rotatebox{90}{handler}& \rotatebox{90}{run}&\rotatebox{90}{victim}& \rotatebox{90}{shake}& \rotatebox{90}{sniff}& \rotatebox{90}{stop}& \rotatebox{90}{walk} & \rotatebox{90}{全体}\\ \hline
@@ -43,7 +43,7 @@ optical flow画像からのマルチクラス推定では，静止画像から�
 \begin{table}[tb]
  \centering
  \caption{optical flow画像を用いたVGG16のfinetuning結果}\label{optic_result}
- \scalebox{0.95}[1.00]{
+ \scalebox{0.86}[0.86]{
   \begin{tabular}{|l||c|c|c|c|c|c|c|c|c|c|c|c|}
    \hline \hline
    クラス   & \rotatebox{90}{bark}& \rotatebox{90}{cling}&\rotatebox{90}{command}& \rotatebox{90}{eat}&\rotatebox{90}{handler}& \rotatebox{90}{run}&\rotatebox{90}{victim}& \rotatebox{90}{shake}& \rotatebox{90}{sniff}& \rotatebox{90}{stop}& \rotatebox{90}{walk} & \rotatebox{90}{全体}\\ \hline
@@ -83,7 +83,7 @@ optical flow画像からのマルチクラス推定では，静止画像から�
 \begin{table}[tb]
  \centering
  \caption{音声データを用いた1d Convolutional networkの推定結果}\label{sound_1d_result}
- \scalebox{0.95}[1.00]{
+ \scalebox{0.80}[0.80]{
   \begin{tabular}{|l||c|c|c|c|c|c|c|c|c|c|c|c|}
    \hline \hline
    クラス   & \rotatebox{90}{bark}& \rotatebox{90}{cling}&\rotatebox{90}{command}& \rotatebox{90}{eat}&\rotatebox{90}{handler}& \rotatebox{90}{run}&\rotatebox{90}{victim}& \rotatebox{90}{shake}& \rotatebox{90}{sniff}& \rotatebox{90}{stop}& \rotatebox{90}{walk} & \rotatebox{90}{全体}\\ \hline
@@ -106,7 +106,7 @@ Jaccard   & 0.669& 0.078& 0.22& 0.023& 0.138& 0.0& 0.274& 0.44& 0.502& 0.745& 0.
 \begin{table}[tb]
  \centering
  \caption{音声データを用いた2d Convolutional networkの推定結果}\label{sound_2d_result}
- \scalebox{0.95}[1.00]{
+ \scalebox{0.80}[0.80]{
   \begin{tabular}{|l||c|c|c|c|c|c|c|c|c|c|c|c|}
    \hline \hline
    クラス   & \rotatebox{90}{bark}& \rotatebox{90}{cling}&\rotatebox{90}{command}& \rotatebox{90}{eat}&\rotatebox{90}{handler}& \rotatebox{90}{run}&\rotatebox{90}{victim}& \rotatebox{90}{shake}& \rotatebox{90}{sniff}& \rotatebox{90}{stop}& \rotatebox{90}{walk} & \rotatebox{90}{全体}\\ \hline
@@ -134,7 +134,7 @@ Jaccard   & 0.563& 0.04& 0.188& 0.001& 0.059& 0.0& 0.201& 0.304& 0.524& 0.744& 0
 \begin{table}[tb]
  \centering
  \caption{Two-stream networkの推定結果}\label{stilloptic_result}
- \scalebox{0.95}[1.00]{
+ \scalebox{0.85}[0.85]{
   \begin{tabular}{|l||c|c|c|c|c|c|c|c|c|c|c|c|}
    \hline \hline
    クラス   & \rotatebox{90}{bark}& \rotatebox{90}{cling}&\rotatebox{90}{command}& \rotatebox{90}{eat}&\rotatebox{90}{handler}& \rotatebox{90}{run}&\rotatebox{90}{victim}& \rotatebox{90}{shake}& \rotatebox{90}{sniff}& \rotatebox{90}{stop}& \rotatebox{90}{walk} & \rotatebox{90}{全体}\\ \hline
@@ -176,7 +176,7 @@ Conv2D音声ストリーム単体の方が精度が高いクラスはsniff，sto
 \begin{table}[tb]
  \centering
  \caption{音声と静止画像からのマルチクラス推定結果}\label{stillsound_result}
- \scalebox{0.95}[1.00]{
+ \scalebox{0.75}[0.75]{
   \begin{tabular}{|l||c|c|c|c|c|c|c|c|c|c|c|c|}
    \hline \hline
    クラス   & \rotatebox{90}{bark}& \rotatebox{90}{cling}&\rotatebox{90}{command}& \rotatebox{90}{eat}&\rotatebox{90}{handler}& \rotatebox{90}{run}&\rotatebox{90}{victim}& \rotatebox{90}{shake}& \rotatebox{90}{sniff}& \rotatebox{90}{stop}& \rotatebox{90}{walk} & \rotatebox{90}{全体}\\ \hline
@@ -210,7 +210,7 @@ stopクラスが特徴的であるのに対し，walkクラスには様々なパ
 \begin{table}[tb]
  \centering
  \caption{音声とoptical flow画像からのマルチクラス推定結果}\label{opticsound_result}
- \scalebox{0.95}[1.00]{
+ \scalebox{0.75}[0.75]{
   \begin{tabular}{|l||c|c|c|c|c|c|c|c|c|c|c|c|}
    \hline \hline
    クラス   & \rotatebox{90}{bark}& \rotatebox{90}{cling}&\rotatebox{90}{command}& \rotatebox{90}{eat}&\rotatebox{90}{handler}& \rotatebox{90}{run}&\rotatebox{90}{victim}& \rotatebox{90}{shake}& \rotatebox{90}{sniff}& \rotatebox{90}{stop}& \rotatebox{90}{walk} & \rotatebox{90}{全体}\\ \hline
@@ -234,8 +234,8 @@ Jaccard   & 0.667& 0.054& 0.234& 0.014& 0.123& 0.01& 0.223& 0.356& 0.487& 0.759&
 
 \begin{table}[tb]
  \centering
- \caption{still optic sound}\label{stillopticsound_result}
- \scalebox{0.95}[1.00]{
+ \caption{静止画像とoptical flow画像と音声からのマルチクラス推定結果}\label{stillopticsound_result}
+ \scalebox{0.75}[0.75]{
   \begin{tabular}{|l||c|c|c|c|c|c|c|c|c|c|c|c|}
    \hline \hline
    クラス   & \rotatebox{90}{bark}& \rotatebox{90}{cling}&\rotatebox{90}{command}& \rotatebox{90}{eat}&\rotatebox{90}{handler}& \rotatebox{90}{run}&\rotatebox{90}{victim}& \rotatebox{90}{shake}& \rotatebox{90}{sniff}& \rotatebox{90}{stop}& \rotatebox{90}{walk} & \rotatebox{90}{全体}\\ \hline

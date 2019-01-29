@@ -33,6 +33,9 @@
 事前に動画から静止画を切り出してから特徴を抽出し学習する手法としてはSimonyanらによるTwo-stream convolutional networksがある~\cite{simonyan2014two}, \cite{wang2015towards}．
 これは，1つの動画から通常のRGB画像とoptical flow画像を抽出し，それぞれを入力とする個々のネットワークを学習することで動き情報を考慮して動画を分類する手法である．
 図~\ref{2st_network}にTwo-stream convolutionalのネットワーク構造を示す．
+
+Two-streamをベースにした派生ネットワークの研究は多く、Convolutional Two-Stream Network Fusion~\cite{a}もその1つである。
+これは，それぞれのストリームのConv層の出力を結合し，その後FC層を追加することで最高精度を達成している．
 \begin{figure}[htbp]
  \begin{center}
   \includegraphics[width=12cm]{./Figures/two-stream.eps}
