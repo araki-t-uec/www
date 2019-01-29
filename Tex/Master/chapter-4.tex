@@ -149,7 +149,7 @@
 ノイズは学習に悪影響を与えること，微細なアスペクト比のずれは学習の際に吸収されること，アスペクト比をそろえる際に必要性の有無を判断できない情報が切り取られることをその判断理由とする．
 このようにして整形した動画を$V$とする．
 \begin{figure}[htbp]
-%  \begin{center}
+  \begin{center}
     \begin{tabular}{c}
       \begin{minipage}{0.18\hsize}
         \begin{center}
@@ -188,7 +188,7 @@
     \end{tabular}
     \caption{提供時のデータ．左から，犬一人称視点，ハンドラー視点，第三者視点の動画が結合されている．合わせて1280x240pixelで，犬一人称視点だけ切り出しても通常カメラで撮影される比率にはならない．}
     \label{concat_movie}
-%  \end{center}
+  \end{center}
 \end{figure}
 
 
@@ -235,7 +235,7 @@ $V$からラベル毎にクリップ群を切り出すと，アノテーショ�
 
 
 \begin{figure}[htbp]
-%  \begin{center}
+  \begin{center}
     \begin{tabular}{c}
      % 0
       \begin{minipage}{0.18\hsize}
@@ -271,7 +271,7 @@ $V$からラベル毎にクリップ群を切り出すと，アノテーショ�
     \end{tabular}
     \caption{クリップセットから計算したフレーム間平均画像．}
     \label{resque_mean}
-%  \end{center}
+  \end{center}
 \end{figure}
 
 \subsubsection{フレーム毎切り抜き画像セット・optical flow画像セット}
@@ -283,8 +283,8 @@ optical flowの計算にはPythonのオープンソースライブラリであ�
 
 \subsubsection{音声セット}
 フレーム毎切り抜き画像セットに対応する音声を切り出した．
-音声データ$S_t$は，$F_t$を中央において前後15フレーム分の長さとした．
-\[S_t = f(F_{t-15}, F_{t+15})\]
+音声データ$S_t$は，$F_t$を中央において前後15フレーム分の長さとした（式~\ref{sound_length}）．
+\[S_t = f(F_{t-15}, F_{t+15}) \label{sound_length}\]
 動画は29.97fpsであるため，31フレームのこれは約1秒に当たる．
 動画あるいは音声から実際に犬の行動を推定する場合を想定すると，1秒は短すぎず現実的で取り扱いやすい時間であり，特徴を取り出すにもコストが低いため実験にも適している．
 
