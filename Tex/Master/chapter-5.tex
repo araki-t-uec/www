@@ -20,7 +20,7 @@ Iwashitaらによる局所的特徴量を用いた分類実験での精度は60.
 全般的に，データの多いクラスは精度が高い傾向にあるが，データの少ないクラスは精度が低い傾向にある．
 加えて，~\(Car\)クラスは道路の進行方向に対して垂直に待機している10クラスの中で特殊なクラスであり，車などの写ったフレームの影響で分類精度が上昇していると考えられる．~\(Feed\)クラス,~\(Pet\)クラス,~\(Play\_with\_ball\)クラスは，それぞれフレーム内を人間が占める割合が多いクラスと言え，そのため混同が起こりやすいと考えられる.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
  % \begin{tabular}{cc}
  %  \begin{minipage}{0.5\textwidth}
    \begin{center}
@@ -38,7 +38,7 @@ Iwashitaらによる局所的特徴量を用いた分類実験での精度は60.
 
 データ数の多いwalkクラスやstopクラスだけでなく，shakeクラスやeatクラスなどのデータ数の少ないクラスも大まかに分類できていることが分かる．
 この結果によって，レスキュー犬訓練データセットからクラス分類・推定が可能であることが示された．
-\begin{figure}[htbp]
+\begin{figure}[H]
   \begin{center}
     \includegraphics[scale=0.7]{./Figures/resque_mean_result.eps}
     \caption{VGG16 pretrained modelとレスキュー犬訓練データセットフレーム平均画像によるクラス分類のfinetuning結果}
@@ -52,7 +52,7 @@ Iwashitaらによる局所的特徴量を用いた分類実験での精度は60.
 
 やはりデータ数の影響を受けているものの，通常の動画のフレーム平均画像とは異なる傾向が得られた．
 この結果によって，optical flow画像から得られる特徴の有用性が示された．
-\begin{figure}[htbp]
+\begin{figure}[H]
   \begin{center}
     \includegraphics[scale=0.7]{./Figures/resque_optmean_result.eps}
     \caption{VGG16 pretrained modelとレスキュー犬訓練データセットoptical flow動画フレーム平均画像によるクラス分類のfinetuning結果}
