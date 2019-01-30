@@ -234,7 +234,7 @@ $V$からラベル毎にクリップ群を切り出すと，アノテーショ�
 このクリップセットから計算したフレーム間平均画像を図~\ref{resque_mean}に示す．
 
 
-\begin{figure}[htbp]
+\begin{figure}[H]
   \begin{center}
     \begin{tabular}{c}
      % 0
@@ -284,25 +284,32 @@ optical flowの計算にはPythonのオープンソースライブラリであ�
 \subsubsection{音声セット}
 フレーム毎切り抜き画像セットに対応する音声を切り出した．
 音声データ$S_t$は，$F_t$を中央において前後15フレーム分の長さとした（式~\ref{sound_length}）．
-\[S_t = f(F_{t-15}, F_{t+15}) \label{sound_length}\]
+%\[S_t = f(F_{t-15}, F_{t+15}) \label{sound_length}\]
+\begin{equation}
+\label{sound_length}
+S_t = f(F_{t-15}, F_{t+15})
+\end{equation}
+
 動画は29.97fpsであるため，31フレームのこれは約1秒に当たる．
 動画あるいは音声から実際に犬の行動を推定する場合を想定すると，1秒は短すぎず現実的で取り扱いやすい時間であり，特徴を取り出すにもコストが低いため実験にも適している．
 
 
-\begin{table}[tb]
+\begin{table}[H]
  \centering
- \caption{サイバーレスキュー犬 訓練データセット 利用範囲内での出現回数}\label{cyberdataset_label}
- \scalebox{1.00}[1.00]{
+ \caption{サイバーレスキュー犬 訓練データセット 利用範囲内で計測した出現回数}\label{cyberdataset_label}
+ \scalebox{0.95}[0.95]{
   \begin{tabular}{|l||c|c|c|c|c|c|c|c|c|c|c|}
    \hline \hline
-   ラベル　& bark&cling&comm&eat&handler&run&victim&shake&sniff&stop&walk \\ \hline
+      クラス   & \rotatebox{90}{bark}& \rotatebox{90}{cling}&\rotatebox{90}{command}& \rotatebox{90}{eat}&\rotatebox{90}{handler}& \rotatebox{90}{run}&\rotatebox{90}{victim}& \rotatebox{90}{shake}& \rotatebox{90}{sniff}& \rotatebox{90}{stop}& \rotatebox{90}{walk} \\ \hline
+
+%   ラベル　& bark&cling&comm&eat&handler&run&victim&shake&sniff&stop&walk \\ \hline
    出現回数& 1744& 1127&2439&343&  2011& 98&  1549&  239& 7719&6384&8764 \\ \hline
   \end{tabular}
  }
 
 \end{table}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \begin{tabular}{l}
      % 0
       \begin{minipage}{0.165\hsize}
