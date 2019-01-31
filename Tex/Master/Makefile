@@ -13,5 +13,5 @@ $(NAME).dvi: $(TEX) $(BIB)
 	platex $(NAME); jbibtex $(NAME); platex $(NAME); platex $(NAME); pbibtex $(NAME)
 
 clean:
-	touch $(NAME).tex ; \rm ./$(NAME).pdf ; \rm ./$(NAME).toc ; \rm ./$(NAME).out ; \rm ./$(NAME).bbl ; \rm ./$(NAME).blg ; \rm ./$(NAME).aux ; \rm ./$(NAME).dvi ; \rm ./$(NAME) ; \rm texput.log
+	touch $(NAME).tex ; \rm ./$(NAME).pdf ; \rm ./$(NAME).toc ; \rm ./$(NAME).out ; \rm ./$(NAME).bbl ; \rm ./$(NAME).blg ; \rm ./$(NAME).aux ; \rm ./$(NAME).dvi ; \rm texput.log
 
