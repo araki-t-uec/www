@@ -33,7 +33,7 @@
 %\subsubsection{Two-stream convolutional network}
 \subsubsection{静止画を入力とする動画認識}
 事前に動画から静止画を切り出してから特徴を抽出し学習する手法としては~\cite{simonyan2014two}, \cite{wang2015towards}が挙げられる．
-SimonyanらによるTwo-stream CNN~\cite{simonyan2014two}は，1つの動画から通常のRGB画像とoptical flow画像を抽出し，
+Simonyanらによるtwo-stream CNN~\cite{simonyan2014two}は，1つの動画から通常のRGB画像とoptical flow画像を抽出し，
 それぞれを入力とする個々のネットワークを学習することで動き情報を考慮して動画を分類する手法である．
 図~\ref{2st_network}に\cite{simonyan2014two}のネットワーク構造を示す．
 この手法では，入力となる動画から静止画を切り出し，さらにoptical flow画像を生成している．
@@ -46,7 +46,7 @@ Two-streamをベースにした派生ネットワークの研究は多く、Conv
 \begin{figure}[htbp]
  \begin{center}
   \includegraphics[width=12cm]{./Figures/two-stream.eps}
-  \caption{Two-stream convolutional networks アーキテクチャ~(\cite{simonyan2014two}より引用)．切り出したRGB画像とoptical flow画像を個々のネットワークに入力し、出力を合わせている．}
+  \caption{Two-stream CNNの アーキテクチャ~(\cite{simonyan2014two}より引用)．切り出したRGB画像とoptical flow画像を個々のネットワークに入力し、出力を合わせている．}
   \label{2st_network}
  \end{center}
 \end{figure}
@@ -83,7 +83,8 @@ twin stream networkのアーキテクチャを図~\ref{twinst_image}に示す．
 \end{figure}
 
 \subsubsection{犬一人称視点からの行動予測}
-犬一人称映像からの犬の行動予測を行なった研究に\cite{whoretthedog}がある．Modeling Dog Behavior From Visual Data
+犬一人称映像からの犬の行動予測を行なった研究に\cite{whoretthedog}がある．
+%Modeling Dog Behavior From Visual Data
 これは，犬の行動をモデリングし，犬が次にどのような道をたどり行動するかを予測している．
 
 しかし，これらの研究は犬の行動のモデリングであり，犬の周辺環境の推定などは行っていない．

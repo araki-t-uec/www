@@ -6,9 +6,8 @@
 この3つをそれぞれ別のストリームに入力し，それぞれの出力を元にレスキュー犬の行動を推定する．概念図を~\ref{easy_image}に示す．
 \begin{figure}[H]
  \begin{center}
-%  \includegraphics[width=10cm]{./Figures/easy_image.eps}
-  \includegraphics[width=10cm]{./Figures/cyberdog.eps}
-  \caption{処理の流れの概念図を作る（提案手法の概要．入力動画から複数データを抽出し，それぞれ別のストリームへ入力する．各ストリームの出力をもとに，動画のレスキュー犬行動推定結果を最終出力とする．）}
+  \includegraphics[width=10cm]{./Figures/easy_image.eps}
+  \caption{提案手法の概要．入力動画から複数データを抽出し，それぞれ別のストリームへ入力する．各ストリームの出力をもとに，動画のレスキュー犬行動推定結果を最終出力とする．}
   \label{easy_image}
  \end{center}
 \end{figure}
@@ -18,11 +17,11 @@
 %この際に，音声をフレームと同じサイズで切り出すと特徴が著しく失われるため入力音声には$F_t$の前後0.5秒ずつを用いた．動画あるいは音声から実際に犬の行動を推定する場合を想定し，現実的で取り扱いやすい時間としてこれを設定した．
 
 %分類はフレーム毎に行った．
-\section{音声と画像を用いたsound/image-based Two-stream CNN}
-1つ目の提案手法として，音声を用いたTwo-stream networkを提案する．
-既存のTwo-stream networkを改造し，静止画と音声からの動画分類の手法である．
-Two-stream networkと違い音声を用いるため，これをSound based Two-stream networkと呼称する．
-Sound based Two-stream networkのアーキテクチャを図~\ref{sound-two-stream}に示す．
+\section{音声と画像を用いたsound/image-based two-stream CNN}
+1つ目の提案手法として，音声を用いたtwo-stream networkを提案する．
+既存のtwo-stream networkを改造し，静止画と音声からの動画分類の手法である．
+Two-stream networkと違い音声を用いるため，これをsound/image-based two-stream networkと呼称する．
+sound/image-based two-stream networkのアーキテクチャを図~\ref{sound-two-stream}に示す．
 本研究ではこのネットワークを一般的なシングルクラス分類ではなくマルチクラス推定に用いる．
 シングルクラス分類の損失関数にはCrossEntropyLossを用いてクラス確率を求めたが，マルチクラス推定にはクラス毎にSoftMarginLossを用いた．
 入力を$x$，出力を$y$，クラス数を$C$とすると，マルチクラス推定の損失関数SoftMarginLossは式~\ref{softmargin}に定義される．
@@ -40,17 +39,17 @@ loss(x, y) = -\frac{1}{C} * \Sigma_{i} y[i] * log((1+exp(-x[i]))^{-1}) + (1 - y[
 \begin{figure}[htbp]
  \begin{center}
   \includegraphics[width=15cm]{./Figures/soundbasedTwostream.eps}
-  \caption{Sound based Two-stream （提案手法）のアーキテクチャ．(3,224,224)次元の画像と(1,20,94)次元を音声をそれぞれ別のネットワークに通し，得られた特徴を結合したのちFCレイヤを通しクラス数と同じ次元の出力を得る．}
+  \caption{Sound/image-based two-stream CNN（提案手法）のアーキテクチャ．(3,224,224)次元の画像と(1,20,94)次元を音声をそれぞれ別のネットワークに通し，得られた特徴を結合したのちFCレイヤを通しクラス数と同じ次元の出力を得る．}
   \label{sound-two-stream}
  \end{center}
 \end{figure}
 
 
 
-\section{音声・静止画像・optical flow画像を用いたsound/image-based Three-stream CNN}
-2つ目の提案手法として，音声，静止画像，optical flow画像の3つの情報を用いたSound based Three-streamを提案する．
-Sound based Two-stream networkに，画像を入力とするネットワークを加えた3つのstreamを組み合わせている．
-Sound based Two-stream networkのアーキテクチャを図~\ref{sound-two-stream}に示す．
+\section{音声・静止画像・optical flow画像を用いたsound/image-based three-stream CNN}
+2つ目の提案手法として，音声，静止画像，optical flow画像の3つの情報を用いたsound/image-based three-streamを提案する．
+Sound/image-based two-stream networkに，画像を入力とするネットワークを加えた3つのstreamを組み合わせている．
+Sound/image-based two-stream networkのアーキテクチャを図~\ref{sound-two-stream}に示す．
 動画を31フレームとし，中央から切り出した静止画像とそれに対応する直後のoptical flow画像をそれぞれImageNetで学習済みのVGG16モデルに通し，畳み込み層の出力を結合する．
 動画から切り出した音声は音声ストリームに入力する．畳み込みを繰り返すと特徴の縦横次元が小さくなるため，静止画像の畳み込みの出力と同じサイズになるように調整する．
 調整は畳み込みで奥行き次元を揃えた後，同じ特徴をリピートし目的の大きさになるまでコピーして結合する．
@@ -59,7 +58,7 @@ Sound based Two-stream networkのアーキテクチャを図~\ref{sound-two-stre
 \begin{figure}[htbp]
  \begin{center}
   \includegraphics[width=15cm]{./Figures/soundbasedThreestream.eps}
-  \caption{Sound based Three-stream （提案手法）のアーキテクチャ．(3,224,224)次元の画像と(1,20,94)次元を音声をそれぞれ別のネットワークに通し，得られた特徴を結合したのちFCレイヤを通しクラス数と同じ次元の出力を得る．}
+  \caption{Sound/image-based three-stream CNN（提案手法）のアーキテクチャ．(3,224,224)次元の画像と(1,20,94)次元を音声をそれぞれ別のネットワークに通し，得られた特徴を結合したのちFCレイヤを通しクラス数と同じ次元の出力を得る．}
   \label{sound-three-stream}
  \end{center}
 \end{figure}
