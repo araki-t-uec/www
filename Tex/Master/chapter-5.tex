@@ -3,13 +3,13 @@
 予備実験として，DCADとレスキュー犬訓練データセットをクリップセットとしてまとめたもののクラス分類を行なった．
 犬の一人称動画は人間の一人称動画とは大きく異なる．そのため，この予備実験では犬一人称動画分類タスクに対するCNNの有効性を確認した．
 
-本実験では，Sound based Three-stream networkを用いてレスキュー犬訓練データセットのマルチクラス推定を行なった．
+本実験では，sound based three-stream networkを用いてレスキュー犬訓練データセットのマルチクラス推定を行なった．
 提案手法の有用性を示すためのアブレーションスタディに
 静止画像からのマルチラベル推定，
 optical flow画像からのマルチラベル推定，
 音声データからのマルチラベル推定2種，
-Sound based Two-stream networkを用いた音声データと静止画像からのマルチクラス推定，
-同じくSound based Two-stream networkを用いた音声データとoptical flow画像からのマルチクラス推定
+Sound based two-stream networkを用いた音声データと静止画像からのマルチクラス推定，
+同じくsound based two-stream networkを用いた音声データとoptical flow画像からのマルチクラス推定
 をそれぞれ行なった．
 \section{DCAD}
 DCADはクリップ毎にフレーム間の平均をとり，画像として扱ってVGG16のpretrained modelを用いてfinetuningを行なった．
