@@ -12,7 +12,7 @@
 現在も作成中であり，完成していないデータを含めた全てを使用することは困難である．
 そのため，本研究ではその一部の提供されたデータをこれとして取り扱うものとする．
 これは約2分から20分の7本の音声付き動画からなり，犬の一人称視点動画に加えてハンドラー視点動画，レスキュー犬とハンドラーを映す第三者視点動画が含まれる．本研究では犬の一人称視点動画のみを用いて推定を行う．
-総時間は57分40秒，秒間フレーム数は29.97，総フレーム数は103696枚である．
+総時間は57分40秒，秒間フレーム数は29.97，総フレーム数は103,696枚である．
 分類クラスそれぞれについて時間範囲を指定する形で動画にアノテーションがされており，同時刻に複数のクラスが重なるためマルチラベルデータとして取り扱う．
 例えば，「被災者を発見しながら吠えている」間はsee victimクラスとbarkクラスの2つのラベルが付与されている．
 本研究ではこのデータを整形したものをサイバーレスキュー犬訓練データセットとして実験を行なった．最終的に利用したデータのクラス毎の出現頻度が~表\ref{cyberdataset_label}の値である．
@@ -38,30 +38,30 @@
 各クラスについて説明する．
 静止画のみでの音声付き動画のクラス特徴の表現は困難であるため、整形した動画的特徴，音声的特徴とをそれぞれに示す．
 \begin{enumerate}
-\item{bark}
+\item{\bf bark}
 被災者を発見し，かつ吠えている状態．わかりやすい音声的特徴があり，固有の画面揺れが生じる(図~\ref{bark})．
-\item{cling}
+\item{\bf cling}
 臭いに対し，鼻を近づけ嗅いでいる状態．sniffのより詳細な状態であり，clingがラベル付される際はsniffと必ず重複する(図~\ref{sniff})．
-\item{command}
+\item{\bf command}
 ハンドラーからの働きかけのある状態．待て/行け等の口頭指示，褒め，指差し指示など状況が多様である(図~\ref{command})．
-\item{eat-drink}
+\item{\bf eat-drink}
 何かを食べている/飲んでいる状態．訓練において被災者発見に対する成功報酬に餌が与えられる他，草を食む，地面/川の水を飲むなど状況が多様(図~\ref{eat-drink})．
 以下，eatと表記する．特筆がない場合，eatという表記はeat（食事）とdrink（水分摂取）の両方の意，drinkという表記は水分摂取の意のみ表現する．
-\item{look at handler}
+\item{\bf look at handler}
 犬がハンドラーを見ている状態(図~\ref{lookathandler})．
 以下，handlerと表記する．
-\item{run}
+\item{\bf run}
 走っている状態．歩いているクラスのwalk-trotと比較すると，画面に浮遊感があり，揺れや音が激しい(図~\ref{run})．
-\item{see victim}
+\item{\bf see victim}
 カメラに被災者が映った状態(図~\ref{seevictim})．
 以下，victimと表記する．
-\item{shake}
+\item{\bf shake}
 犬が激しく体を震わせている状態．振動に合わせてカラカラカラとカメラの揺れる音がする(図~\ref{shake})．
-\item{sniff}
+\item{\bf sniff}
 臭いを嗅いでいる状態．探査に対するやる気などを測る一つに指標になる．地面などに鼻を近づけている状態だけでなく，浮遊臭を嗅いでいる際も含む(図~\ref{sniff})．
-\item{stop}
+\item{\bf stop}
 足を運んでいない状態．その場での足踏みは含む．方向転換は含まない．画面の動き情報が少なく特徴的である(図~\ref{stop})．
-\item{walk-trot}
+\item{\bf walk-trot}
 歩いており、runではない状態(図~\ref{walk-trot})．第三者視点で見ると，犬の運歩がrunクラスとは異なる．
 runクラスは前脚と後ろ脚で跳び箱を跳ぶように跳ねて進むが，walk-trotクラスは右左の脚を交互に出して進む．
 以下，walkと表記する．
@@ -73,35 +73,35 @@ runクラスは前脚と後ろ脚で跳び箱を跳ぶように跳ねて進む�
       \begin{minipage}{0.18\hsize}
         \begin{center}
           \includegraphics[clip, width=12cm]{./Figures/2016_gonta_1.eps}
-          %\hspace{0.3cm} { }
+          \hspace{0.3cm} { }
         \end{center}
       \end{minipage}
 \\
       \begin{minipage}{0.18\hsize}
         \begin{center}
           \includegraphics[clip, width=12cm]{./Figures/2016_gonta_2.eps}
-          %\hspace{0.3cm} { }
+          \hspace{0.3cm} { }
         \end{center}
       \end{minipage}
 \\
       \begin{minipage}{0.18\hsize}
         \begin{center}
           \includegraphics[clip, width=12cm]{./Figures/2016_gonta_3.eps}
-          %\hspace{0.3cm} { }
+          \hspace{0.3cm} { }
         \end{center}
       \end{minipage}
 \\
       \begin{minipage}{0.18\hsize}
         \begin{center}
           \includegraphics[clip, width=12cm]{./Figures/2016_gonta_4.eps}
-          %\hspace{0.3cm} { }
+          \hspace{0.3cm} { }
         \end{center}
       \end{minipage}
 \\
       \begin{minipage}{0.18\hsize}
         \begin{center}
           \includegraphics[clip, width=12cm]{./Figures/2016_gonta_5.eps}
-          %\hspace{0.3cm} { }
+          \hspace{0.3cm} { }
         \end{center}
       \end{minipage}
     \end{tabular}
@@ -178,6 +178,76 @@ runクラスは前脚と後ろ脚で跳び箱を跳ぶように跳ねて進む�
     \end{tabular}
     \caption{サイバーレスキュー犬訓練データセットbarkクラス}
     \label{bark}
+\end{figure}
+
+\begin{figure}[H]
+    \begin{tabular}{l}
+
+\\ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      \begin{minipage}{0.165\hsize}
+        \begin{center}
+          \includegraphics[clip, width=2.5cm]{./Figures/still_sniffcling1.eps}
+        \end{center}
+      \end{minipage}
+      \begin{minipage}{0.165\hsize}
+        \begin{center}
+          \includegraphics[clip, width=2.5cm]{./Figures/still_sniffcling2.eps}
+        \end{center}
+      \end{minipage}
+      \begin{minipage}{0.165\hsize}
+        \begin{center}
+          \includegraphics[clip, width=2.5cm]{./Figures/still_sniffcling3.eps}
+        \end{center}
+      \end{minipage}
+      \begin{minipage}{0.165\hsize}
+        \begin{center}
+          \includegraphics[clip, width=2.5cm]{./Figures/still_sniffcling4.eps}
+        \end{center}
+      \end{minipage}
+      \begin{minipage}{0.165\hsize}
+        \begin{center}
+          \includegraphics[clip, width=2.5cm]{./Figures/still_sniffcling5.eps}
+        \end{center}
+      \end{minipage}
+      \begin{minipage}{0.165\hsize}
+        \begin{center}
+          \includegraphics[clip, width=2.5cm]{./Figures/sound_sniffcling.eps}
+        \end{center}
+      \end{minipage}
+\\  %%%%%%%%%%%%%%%%
+      \begin{minipage}{0.165\hsize}
+        \begin{center}
+          \includegraphics[clip, width=2.5cm]{./Figures/optic_sniffcling1.eps}
+          \hspace{0.3cm} { }
+        \end{center}
+      \end{minipage}
+      \begin{minipage}{0.165\hsize}
+        \begin{center}
+          \includegraphics[clip, width=2.5cm]{./Figures/optic_sniffcling2.eps}
+          \hspace{0.0cm} { }
+        \end{center}
+      \end{minipage}
+      \begin{minipage}{0.165\hsize}
+        \begin{center}
+          \includegraphics[clip, width=2.5cm]{./Figures/optic_sniffcling3.eps}
+          \hspace{0.0cm} {cling, sniff}
+        \end{center}
+      \end{minipage}
+      \begin{minipage}{0.165\hsize}
+        \begin{center}
+          \includegraphics[clip, width=2.5cm]{./Figures/optic_sniffcling4.eps}
+          \hspace{0.1cm} { }
+        \end{center}
+      \end{minipage}
+      \begin{minipage}{0.165\hsize}
+        \begin{center}
+          \includegraphics[clip, width=2.5cm]{./Figures/optic_sniffcling5.eps}
+          \hspace{2.2cm} { }
+        \end{center}
+      \end{minipage}
+    \end{tabular}
+    \caption{サイバーレスキュー犬訓練データセットsniffクラス,clingクラス．}
+    \label{sniff}
 \end{figure}
 
 \begin{figure}[H]
@@ -522,71 +592,73 @@ runクラスは前脚と後ろ脚で跳び箱を跳ぶように跳ねて進む�
 \begin{figure}[H]
     \begin{tabular}{l}
 
+
 \\ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
       \begin{minipage}{0.165\hsize}
         \begin{center}
-          \includegraphics[clip, width=2.5cm]{./Figures/still_sniffcling1.eps}
+          \includegraphics[clip, width=2.5cm]{./Figures/still_run1.eps}
         \end{center}
       \end{minipage}
       \begin{minipage}{0.165\hsize}
         \begin{center}
-          \includegraphics[clip, width=2.5cm]{./Figures/still_sniffcling2.eps}
+          \includegraphics[clip, width=2.5cm]{./Figures/still_run2.eps}
         \end{center}
       \end{minipage}
       \begin{minipage}{0.165\hsize}
         \begin{center}
-          \includegraphics[clip, width=2.5cm]{./Figures/still_sniffcling3.eps}
+          \includegraphics[clip, width=2.5cm]{./Figures/still_run3.eps}
         \end{center}
       \end{minipage}
       \begin{minipage}{0.165\hsize}
         \begin{center}
-          \includegraphics[clip, width=2.5cm]{./Figures/still_sniffcling4.eps}
+          \includegraphics[clip, width=2.5cm]{./Figures/still_run4.eps}
         \end{center}
       \end{minipage}
       \begin{minipage}{0.165\hsize}
         \begin{center}
-          \includegraphics[clip, width=2.5cm]{./Figures/still_sniffcling5.eps}
+          \includegraphics[clip, width=2.5cm]{./Figures/still_run5.eps}
         \end{center}
       \end{minipage}
       \begin{minipage}{0.165\hsize}
         \begin{center}
-          \includegraphics[clip, width=2.5cm]{./Figures/sound_sniffcling.eps}
+          \includegraphics[clip, width=2.5cm]{./Figures/sound_run.eps}
         \end{center}
       \end{minipage}
 \\  %%%%%%%%%%%%%%%%
       \begin{minipage}{0.165\hsize}
         \begin{center}
-          \includegraphics[clip, width=2.5cm]{./Figures/optic_sniffcling1.eps}
+          \includegraphics[clip, width=2.5cm]{./Figures/optic_run1.eps}
           \hspace{0.3cm} { }
         \end{center}
       \end{minipage}
       \begin{minipage}{0.165\hsize}
         \begin{center}
-          \includegraphics[clip, width=2.5cm]{./Figures/optic_sniffcling2.eps}
+          \includegraphics[clip, width=2.5cm]{./Figures/optic_run2.eps}
           \hspace{0.0cm} { }
         \end{center}
       \end{minipage}
       \begin{minipage}{0.165\hsize}
         \begin{center}
-          \includegraphics[clip, width=2.5cm]{./Figures/optic_sniffcling3.eps}
-          \hspace{0.0cm} {cling, sniff}
+          \includegraphics[clip, width=2.5cm]{./Figures/optic_run3.eps}
+          \hspace{2.0cm} {run}
         \end{center}
       \end{minipage}
       \begin{minipage}{0.165\hsize}
         \begin{center}
-          \includegraphics[clip, width=2.5cm]{./Figures/optic_sniffcling4.eps}
+          \includegraphics[clip, width=2.5cm]{./Figures/optic_run4.eps}
           \hspace{0.1cm} { }
         \end{center}
       \end{minipage}
       \begin{minipage}{0.165\hsize}
         \begin{center}
-          \includegraphics[clip, width=2.5cm]{./Figures/optic_sniffcling5.eps}
+          \includegraphics[clip, width=2.5cm]{./Figures/optic_run5.eps}
           \hspace{2.2cm} { }
         \end{center}
       \end{minipage}
     \end{tabular}
-    \caption{サイバーレスキュー犬訓練データセットsniffクラス,clingクラス．}
-    \label{sniff}
+    \caption{サイバーレスキュー犬訓練データセットrunクラス．}
+    \label{run}
 \end{figure}
 
 \begin{figure}[H]
@@ -868,80 +940,8 @@ runクラスは前脚と後ろ脚で跳び箱を跳ぶように跳ねて進む�
         \end{center}
       \end{minipage}
     \end{tabular}
-    \caption{サイバーレスキュー犬訓練データセットstopクラス．}
+    \caption{サイバーレスキュー犬訓練データセットstopクラス．同じクラス内の違いが顕著に表れている．同時にAとBで周波数が異なるものの静止画像，optical flow画像，音声共に均一なノイズが入っている点で共通していることも判断できる．}
     \label{stop}
-\end{figure}
-
-\begin{figure}[H]
-    \begin{tabular}{l}
-
-
-\\ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-      \begin{minipage}{0.165\hsize}
-        \begin{center}
-          \includegraphics[clip, width=2.5cm]{./Figures/still_run1.eps}
-        \end{center}
-      \end{minipage}
-      \begin{minipage}{0.165\hsize}
-        \begin{center}
-          \includegraphics[clip, width=2.5cm]{./Figures/still_run2.eps}
-        \end{center}
-      \end{minipage}
-      \begin{minipage}{0.165\hsize}
-        \begin{center}
-          \includegraphics[clip, width=2.5cm]{./Figures/still_run3.eps}
-        \end{center}
-      \end{minipage}
-      \begin{minipage}{0.165\hsize}
-        \begin{center}
-          \includegraphics[clip, width=2.5cm]{./Figures/still_run4.eps}
-        \end{center}
-      \end{minipage}
-      \begin{minipage}{0.165\hsize}
-        \begin{center}
-          \includegraphics[clip, width=2.5cm]{./Figures/still_run5.eps}
-        \end{center}
-      \end{minipage}
-      \begin{minipage}{0.165\hsize}
-        \begin{center}
-          \includegraphics[clip, width=2.5cm]{./Figures/sound_run.eps}
-        \end{center}
-      \end{minipage}
-\\  %%%%%%%%%%%%%%%%
-      \begin{minipage}{0.165\hsize}
-        \begin{center}
-          \includegraphics[clip, width=2.5cm]{./Figures/optic_run1.eps}
-          \hspace{0.3cm} { }
-        \end{center}
-      \end{minipage}
-      \begin{minipage}{0.165\hsize}
-        \begin{center}
-          \includegraphics[clip, width=2.5cm]{./Figures/optic_run2.eps}
-          \hspace{0.0cm} { }
-        \end{center}
-      \end{minipage}
-      \begin{minipage}{0.165\hsize}
-        \begin{center}
-          \includegraphics[clip, width=2.5cm]{./Figures/optic_run3.eps}
-          \hspace{2.0cm} {run}
-        \end{center}
-      \end{minipage}
-      \begin{minipage}{0.165\hsize}
-        \begin{center}
-          \includegraphics[clip, width=2.5cm]{./Figures/optic_run4.eps}
-          \hspace{0.1cm} { }
-        \end{center}
-      \end{minipage}
-      \begin{minipage}{0.165\hsize}
-        \begin{center}
-          \includegraphics[clip, width=2.5cm]{./Figures/optic_run5.eps}
-          \hspace{2.2cm} { }
-        \end{center}
-      \end{minipage}
-    \end{tabular}
-    \caption{サイバーレスキュー犬訓練データセットrunクラス．}
-    \label{run}
 \end{figure}
 
 \begin{figure}[H]
@@ -1026,7 +1026,7 @@ runクラスは前脚と後ろ脚で跳び箱を跳ぶように跳ねて進む�
 本研究では，提供されたサイバーレスキュー犬訓練データを整形し，クラス毎に短く切り出したクリップセット/フレーム毎に切り出した画像セット/フレーム毎に計算したoptical flow画像セット/フレームに合わせて一定時間毎に切り出した音声セットをそれぞれ作成した．
 データを整形して複数セットを作成したのち，さらにラベルのないフレームなどを排除してから，動画に戻した際に6fpsとなる量に学習データを間引いた．
 30fps近い動画をフレーム毎に学習すると，直近のフレームに対して過度に反応する恐れがあるため，この処理で過学習を防ぐ狙いがある．
-整形・サンプリングによって，学習および評価に使った総フレーム数は14581枚となった．
+整形・サンプリングによって，学習および評価に使った総フレーム数は14,581枚となった．
 %この範囲でラベル付けされたクラス毎の回数は~表\ref{cyberdataset_label}に示した．
 %静止画のみでの音声付き動画のクラス特徴の表現は困難であるため、整形した動画的特徴，音声的特徴とをそれぞれ~図\ref{cyberdataset_img}に示す．
 \subsubsection{動画整形}
@@ -1120,7 +1120,7 @@ $V$からラベル毎にクリップ群を切り出すと，アノテーショ�
 \subsubsection{フレーム毎切り抜き画像セット・optical flow画像セット}
 フレーム毎に切り出した画像には，そのフレームの時間点にアノテーションされているラベルをそのまま用いた．
 
-optical flowの計算にはPythonのオープンソースライブラリであるOpenCVを用いた．なお，利用したバージョンはpython3.6，OpenCV3.3.1である．
+Optical flowの計算にはPythonのオープンソースライブラリであるOpenCVを用いた．なお，利用したバージョンはPython3.6，OpenCV3.3.1である．
 元のRGB動画のフレーム$F_t$と$F_{t+1}$から求まるoptical frame画像を$O_t$とした際に，$O_t$には$F_t$と同じラベルを紐付けた．
 
 
@@ -1138,7 +1138,7 @@ S_t = f(F_{t-15}, F_{t+15})
 
 
 \section{DogCentric Activity Dataset (DCAD)}
-4頭の犬の背中にGoProカメラを取り付けて散歩をした動画を単一クラス分けしたデータセット~(図\ref{DCAD_image})．動画は320 x 240 解像度，48 frames per secondで撮影されている．
+これは，4頭の犬の背中にGoProカメラを取り付けて散歩をした動画を単一クラス分けしたデータセット~(図\ref{DCAD_image})である．動画は320 x 240 解像度，48 frames per secondで撮影されている．
 これは犬の行動を切り出した数秒の動画群で構成される．1つの動画につき1つの行動ラベルが付与されており，これをクリップと呼ぶ．
 行動のクラスは10種類(
 横断前の待機: Car， 水分の摂取: Drink， 手渡しでの食事: Feed， 左を向く: Look at left， 右を向く: Look at right， 人間が犬を撫でる: Pet， ボールで遊ぶ: Play with ball， 身体をブルブルと振る: Shake， 何かの匂いを嗅ぐ: Sniff， 歩く: Walk

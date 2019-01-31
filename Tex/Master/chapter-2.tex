@@ -30,13 +30,16 @@
 もう1つは動画から直接特徴量を抽出する手法である．
 前者は既存の画像認識の技術を簡単に流用でき，入力データが比較的小さいので学習コストが低い．
 対して後者はフレーム間の情報を考慮できるが，動画を直接入力データとするため学習コストが非常に高い．
-%\subsubsection{Two-stream convolutional network}
+
+
 \subsubsection{動画内の連続した静止画間の動き推定}
 動画の動き特徴を取得して表現する方法として\cite{Zach2007optical}がある．
 これは静止画像の特徴点と連続した次の静止画像の特徴点から移動ベクトルを求め，ピクセル毎にその分布を取得する手法である．
 移動ベクトルの曖昧な部分も周辺のベクトル分布を加味し平滑化することでより滑らかな分布を取得している．
 本研究では，動画からoptical flow画像を生成する際にこの手法を用いる．
-\subsubsection{静止画を入力とする動画認識}
+
+
+\subsubsection{Two-stream CNN}
 事前に動画から静止画を切り出してから特徴を抽出し学習する手法としては~\cite{simonyan2014two}, \cite{wang2015towards}が挙げられる．
 Simonyanらによるtwo-stream CNN~\cite{simonyan2014two}は，1つの動画から通常のRGB画像とoptical flow画像を抽出し，
 それぞれを入力とする個々のネットワークを学習することで動き情報を考慮して動画を分類する手法である．
@@ -56,7 +59,7 @@ Two-streamをベースにした派生ネットワークの研究は多く、Conv
  \end{center}
 \end{figure}
 
-\subsubsection{動画を入力とする動画認識}
+\subsubsection{3D CNN}
 動画から直接特徴を抽出して学習する手法としてはTranらによる3D Convolution がある~\cite{tran14}．
 画像に対して2次元であったフィルターを3次元形状に拡張することで，縦横の空間以外である時間方向への広がりを持って特徴抽出が可能になった．
 図~\ref{3dconv_image}に3D Convolutionalの詳細を示す．
@@ -73,21 +76,23 @@ Two-stream convolution networkのストリームへの入力が画像であっ�
 \end{figure}
 
 
-\subsubsection{一人称映像からの行動分類}
+\subsection{一人称映像からの行動分類}
 動作認識の中でも，一人称視点の映像からFarst Personがどのような行動を行なっているのか分類する研究がある~\cite{minghuang2016fpar}\cite{gedas2017dblp}．
 Minghuangら\cite{minghuang2016fpar}は，最近の研究から一人称映像行動の分類において，手の位置・手の動き・対象の物体・カメラの動きが動作認識に重要であるとしてこれらを統合したtwin stream networkを提案した．
-twin stream networkのアーキテクチャを図~\ref{twinst_image}に示す．
+Twin stream networkのアーキテクチャを図~\ref{twinst_image}に示す．
 腕領域と物体をCNNを通し推定した後，さらにCNNを通しoptical flow画像のCNN出力結果と統合している．最終的な出力は物体認識結果と動作認識結果，それらを合わせた行動推定結果の3つである．
-本研究では対象となる物体もなく，カメラと犬の位置関係が決まっているため腕領域のように犬領域の推定はしない．
+本研究では対象となる物体もなく，カメラと犬の位置関係が決まっているため，今回は一般的な動画認識手法を用いることとして，特に犬一人称映像を対象としたような特別な処理は行わない．
+
 \begin{figure}[htbp]
  \begin{center}
   \includegraphics[width=12cm]{./Figures/goingtodeeper.eps}
-  \caption{twin stream networkの詳細~(\cite{minghuang2016fpar}より引用)．腕領域のセグメンテーションネットワーク，関連物体の位置推定ネットワーク，物体推定ネットワーク，動作ネットワークが組み合わせられている．同時に物体推定と行動推定を行うことで動作認識を行なっている．}
+  \caption{Twin stream networkの詳細~(\cite{minghuang2016fpar}より引用)．腕領域のセグメンテーションネットワーク，関連物体の位置推定ネットワーク，物体推定ネットワーク，動作ネットワークが組み合わせられている．同時に物体推定と行動推定を行うことで動作認識を行なっている．}
   \label{twinst_image}
  \end{center}
 \end{figure}
 
-\subsubsection{犬一人称視点からの行動予測}
+
+\subsection{犬一人称視点からの行動予測}
 犬一人称映像からの犬の行動予測を行なった研究に\cite{whoretthedog}がある．
 %Modeling Dog Behavior From Visual Data
 これは，犬の行動をモデリングし，犬が次にどのような道をたどり行動するかを予測している．
@@ -100,7 +105,7 @@ twin stream networkのアーキテクチャを図~\ref{twinst_image}に示す．
 本研究は映像と音声からなるマルチモーダルな情報を入力とした犬の行動推定を目的としている． 
 
 
-\subsection{音声分類}
+\section{音声分類}
 音声と画像から特徴を抽出する研究には以下のようなものがある．
 \subsubsection{Sound Net}
 音声をクラス分類する研究としてAyterらによるSound Netがある~\cite{aytar2016soundnet}．
@@ -109,6 +114,8 @@ twin stream networkのアーキテクチャを図~\ref{twinst_image}に示す．
 図~\ref{soundnet_network}にSound Netのネットワーク構造を示す．
 本研究では音声のみからの行動推定は目的としない．しかし，音声の意味的情報は動画認識に重要であることが明らかにされている．
 音声を入力とするストリームの構築にあたり，Sound Netで用いられている音声畳み込みネットワークを参考にした．
+Sound Netが音声波形を入力とするのに対し，本研究では音声からmfcc特徴を抽出してからストリームへの入力とする点で異なっている．
+
 \begin{figure}[htbp]
  \begin{center}
   \includegraphics[width=15cm]{./Figures/soundnet.eps}

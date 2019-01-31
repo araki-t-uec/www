@@ -4,7 +4,7 @@
 アブレーションスタディとして7つの実験を行なった(表~\ref{ablation})．
 \begin{table}[tb]
  \centering
- \caption{本実験を含めたモダリティテーブル}\label{ablation}
+ \caption{本実験を含めたモダリティテーブル．音声ストリームは畳み込み層がConv2Dの実験とConv1Dの実験を行なった．}\label{ablation}
  \scalebox{1.00}[1.00]{
   \begin{tabular}{|l||c|c|c|}
 \hline \hline
@@ -35,7 +35,7 @@
 %eatクラス，runクラスが特にその傾向を反映している．傾向とは異なるものとして，
 
 eatクラス，runクラスが特に精度が低く，データ数の少なさと関係していると考察できる．
-データ数が少ないにも関わらずPrecisionの高いshakeクラス，反対にデータ数が十分にも関わらず精度の低いsniffクラスからは，\ref{sniff}に示したように画像特徴の取りやすさ、取りにくさに依存していることが確認できる．
+データ数が少ないにも関わらずPrecisionの高いshakeクラス，反対にデータ数が十分にも関わらず精度の低いsniffクラスからは，図~\ref{sniff}に示したように画像特徴の取りやすさ、取りにくさに依存していることが確認できる．
 \begin{table}[tb]
  \centering
  \caption{静止画像を用いたVGG16のfinetuning結果}\label{still_result}
@@ -57,7 +57,7 @@ Jaccard   & 0.244& 0.066& 0.0& 0.024& 0.057& 0.0& 0.204& 0.0& 0.0& 0.588& 0.51& 
 \end{table}
 
 \subsection{Optical flow画像からのマルチクラス推定}
-optical flow画像からのマルチクラス推定では，静止画像からのマルチラベル推定と同じようにImageNetで学習したVGG16のpretrained modelを用いてのfinetuningを行なった．
+Optical flow画像からのマルチクラス推定では，静止画像からのマルチラベル推定と同じようにImageNetで学習したVGG16のpretrained modelを用いてのfinetuningを行なった．
 推定精度を表~\ref{optic_result}に示す．
 
 静止画像と比較して，shakeクラス，stopクラスなどの動き特徴の現れやすそうなクラスの精度が高くなることを期待していたが，それらを含め全体的に精度が下がった．
@@ -96,7 +96,7 @@ optical flow画像からのマルチクラス推定では，静止画像から�
 ネットワークは\cite{aytar2016soundnet}の音声分類ネットワークを参考に構成した．
 メル周波数スペクトラム係数を用いて音声データから特徴を取り出し，その値をネットワークへの入力とした．
 29.97fpsの動画31フレーム分の音声を48000Hzとして扱い，(20, 94)次元の入力を得た．
-\subsubsection{1D Convolutional network}
+\subsubsection{1D Convolutional Network}
 %図~\ref{sound_network}
 第3章
 に示したネットワークの2D Convolutionレイヤを1D Convolutionレイヤに置き換えたネットワークを用いて推定を行なった．
