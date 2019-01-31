@@ -41,7 +41,7 @@
 \item{bark}
 被災者を発見し，かつ吠えている状態．わかりやすい音声的特徴があり，固有の画面揺れが生じる(図~\ref{bark})．
 \item{cling}
-臭いに対し，鼻を近づけ嗅いでいる状態．sniffのより詳細な状態であり，clingがラベル付される際はsniffと必ず重複する．
+臭いに対し，鼻を近づけ嗅いでいる状態．sniffのより詳細な状態であり，clingがラベル付される際はsniffと必ず重複する(図~\ref{sniff})．
 \item{command}
 ハンドラーからの働きかけのある状態．待て/行け等の口頭指示，褒め，指差し指示など状況が多様である(図~\ref{command})．
 \item{eat-drink}
@@ -569,7 +569,7 @@ runクラスは前脚と後ろ脚で跳び箱を跳ぶように跳ねて進む�
       \begin{minipage}{0.165\hsize}
         \begin{center}
           \includegraphics[clip, width=2.5cm]{./Figures/optic_sniffcling3.eps}
-          \hspace{0.0cm} {cling}
+          \hspace{0.0cm} {cling, sniff}
         \end{center}
       \end{minipage}
       \begin{minipage}{0.165\hsize}
@@ -585,7 +585,7 @@ runクラスは前脚と後ろ脚で跳び箱を跳ぶように跳ねて進む�
         \end{center}
       \end{minipage}
     \end{tabular}
-    \caption{サイバーレスキュー犬訓練データセットclingクラス．}
+    \caption{サイバーレスキュー犬訓練データセットsniffクラス,clingクラス．}
     \label{sniff}
 \end{figure}
 
@@ -1138,13 +1138,12 @@ S_t = f(F_{t-15}, F_{t+15})
 
 
 \section{DogCentric Activity Dataset (DCAD)}
-4頭の犬の背中にGoProカメラを取り付けて散歩をした動画を単一クラス分けしたデータセット~(図\ref{DCAD_img})．動画は320 x 240 解像度，48 frames per secondで撮影されている．
+4頭の犬の背中にGoProカメラを取り付けて散歩をした動画を単一クラス分けしたデータセット~(図\ref{DCAD_image})．動画は320 x 240 解像度，48 frames per secondで撮影されている．
 これは犬の行動を切り出した数秒の動画群で構成される．1つの動画につき1つの行動ラベルが付与されており，これをクリップと呼ぶ．
 行動のクラスは10種類(
 横断前の待機: Car， 水分の摂取: Drink， 手渡しでの食事: Feed， 左を向く: Look at left， 右を向く: Look at right， 人間が犬を撫でる: Pet， ボールで遊ぶ: Play with ball， 身体をブルブルと振る: Shake， 何かの匂いを嗅ぐ: Sniff， 歩く: Walk
 )あり，それぞれ合わせて209クリップになる~(表\ref{DCADlabel})．
 散歩する地域やコースは犬毎に異なるが，全ての犬に10クラスのクリップが用意されている．
-DCADをラベル毎に図~\ref{DCAD_image}に示す．
 
 本研究ではマルチクラス推定を行うが，DCADはシングルクラス分類のためのデータセットであるため比較に用いることができない．
 規模が小さいことから，本実験の前の予備実験にこれを用いた．
@@ -1161,8 +1160,11 @@ DCADをラベル毎に図~\ref{DCAD_image}に示す．
 
 \end{table}
 
+
 \begin{figure}[htbp]
   \begin{center}
+    \scalebox{0.90}[0.90]{
+
     \begin{tabular}{c}
      % 0
       \begin{minipage}{0.18\hsize}
@@ -1491,6 +1493,7 @@ DCADをラベル毎に図~\ref{DCAD_image}に示す．
 
 
     \end{tabular}
+   }
     \caption{DogCentric Activity Dataset}
     \label{DCAD_image}
   \end{center}

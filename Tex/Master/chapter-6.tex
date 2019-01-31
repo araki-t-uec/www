@@ -35,7 +35,7 @@
 %eatクラス，runクラスが特にその傾向を反映している．傾向とは異なるものとして，
 
 eatクラス，runクラスが特に精度が低く，データ数の少なさと関係していると考察できる．
-データ数が少ないにも関わらずPrecisionの高いshakeクラス，反対にデータ数が十分にも関わらず精度の低いsniffクラスからは，図~\ref{cyberdataset_img}に示したように画像特徴の取りやすさ、取りにくさに依存していることが確認できる．
+データ数が少ないにも関わらずPrecisionの高いshakeクラス，反対にデータ数が十分にも関わらず精度の低いsniffクラスからは，\ref{sniff}に示したように画像特徴の取りやすさ、取りにくさに依存していることが確認できる．
 \begin{table}[tb]
  \centering
  \caption{静止画像を用いたVGG16のfinetuning結果}\label{still_result}
@@ -220,7 +220,7 @@ Jaccard   & 0.662& 0.031& 0.195& 0.018& 0.115& 0.002& 0.308& 0.402& 0.498& 0.726
 基本的には前項で述べた比較と同じである．そのため前項との差分についてのみ述べる．
 
 顕著に精度の上がったクラスはcommand，stopクラスである．本研究の実験を通して最もcommandクラスの精度が高かった．
-stopクラスについては図~\ref{cyberdataset_img}に示したoptical flow画像と静止画像，音声を比較すると，そのoptical flow画像の特徴は歴然である．
+stopクラスについては図~\ref{stop}に示したoptical flow画像と静止画像，音声を比較すると，そのoptical flow画像の特徴は歴然である．
 これがoptical flow画像を用いてstopクラスの精度が上昇した理由と言える．
 データセットには基本的にwalkかstopのクラスがついていることも考慮し，walk，stopクラスのPrecisionとRecallを比較するとstopクラス検知数の増加がwalkクラス検知数の減少に繋がっていることが読み取れる．
 stopクラスのPredcisionが下がり，誤検知が増えている．これは，walkクラスをstopクラスと認識していると考えられる．
