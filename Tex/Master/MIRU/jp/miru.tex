@@ -23,7 +23,7 @@
 \section*{概要}
 被災地での災害救助を補助する犬をレスキュー（災害救助）犬といい，カメラなどの計測装置を装備したレスキュー犬をサイバーレスキュー犬と言う．本研究では，犬にとりつけたセンサからサイバーレスキュー犬の活動を識別した．
 犬一人称動画像と音声をCNNを用いて動作毎に分類するsound/image-based three-stream CNNの提案と，提案手法をマルチクラス推定に用いた実験を行なった．
-sound/image-based three-stream CNNは動画から得られた静止画像・optical flow画像・音声を入力とする動画識別ネットワークである．
+Sound/image-based three-stream CNNは動画から得られた静止画像・optical flow画像・音声を入力とする動画識別ネットワークである．
 本提案手法の有効性を示すため，3つの入力それぞれ単体とその組み合わせパターン
 （静止画像単体，optical flow画像単体，音声単体，静止画像+optical flow画像，静止画像+音声，optical flow画像+音声）
 を用いた識別との比較実験を行なった．
@@ -32,12 +32,18 @@ sound/image-based three-stream CNNは動画から得られた静止画像・opti
 一人称視点動画からのマルチクラス推定というタスクと，レスキュー犬訓練データセットの複雑さのあいまったチャレンジングなタスクであることを踏まえると，本研究では次に繋がる十分な結果が得られたと言える．
 
 \section{はじめに}
-被災地での救助活動を行う際に，人間の補助として訓練されたレスキュー犬（災害救助犬）が探査を行う場合がある．レスキュー犬は，犬としての特性を生かして人間と協力して被災地の探索を行う．がれきの隙間などの狭い空間や倒壊した建物など人間には踏破困難な環境でも探査可能であり，発達した嗅覚を頼りにした救助活動が可能である．しかし彼らは人間に向けた言語を持たないため，人間はレスキュー犬の行動から彼らが収集した情報を理解しなくてはならない．現状では，レスキュー犬を指揮するハンドラーと呼ばれる人間がレスキュー犬の行動を手動でマーキングしており，その情報を消防などの指揮命令者に口頭伝達している．このレスキュー犬との共同探索の問題点として，トリアージ（緊急度に従った手当の優先順位付け）のための周辺環境情報や，要救助者情報の不足があげられる．
+被災地での救助活動を行う際に，人間の補助として訓練されたレスキュー犬（災害救助犬）が探査を行う場合がある．
+レスキュー犬は，犬としての特性を生かして人間と協力して被災地の探索を行う．
+がれきの隙間などの狭い空間や倒壊した建物など人間には踏破困難な環境でも探査可能であり，発達した嗅覚を頼りにした救助活動が可能である．
+しかし彼らは人間に向けた言語を持たないため，人間はレスキュー犬の行動から彼らが収集した情報を理解しなくてはならない．
+現状では，レスキュー犬を指揮するハンドラーと呼ばれる人間がレスキュー犬の行動を手動でマーキングしており，その情報を消防などの指揮命令者に口頭伝達している．
+このレスキュー犬との共同探索の問題点として，トリアージ（緊急度に従った手当の優先順位付け）のための周辺環境情報や，要救助者情報の不足があげられる．
+また，ハンドラーによる記録はどうしても主観的になるので客観性に欠け，さらにそれが口頭伝達されることで正確性がより欠落する．
 
 本研究では，レスキュー犬にセンサを装着して得られたデータを用いてレスキュー犬の行動推定を目的とする（図\ref{lite_model}）．
-本研究の具体的なタスクは, 映像だけでなく音声などのデータも活用したマルチモーダル情報を用いたクラス推定である.これにより，レスキュー犬が今何をしているのか明示的に判断することが可能となり，トリアージに必要な情報が整理され，災害救助活動の効率化が期待される.
+本研究の具体的なタスクは, 映像だけでなく音声などのデータも活用したマルチモーダル情報を用いたクラス推定である.これにより，レスキュー犬が今何をしているのか個人の主観に基づくことなく判断することが可能となり，トリアージに必要な情報が整理され，災害救助活動の効率化が期待される.
 
-\begin{figure}[htbp]
+\begin{figure}[tb]
  \begin{center}
   \includegraphics[width=7cm]{./Figures/easy_image.eps}
   \caption{提案手法の概要．入力画像から複数データを抽出し，それぞれ別のストリームへ入力する．各ストリームの出力をもとに，動画のレスキュー犬行動推定結果を最終出力とする．}
@@ -60,13 +66,18 @@ sound/image-based three-stream CNNは動画から得られた静止画像・opti
 %本研究でこのデータセットを直接用いることはないが，本研究と同様のタスクに取り組んだ研究を発見できないため，これの分類精度をベンチマークとして扱う．
 
 音声に焦点をあてた動画分類の研究にはSound Net~\cite{aytar2016soundnet}がある.
-これと~\cite{simonyan2014two}を参考に, 本研究では音声識別ネットワークと two-streamネットワークを統合したアーキテクチャを構築した.
+動画から音声と画像を取り出し，画像を教師データとし，音声は生徒データとして出力が等しくなるように学習している．
+この手法は音響シーン分類，物体分類の標準ベンチマークにおいて教師あり学習の最高精度を達成した．
+本研究では音声のみからの行動推定は目的としない．しかし，音声の意味的情報は動画認識に重要であることが明らかにされている．
+
+Sound Netとtwo-stream CNN を参考に, 本研究では音声識別ネットワークと two-streamネットワークを統合したアーキテクチャを構築した.
+Sound Netが音声波形を入力とするのに対し，本研究では音声からmfcc特徴を抽出してからストリームへの入力とする点で異なっている．
 
 音声と動画像だけでなく，加速度と速度情報を用いたマルチモーダルな学習の研究には~\cite{tanno2019deim}がある．
 これは，情報を追加することによっての認識精度の向上や低下を報告しており，特に音声によって分類精度が向上するとされている．
 マルチモーダルな深層学習という点で本研究と同様のテーマだが，マルチクラス推定という点で本研究とは異なっている．
 
-\begin{figure}[htbp]
+\begin{figure}[tb]
  \begin{center}
   \includegraphics[width=5cm]{./Figures/cyberdog.eps}
   \caption{装着型計測・記録装置~\cite{dog01}より引用.}
@@ -83,7 +94,7 @@ sound/image-based three-stream CNNは動画から得られた静止画像・opti
 犬行動は11種(bark, cling, command, eat-drink, look\_at\_handler, run, see\_victim, shake, sniff, stop, walk-trot)あり, その一部を図~\ref{dataset}に示す.
 
 
-\begin{figure}[htbp]
+\begin{figure}[tb]
     \begin{tabular}{l}
 
       \begin{minipage}{0.32\hsize}
@@ -128,6 +139,14 @@ Sound/image-based three-stream CNN のアーキテクチャを図~\ref{sound3st}
 調整は畳み込みで奥行き次元を揃えた後，同じ特徴をリピートし目的の大きさになるまでコピーして結合した．
 
 分類はフレーム毎に行った．
+\begin{figure}[tb]
+   \begin{center}
+    \includegraphics[scale=0.25]{./Figures/soundimage-basedthree-streamCNN.eps}
+%    \includegraphics[scale=0.25]{./Figures/soundbasedThreestream.eps}
+    \caption{Sound/image-based three-streamのアーキテクチャ.音声, 静止画像, optical flow画像それぞれを入力とする3つのストリームからなり, それぞれの出力を結合してクラス推定を行っている.}
+    \label{sound3st}
+   \end{center}
+\end{figure}
 
 \section{実験}
 
@@ -145,19 +164,10 @@ Sound/image-based three-stream CNN のアーキテクチャを図~\ref{sound3st}
 人間が耳で聞いた際にもその特徴を識別しやすいbark, shakeクラスにおいては音声単体を1D畳み込み層で学習したものの方が数値が高い.
 これらから, データセットに対する提案手法の有効性が示された.
 
-\begin{figure}[htbp]
-   \begin{center}
-    \includegraphics[scale=0.25]{./Figures/soundimage-basedthree-streamCNN.eps}
-%    \includegraphics[scale=0.25]{./Figures/soundbasedThreestream.eps}
-    \caption{Sound/image-based three-streamのアーキテクチャ.音声, 静止画像, optical flow画像それぞれを入力とする3つのストリームからなり, それぞれの出力を結合してクラス推定を行っている.}
-    \label{sound3st}
-   \end{center}
-\end{figure}
-
 \begin{table}[tb]
  \centering
  \caption{本実験を含めたモダリティテーブル．音声ストリームは畳み込み層がConv2Dの実験とConv1Dの実験を行なった．}\label{ablation}
- \scalebox{1.00}[1.00]{
+ \scalebox{0.90}[0.90]{
   \begin{tabular}{|l||c|c|c|}
 \hline \hline
 &静止画像&optical flow画像&音声 \\ \hline \hline
@@ -174,7 +184,7 @@ Sound/image-based three-stream CNN のアーキテクチャを図~\ref{sound3st}
  }
 \end{table}
 
-\begin{figure}[htbp]
+\begin{figure}[tb]
    \begin{center}
     \includegraphics[scale=0.16]{./Figures/1d2dconv.eps}
     \caption{1D convolutionと 2D convolutionの詳細.データは同様でも入力の形と処理が異なり, 出力の結果も異なっている.}
