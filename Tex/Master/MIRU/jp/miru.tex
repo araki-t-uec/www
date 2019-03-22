@@ -142,7 +142,26 @@ Sound/image-based three-stream CNN のアーキテクチャを図~\ref{sound3st}
 
 \section{実験}
 
-3つの入力について, それぞれ単体, 2つずつの組み合わせおよび全てを統合した場合の8通りを行った.
+3つの入力について, それぞれ単体, 2つずつの組み合わせおよび全てを統合した場合の8通りを行った(表~\ref{ablation})．
+\begin{table}[tb]
+ \centering
+ \caption{本実験を含めたモダリティテーブル．音声ストリームは畳み込み層がConv2Dの実験とConv1Dの実験を行なった．}\label{ablation}
+ \scalebox{1.00}[1.00]{
+  \begin{tabular}{|l||c|c|c|}
+\hline \hline
+&静止画像&optical flow画像&音声 \\ \hline \hline
+(1) & ◯ & × & × \\ \hline
+(2) & × & ◯ & × \\ \hline
+(3) & × & × &1D \\ \hline
+(4) & × & × &2D \\ \hline
+(5) & ◯ & ◯ & × \\ \hline
+(6) & ◯ & × &2D\\ \hline
+(7) & × & ◯ &2D\\ \hline
+(8) & ◯ & ◯ &2D\\ \hline
+
+  \end{tabular}
+ }
+\end{table}
 
 画像単体を入力とした実験ではImageNetを学習したVGG16の学習済みモデルを用い再学習した.
 音声での学習は畳み込み層について1Dと2Dの2種類で行った.
