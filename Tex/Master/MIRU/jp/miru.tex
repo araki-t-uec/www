@@ -39,7 +39,7 @@ sound/image-based three-stream CNNは動画から得られた静止画像・opti
 
 \begin{figure}[htbp]
  \begin{center}
-  \includegraphics[width=5cm]{./Figures/easy_image.eps}
+  \includegraphics[width=7cm]{./Figures/easy_image.eps}
   \caption{提案手法の概要．入力画像から複数データを抽出し，それぞれ別のストリームへ入力する．各ストリームの出力をもとに，動画のレスキュー犬行動推定結果を最終出力とする．}
   \label{lite_model}
  \end{center}
@@ -52,7 +52,7 @@ sound/image-based three-stream CNNは動画から得られた静止画像・opti
 
 \begin{figure}[htbp]
  \begin{center}
-  \includegraphics[width=4cm]{./Figures/cyberdog.eps}
+  \includegraphics[width=6cm]{./Figures/cyberdog.eps}
   \caption{装着型計測・記録装置~\cite{dog01}より引用.}
   \label{cyber}
  \end{center}
@@ -69,6 +69,11 @@ sound/image-based three-stream CNNは動画から得られた静止画像・opti
 
 音声に焦点をあてた動画分類の研究にはSound Net~\cite{aytar2016soundnet}がある.
 これと~\cite{simonyan2014two}を参考に, 本研究では音声識別ネットワークと two-streamネットワークを統合したアーキテクチャを構築した.
+
+音声と動画像だけでなく，加速度と速度情報を用いたマルチモーダルな学習の研究には~\cite{tanno2019deim}がある．
+これは，情報を追加することによっての認識精度の向上や低下を報告しており，特に音声によって分類精度が向上するとされている．
+マルチモーダルな深層学習という点で本研究と同様のテーマだが，マルチクラス推定という点で本研究とは異なっている．
+
 \section{データセット}
 東北大学の大野らから提供をされたレスキュー犬訓練データセットを本研究で整形したものを学習に用いた.
 提供されたデータは7本からなる動画で, 犬視点動画, ハンドラー視点映像, 第三者視点映像が横並びに結合されており, 時間の範囲を指定するように犬行動がラベル付けされている.
@@ -172,11 +177,13 @@ Sound/image-based three-stream CNN のアーキテクチャを図~\ref{sound3st}
 
 
 結果のまとめを表~\ref{expetiments_result}に示す.
+一人称視点動画像からのマルチ行動推定を行なった先行研究は見つけられなかったため，既存手法との比較は行なっていない．
 静止画像, optical flow画像単体では精度が低く, これらを組合せたもので精度が上昇した.
 比較して, 音声単体では1D, 2Dともに精度が高く, 静止画像や optical flow画像と組合せた実験では全体的な精度は低下した.
 静止画像, optical flow画像, 音声の3つを組合せた提案手法では全体的な精度の上昇が見られ, クラス別で見ても半数以上のクラスの数値が上昇している.
 人間が耳で聞いた際にもその特徴を識別しやすいbark, shakeクラスにおいては音声単体を1D畳み込み層で学習したものの方が数値が高い.
 これらから, データセットに対する提案手法の有効性が示された.
+
 
 
 
