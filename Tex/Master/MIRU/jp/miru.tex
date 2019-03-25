@@ -1,5 +1,6 @@
 \documentclass[MIRU,submit]{miru2019j}
 \usepackage{graphicx}
+
 %\usepackage{latexsym}
 %\usepackage[fleqn]{amsmath}
 %\usepackage[psamsfonts]{amssymb}
@@ -162,7 +163,7 @@ Sound/image-based three-stream CNN のアーキテクチャを図~\ref{sound3st}
 \begin{equation}
     \label{softmargin}
 \begin{split}
-    loss(x, y) = &-\frac{1}{C} * \Sigma_{i} y[i] * log((1+exp(-x[i]))^{-1}])\\
+    loss(x, y) &= -\frac{1}{C} * \Sigma_{i} y[i] * log((1+exp(-x[i]))^{-1}]) \\
     &+ (1 - y[i]) * log(\frac{exp(-x[i])}{1+exp(-x[i])})
 \end{split}
 \end{equation}
