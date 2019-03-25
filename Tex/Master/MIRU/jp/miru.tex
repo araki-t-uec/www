@@ -161,9 +161,10 @@ Sound/image-based three-stream CNN のアーキテクチャを図~\ref{sound3st}
 閾値=0.5とし，閾値以上のクラスを推定クラスとした．
 \begin{equation}
     \label{softmargin}
-    loss(x, y) = -\frac{1}{C} * \Sigma_{i} y[i] * log((1+exp(-x[i]))^{-1}])
-
- + (1 - y[i]) * log(\frac{exp(-x[i])}{1+exp(-x[i])})
+\begin{split}
+    loss(x, y) = &-\frac{1}{C} * \Sigma_{i} y[i] * log((1+exp(-x[i]))^{-1}])\\
+    &+ (1 - y[i]) * log(\frac{exp(-x[i])}{1+exp(-x[i])})
+\end{split}
 \end{equation}
 
 学習は全てにおいて100エポック行った．学習率は1e-03〜1e-06，バッチサイズは32〜128の範囲で学習毎に変え制限の中で最も良い精度の結果を評価した．
