@@ -13,8 +13,8 @@
 
  \author{荒木 勇人}{Tsuyohito ARAKI}{Tokyo}[araki-t@mm.inf.uec.ac.jp]
  \author{井出 裕太}{Yuta IDE}{Tokyo}[ide-y@mm.inf.uec.ac.jp]
- \author{大野 和則}{Kazunori OHNO}{Osaka}[@]
- \author{柳井 啓司}{Keiji YANAI}{Tokyo}[@mm.inf.uec.ac.jp]
+ \author{大野 和則}{Kazunori OHNO}{Osaka}[]
+ \author{柳井 啓司}{Keiji YANAI}{Tokyo}[yanai@cs.uec.ac.jp]
 
 % 概要・キーワードは省略して下さい．
 
@@ -61,8 +61,6 @@ Sound/image-based three-stream CNNは動画から得られた静止画像・opti
 このように，動画像データからだけではなく，音声データ，および慣性データ・GPSデータなどの情報を複合的に用いてレスキュー犬の状態を判断しなければならない．
 ただし, 本研究では動画像と音声情報のみの提供をうけたため, これらを入力とした犬の行動推定を行う.
 
-%音声情報を用いず，動画のみの犬一人称動画データセットを作成して分類した研究がある~\cite{yumi2014first}．これは犬の背中にカメラを取り付け，散歩の様子を犬視点から撮影し行動毎に分類したデータセットである．
-%本研究でこのデータセットを直接用いることはないが，本研究と同様のタスクに取り組んだ研究を発見できないため，これの分類精度をベンチマークとして扱う．
 
 音声に焦点をあてた動画分類の研究にはSound Net~\cite{aytar2016soundnet}がある.
 動画から音声と画像を取り出し，画像を教師データとし，音声は生徒データとして出力が等しくなるように学習している．
@@ -114,8 +112,26 @@ Sound Netが音声波形を入力とするのに対し，本研究では音声�
         \end{center}
       \end{minipage}
     \end{tabular}
-
-    \caption{サイバーレスキュー犬訓練データセットsee victimクラス． 左から静止画像, optical flow画像, MFCCスペクトラムで可視化した音声である.}
+\\  %%%%%%%%%%%%%%%%
+      \begin{minipage}{0.165\hsize}
+        \begin{center}
+          \includegraphics[clip, width=2.5cm]{./Figures/still_stop2-3.eps}
+        \end{center}
+      \end{minipage}
+\\  %%%%%%%%%%%%%%%%
+      \begin{minipage}{0.165\hsize}
+        \begin{center}
+          \includegraphics[clip, width=2.5cm]{./Figures/optic_stop2-3.eps}
+          \hspace{2.0cm} {stop-B}
+        \end{center}
+      \end{minipage}
+      \begin{minipage}{0.165\hsize}
+        \begin{center}
+          \includegraphics[clip, width=2.5cm]{./Figures/sound_stop2.eps}
+        \end{center}
+      \end{minipage}
+    \end{tabular}
+    \caption{サイバーレスキュー犬訓練データセットsee victimクラス（上段）とstopクラス（下段）． 左から静止画像, optical flow画像, MFCCスペクトラムで可視化した音声である.}
     \label{dataset}
 \end{figure}
 
@@ -145,7 +161,9 @@ Sound/image-based three-stream CNN のアーキテクチャを図~\ref{sound3st}
 閾値=0.5とし，閾値以上のクラスを推定クラスとした．
 \begin{equation}
     \label{softmargin}
-    loss(x, y) = -\frac{1}{C} * \Sigma_{i} y[i] * log((1+exp(-x[i]))^{-1}) + (1 - y[i]) * log(\frac{exp(-x[i])}{1+exp(-x[i])})
+    loss(x, y) = -\frac{1}{C} * \Sigma_{i} y[i] * log((1+exp(-x[i]))^{-1}])
+
+ + (1 - y[i]) * log(\frac{exp(-x[i])}{1+exp(-x[i])})
 \end{equation}
 
 学習は全てにおいて100エポック行った．学習率は1e-03〜1e-06，バッチサイズは32〜128の範囲で学習毎に変え制限の中で最も良い精度の結果を評価した．
@@ -153,7 +171,6 @@ Sound/image-based three-stream CNN のアーキテクチャを図~\ref{sound3st}
 \begin{figure}[tb]
    \begin{center}
     \includegraphics[scale=0.25]{./Figures/soundimage-basedthree-streamCNN.eps}
-%    \includegraphics[scale=0.25]{./Figures/soundbasedThreestream.eps}
     \caption{Sound/image-based three-streamのアーキテクチャ.音声, 静止画像, optical flow画像それぞれを入力とする3つのストリームからなり, それぞれの出力を結合してクラス推定を行っている.}
     \label{sound3st}
    \end{center}
