@@ -10,18 +10,20 @@
 \title{レスキュー犬の一人称動画を用いた動作推定}
 
 \affiliate{Tokyo}{電気通信大学}
-\affiliate{Osaka}{東北大学}
+\affiliate{Tohoku}{東北大学}
 
  \author{荒木 勇人}{Tsuyohito ARAKI}{Tokyo}[araki-t@mm.inf.uec.ac.jp]
  \author{井出 裕太}{Yuta IDE}{Tokyo}[ide-y@mm.inf.uec.ac.jp]
- \author{大野 和則}{Kazunori OHNO}{Osaka}[]
+ \author{濱田 龍之介}{Kazunori OHNO}{Tohoku}[hamada@rm.is.tohoku.ac.jp]
+ \author{大野 和則}{Kazunori OHNO}{Tohoku}[]
  \author{柳井 啓司}{Keiji YANAI}{Tokyo}[yanai@cs.uec.ac.jp]
 
 % 概要・キーワードは省略して下さい．
 
 \maketitle
 \section*{概要}
-被災地での災害救助を補助する犬をレスキュー（災害救助）犬といい，カメラなどの計測装置を装備したレスキュー犬をサイバーレスキュー犬と言う．本研究では，犬にとりつけたセンサからサイバーレスキュー犬の活動を識別した．
+被災地での災害救助を補助する犬をレスキュー（災害救助）犬といい，カメラなどの計測装置を装備したレスキュー犬をサイバーレスキュー犬と言う．
+本研究では，犬にとりつけたセンサからサイバーレスキュー犬活動の識別を目的とする．
 犬一人称動画像と音声をCNNを用いて動作毎に分類するsound/image-based three-stream CNNの提案と，提案手法をマルチクラス推定に用いた実験を行なった．
 Sound/image-based three-stream CNNは動画から得られた静止画像・optical flow画像・音声を入力とする動画識別ネットワークである．
 本提案手法の有効性を示すため，3つの入力それぞれ単体とその組み合わせパターン
@@ -29,7 +31,7 @@ Sound/image-based three-stream CNNは動画から得られた静止画像・opti
 を用いた識別との比較実験を行なった．
 結果は，51.8\%で提案手法で最も高い精度が得られた．
 推定には，レスキュー犬の訓練の様子を撮影したデータセットを用いた．このデータセットは現在も作成中であり，まだ学習のデータ量が十分とは言えない．
-一人称視点動画からのマルチクラス推定というタスクと，レスキュー犬訓練データセットの複雑さのあいまったチャレンジングなタスクであることを踏まえると，本研究では次に繋がる十分な結果が得られたと言える．
+一人称視点動画からのマルチクラス推定というタスクと，レスキュー犬訓練データセットの複雑さのあいまったチャレンジングなタスクであることを踏まえても不十分な結果であり，今後さらに手法の改良とデータセットの拡充が必要である．
 
 \section{はじめに}
 被災地での救助活動を行う際に，人間の補助として訓練されたレスキュー犬（災害救助犬）が探査を行う場合がある．
@@ -63,15 +65,15 @@ Sound/image-based three-stream CNNは動画から得られた静止画像・opti
 ただし, 本研究では動画像と音声情報のみの提供をうけたため, これらを入力とした犬の行動推定を行う.
 
 
-音声に焦点をあてた動画分類の研究にはSound Net~\cite{aytar2016soundnet}がある.
+音声に焦点をあてた動画分類の研究にはSoundNet~\cite{aytar2016soundnet}がある.
 動画から音声と画像を取り出し，画像を教師データとし，音声は生徒データとして出力が等しくなるように学習している．
 この手法は音響シーン分類，物体分類の標準ベンチマークにおいて教師あり学習の最高精度を達成した．
 本研究では音声のみからの行動推定は目的としない．しかし，音声の意味的情報は動画認識に重要であることが明らかにされている．
 
-Sound Netとtwo-stream CNN を参考に, 本研究では音声識別ネットワークと two-streamネットワークを統合したアーキテクチャを構築した.
-Sound Netが音声波形を入力とするのに対し，本研究では音声からmfcc特徴を抽出してからストリームへの入力とする点で異なっている．
+SoundNetとtwo-stream CNN を参考に, 本研究では音声識別ネットワークと two-streamネットワークを統合したアーキテクチャを構築した.
+SoundNetが音声波形を入力とするのに対し，本研究では音声からMFCC特徴を抽出してからストリームへの入力とする点で異なっている．
 
-音声と動画像だけでなく，加速度と速度情報を用いたマルチモーダルな学習の研究には~\cite{tanno2019deim}がある．
+音声と動画像だけでなく，加速度と速度情報を用いたマルチモーダルな学習の研究には丹野らの~\cite{tanno2019deim}がある．
 これは，情報を追加することによっての認識精度の向上や低下を報告しており，特に音声によって分類精度が向上するとされている．
 マルチモーダルな深層学習という点で本研究と同様のテーマだが，マルチクラス推定という点で本研究とは異なっている．
 
@@ -84,12 +86,31 @@ Sound Netが音声波形を入力とするのに対し，本研究では音声�
 \end{figure}
 
 \section{データセット}
-東北大学の大野らから提供をされたレスキュー犬訓練データセットを本研究で整形したものを学習に用いた.
+学習には，サイバーレスキュー犬訓練データセットを利用した．これは，訓練されているレスキューいぬに専用の計測スーツを着用させ収集したデータ群である．東北大学の大野らからその一部を提供され，本研究では提供されたデータを整形したものを学習に用いた．
 提供されたデータは7本からなる動画で, 犬視点動画, ハンドラー視点映像, 第三者視点映像が横並びに結合されており, 時間の範囲を指定するように犬行動がラベル付けされている.
-犬行動は同時刻に複数発生するため, ラベル付けもそのようになっている.
-ここから犬視点動画のみを切り出し, フレームの静止画像とその直後のフレームから計算したoptical flow画像, および前後15フレーム分の長さの音声の3データをフレーム毎に抽出した.
+総時間は57分40秒，秒間フレーム数は29.97，総フレーム数は103,696枚である．
+分類クラスそれぞれについて時間範囲を指定する形で動画にアノテーションがされており，同時刻に複数のクラスが重なるためマルチラベルデータとして取り扱う．
+ここから犬視点動画のみを切り出し, 6fpsにサンプリングしてデータを整形した．
+最終的に利用したデータのクラス毎の出現頻度が~表\ref{cyberdataset_label}の値である．
+
+\begin{table}[tb]
+ \centering
+ \caption{サイバーレスキュー犬訓練データセット 利用範囲内で計測した出現回数}\label{cyberdataset_label}
+ \scalebox{0.95}[0.95]{
+  \begin{tabular}{|l||c|c|c|c|c|c|c|c|c|c|c|}
+   \hline \hline
+      クラス   & \rotatebox{90}{bark}& \rotatebox{90}{cling}&\rotatebox{90}{command}& \rotatebox{90}{eat}&\rotatebox{90}{handler}& \rotatebox{90}{run}&\rotatebox{90}{victim}& \rotatebox{90}{shake}& \rotatebox{90}{sniff}& \rotatebox{90}{stop}& \rotatebox{90}{walk} \\ \hline
+
+%   ラベル　& bark&cling&comm&eat&handler&run&victim&shake&sniff&stop&walk \\ \hline
+   出現回数& 1744& 1127&2439&343&  2011& 98&  1549&  239& 7719&6384&8764 \\ \hline
+  \end{tabular}
+ }
+
+\end{table}
+
+フレームの静止画像とその直後のフレームから計算したoptical flow画像, および前後15フレーム分の長さの音声の3データをフレーム毎に抽出した.
 これを1/5の量にサンプリングしたものを学習と評価に用いた.
-犬行動は11種(bark, cling, command, eat-drink, look\_at\_handler, run, see\_victim, shake, sniff, stop, walk-trot)あり, その一部を図~\ref{dataset}に示す.
+犬行動は11種(bark:吠える, cling:匂いに執着する, command:ハンドラーからの働きかけがある, eat-drink:飲食する, look\_at\_handler:ハンドラーを見る, run:走る, see\_victim:要救助者を発見した, shake:体をブルブルと震わせる, sniff:匂いを嗅ぐ, stop:脚を止める, walk-trot:歩く)あり, その一部を図~\ref{dataset}に示す.
 
 \begin{figure}[tb]
     \begin{tabular}{l}
@@ -116,17 +137,17 @@ Sound Netが音声波形を入力とするのに対し，本研究では音声�
 \\  %%%%%%%%%%%%%%%%
       \begin{minipage}{0.32\hsize}
         \begin{center}
-          \includegraphics[clip, width=2.8cm]{./Figures/still_stop2-3.eps}
+          \includegraphics[clip, width=2.8cm]{./Figures/still_stop1-3.eps}
         \end{center}
       \end{minipage}
       \begin{minipage}{0.32\hsize}
         \begin{center}
-          \includegraphics[clip, width=2.8cm]{./Figures/optic_stop2-3.eps}
+          \includegraphics[clip, width=2.8cm]{./Figures/optic_stop1-3.eps}
         \end{center}
       \end{minipage}
       \begin{minipage}{0.32\hsize}
         \begin{center}
-          \includegraphics[clip, width=2.8cm]{./Figures/sound_stop2.eps}
+          \includegraphics[clip, width=2.8cm]{./Figures/sound_stop1.eps}
         \end{center}
       \end{minipage}
     \end{tabular}
@@ -143,7 +164,7 @@ Sound Netが音声波形を入力とするのに対し，本研究では音声�
 Sound/image-based three-stream CNN のアーキテクチャを図~\ref{sound3st}に示す．
 
 まず入力となる動画から静止画像のフレーム（$F_t$）を取り出し，直後の$F_{t+1}$間とのoptical flow画像（$O_t$）を生成する．次に両画像から同じ構造の2つのネットワークを用いて特徴量の抽出を行う．
-そして対応する音声（$A_t$）からメル周波数ケプストラム係数（$M_t$）を求め，前述とは異なる構造のネットワークを用いて（$M_t$）から特徴量の抽出を行う．
+そして対応する音声（$A_t$）からMFCC（$M_t$）を求め，前述とは異なる構造のネットワークを用いて（$M_t$）から特徴量の抽出を行う．
 最後にこれら2つあるいは3つの特徴量の組み合わせ毎に結合し，分類ネットワークでクラス分類を行う．
 この際に，音声をフレームと同じサイズで切り出すと特徴が著しく失われるため入力音声には$F_t$の前後0.5秒ずつを用いた．動画あるいは音声から実際に犬の行動を推定する場合を想定し，現実的で取り扱いやすい時間としてこれを設定した．
 
@@ -184,13 +205,13 @@ Sound/image-based three-stream CNN のアーキテクチャを図~\ref{sound3st}
 音声での学習は畳み込み層について1Dと2Dの2種類で行った.
 畳み込み層の次元の差について図~\ref{1d2dconv}に詳細を示す.出力の向きを合わせるために, 提案手法の複数入力には2Dの畳み込みを用いた.
 
-結果のまとめを表~\ref{expetiments_result}に示す.
 一人称視点動画像からのマルチ行動推定を行なった先行研究は見つけられなかったため，既存手法との比較は行なっていない．
 表では，クラス毎の精度と全体を合計しての精度をJaccard係数で示している．
 なお，Jaccard係数とは$$\frac{TP}{FP+FN+TP}$$で表され，PrecisionとRecallの両者についてF尺度と比較してより厳格な値が求まる．
 レスキュー犬の行動分類にあたり，PrecisionとRecallを共に重視するためにこの係数を採用した．
 よって，本研究ではJaccard係数がより大きいモデルは精度がより良いと表現する．
 
+結果のまとめを表~\ref{expetiments_result}に示す.
 静止画像, optical flow画像単体では精度が低く, これらを組合せたもので精度が上昇した.
 比較して, 音声単体では1D, 2Dともに精度が高かった．音声と静止画像，音声とoptical flow画像を組合せた実験では，音声単体と比較して全体的な精度は低下した.
 しかし，静止画像, optical flow画像, 音声の3つを組合せた提案手法では全体的な精度の上昇が見られ, クラス別で見ても半数以上のクラスの数値が上昇している.
@@ -249,7 +270,7 @@ Sound/image-based three-stream CNN のアーキテクチャを図~\ref{sound3st}
 \end{table*}
 
 
-\section{おわりに}
+\section{考察}
 Sound/image-based three-stream CNNの提案と, 提案手法を用いたレスキュー犬の行動推定を行なった.
 音声データはクラス推定に強力であるものの，音声・静止画像・optical flow画像の3つのデータにそれぞれ必要な情報が含まれていることがわかった.
 提案手法が相対的に最も精度が高かったが, 51.8\%と数値では決して高いとは言えない．
