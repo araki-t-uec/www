@@ -86,15 +86,14 @@ SoundNetが音声波形を入力とするのに対し，本研究では音声か
 \end{figure}
 
 \section{データセット}
-学習には，サイバーレスキュー犬訓練データセットを利用した．これは，訓練されているレスキューいぬに専用の計測スーツを着用させ収集したデータ群である．東北大学の大野らからその一部を提供され，本研究では提供されたデータを整形したものを学習に用いた．
-提供されたデータは7本からなる動画で, 犬視点動画, ハンドラー視点映像, 第三者視点映像が横並びに結合されており, 時間の範囲を指定するように犬行動がラベル付けされている.
+学習には，サイバーレスキュー犬訓練データセットを利用した．これは，訓練されているレスキューいぬに専用の計測スーツを着用させ収集したデータ群である．東北大学の大野らからその一部を提供された．
+提供されたデータは7本からなる動画で, 時間の範囲を指定するように犬行動がラベル付けされている.
 総時間は57分40秒，秒間フレーム数は29.97，総フレーム数は103,696枚である．
 分類クラスそれぞれについて時間範囲を指定する形で動画にアノテーションがされており，同時刻に複数のクラスが重なるためマルチラベルデータとして取り扱う．
-ここから犬視点動画のみを切り出し, 6fpsにサンプリングしてデータを整形した．
-最終的に利用したデータのクラス毎の出現頻度が~表\ref{cyberdataset_label}の値である．
+これを 6fpsにサンプリングして整形したものを学習と評価に用いた．クラス毎の出現頻度が~表\ref{cyberdataset_label}の値である．
 
 \begin{table}[tb]
- \centering
+ \begin{center}
  \caption{サイバーレスキュー犬訓練データセット 利用範囲内で計測した出現回数}\label{cyberdataset_label}
  \scalebox{0.95}[0.95]{
   \begin{tabular}{|l||c|c|c|c|c|c|c|c|c|c|c|}
@@ -105,11 +104,11 @@ SoundNetが音声波形を入力とするのに対し，本研究では音声か
    出現回数& 1744& 1127&2439&343&  2011& 98&  1549&  239& 7719&6384&8764 \\ \hline
   \end{tabular}
  }
-
+\end{center}
 \end{table}
 
 フレームの静止画像とその直後のフレームから計算したoptical flow画像, および前後15フレーム分の長さの音声の3データをフレーム毎に抽出した.
-これを1/5の量にサンプリングしたものを学習と評価に用いた.
+%これを1/5の量にサンプリングしたものを学習と評価に用いた.
 犬行動は11種(bark:吠える, cling:匂いに執着する, command:ハンドラーからの働きかけがある, eat-drink:飲食する, look\_at\_handler:ハンドラーを見る, run:走る, see\_victim:要救助者を発見した, shake:体をブルブルと震わせる, sniff:匂いを嗅ぐ, stop:脚を止める, walk-trot:歩く)あり, その一部を図~\ref{dataset}に示す.
 
 \begin{figure}[tb]
@@ -250,7 +249,7 @@ Sound/image-based three-stream CNN のアーキテクチャを図~\ref{sound3st}
 % \centering
  \begin{center}
  \caption{各実験結果比較表.}\label{expetiments_result}
- \scalebox{0.90}[0.90]{
+ \scalebox{0.85}[0.85]{
   \begin{tabular}{|l|c|c|c||c|c|c|c|c|c|c|c|c|c|c|c|}
    \hline \hline
    &静止画像&optical flow画像&音声& \rotatebox{90}{bark}& \rotatebox{90}{cling}&\rotatebox{90}{command}& \rotatebox{90}{eat}&\rotatebox{90}{handler}& \rotatebox{90}{run}&\rotatebox{90}{victim}& \rotatebox{90}{shake}& \rotatebox{90}{sniff}& \rotatebox{90}{stop}& \rotatebox{90}{walk} & \rotatebox{90}{全体}\\ \hline \hline
