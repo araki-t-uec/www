@@ -203,7 +203,7 @@ Sound/image-based three-stream CNN のアーキテクチャを図~\ref{sound3st}
 
 \section{実験}
 
-3つの入力について, それぞれ単体, 2つずつの組み合わせおよび全てを統合した場合の8通りを行った(表~\ref{ablation})．
+3つの入力について, それぞれ単体, 2つずつの組み合わせおよび全てを統合した場合の8通りを行った．%(表~\ref{ablation})．
 
 画像単体を入力とした実験ではImageNetを学習したVGG16の学習済みモデルを用い再学習した.
 音声での学習は畳み込み層について1Dと2Dの2種類で行った.
@@ -222,25 +222,24 @@ Sound/image-based three-stream CNN のアーキテクチャを図~\ref{sound3st}
 人間が耳で聞いた際にもその特徴を識別しやすいbark, shakeクラスにおいては音声単体を1D畳み込み層で学習したものの方が数値が高い.
 これらから, データセットに対する提案手法の有効性が示された.
 
-\begin{table}[tb]
- \centering
- \caption{本実験を含めたモダリティテーブル．音声ストリームは畳み込み層がConv2Dの実験とConv1Dの実験を行った．}\label{ablation}
- \scalebox{0.90}[0.90]{
-  \begin{tabular}{|l||c|c|c|}
-\hline \hline
-&静止画像&optical flow画像&音声 \\ \hline \hline
-(1) & ◯ & × & × \\ \hline
-(2) & × & ◯ & × \\ \hline
-(3) & × & × &1D \\ \hline
-(4) & × & × &2D \\ \hline
-(5) & ◯ & ◯ & × \\ \hline
-(6) & ◯ & × &2D\\ \hline
-(7) & × & ◯ &2D\\ \hline
-(8) & ◯ & ◯ &2D\\ \hline
-
-  \end{tabular}
- }
-\end{table}
+%\begin{table}[tb]
+% \centering
+% \caption{本実験を含めたモダリティテーブル．音声ストリームは畳み込み層がConv2Dの実験とConv1Dの実験を行った．}\label{ablation}
+% \scalebox{0.90}[0.90]{
+%  \begin{tabular}{|l||c|c|c|}
+%\hline \hline
+%&静止画像&optical flow画像&音声 \\ \hline \hline
+%(1) & ◯ & × & × \\ \hline
+%(2) & × & ◯ & × \\ \hline
+%(3) & × & × &1D \\ \hline
+%(4) & × & × &2D \\ \hline
+%(5) & ◯ & ◯ & × \\ \hline
+%(6) & ◯ & × &2D\\ \hline
+%(7) & × & ◯ &2D\\ \hline
+%(8) & ◯ & ◯ &2D\\ \hline
+%  \end{tabular}
+% }
+%\end{table}
 
 \begin{figure}[tb]
    \begin{center}
