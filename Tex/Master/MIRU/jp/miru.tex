@@ -169,12 +169,10 @@ Sound/image-based three-stream CNN のアーキテクチャを図~\ref{sound3st}
 そして対応する音声（$A_t$）からMFCC（$M_t$）を求め，前述とは異なる構造のネットワークを用いて（$M_t$）から特徴量の抽出を行う．
 最後にこれら2つあるいは3つの特徴量の組み合わせ毎に結合し，分類ネットワークでクラス分類を行う．
 この際に，音声をフレームと同じサイズで切り出すと特徴が著しく失われるため入力音声には$F_t$の前後0.5秒ずつを用いた．動画あるいは音声から実際に犬の行動を推定する場合を想定し，現実的で取り扱いやすい時間としてこれを設定した．
-
 動画長は31フレームとし，中央から切り出した静止画像とそれに対応する直後のoptical flow画像をそれぞれImageNetで学習済みのVGG16モデルに通し，畳み込み層の出力を結合した．
 動画から切り出した音声は畳み込みを繰り返すと特徴の縦横次元が小さくなるため，静止画像の畳み込みの出力と同じサイズになるように調整した．
 調整は畳み込みで奥行き次元を揃えた後，同じ特徴をリピートし目的の大きさになるまでコピーして結合した．
 分類はフレーム毎に行った．
-
 推定にはクラス毎にSoftMarginLossを用いた．
 入力を$x$，出力を$y$，クラス数を$C$とすると，マルチクラス推定の損失関数SoftMarginLossは式~\ref{softmargin}に定義される．
 推定クラスが正解なら$\Sigma$内の第2項，不正解なら第1項が計算に利用するように設計されており，推定ラベルによって関数が変わる．
@@ -193,7 +191,7 @@ Sound/image-based three-stream CNN のアーキテクチャを図~\ref{sound3st}
 \begin{figure}[tb]
    \begin{center}
     \includegraphics[scale=0.25]{./Figures/soundimage-basedthree-streamCNN.eps}
-    \caption{Sound/image-based three-streamのアーキテクチャ.音声, 静止画像, optical flow画像それぞれを入力とする3つのストリームからなり, それぞれの出力を結合してクラス推定を行っている.}
+    \caption{Sound/image-based three-streamアーキテクチャ.音声, 静止画像, optical flow画像それぞれを入力とする3ストリームからなり, それぞれの出力を結合してクラスを推定している.}
     \label{sound3st}
    \end{center}
 \end{figure}
