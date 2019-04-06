@@ -9,30 +9,39 @@
 
 \title{レスキュー犬の一人称動画を用いた動作推定}
 
-\affiliate{Tokyo}{電気通信大学 大学院情報理工学研究科 情報学専攻}
-\affiliate{Tohoku}{東北大学NICHe}
-\affiliate{rikei}{理研AIP}
+\affiliate{Tokyo}{Department of Informatics, The University of Electro-Communications} %{電気通信大学 大学院情報理工学研究科 情報学専攻}
+\affiliate{Tohoku}{NICHe, Tohoku University}
+\affiliate{riken}{理研AIP}
 
- \author{荒木 勇人}{Tsuyohito ARAKI}{Tokyo}[araki-t@mm.inf.uec.ac.jp]
- \author{井出 佑汰}{Yuta IDE}{Tokyo}%[ide-y@mm.inf.uec.ac.jp]
- \author{濱田 龍之介}{Kazunori OHNO}{Tohoku}%[hamada@rm.is.tohoku.ac.jp]
- \author{大野 和則}{Kazunori OHNO}{Tohoku, rikei}%[]
- \author{柳井 啓司}{Keiji YANAI}{Tokyo}%[yanai@cs.uec.ac.jp]
-
-% 概要・キーワードは省略して下さい．
+ \author{Tsuyohito ARAKI}{Tokyo}[araki-t@mm.inf.uec.ac.jp]
+ \author{Yuta IDE}{Tokyo}%[ide-y@mm.inf.uec.ac.jp]
+ \author{Kazunori OHNO}{Tohoku}%[hamada@rm.is.tohoku.ac.jp]
+ \author{Kazunori OHNO}{Tohoku, riken}%[]
+ \author{Keiji YANAI}{Tokyo}%[yanai@cs.uec.ac.jp]
 
 \maketitle
 \section*{Abstract}
-被災地での災害救助を補助する犬をレスキュー（災害救助）犬といい，カメラなどの計測装置を装備したレスキュー犬をサイバーレスキュー犬と言う．
-本研究では，犬にとりつけたセンサからサイバーレスキュー犬活動の識別を目的とする．
-犬一人称動画像と音声をCNNを用いて動作毎に分類するsound/image-based three-stream CNNの提案と，提案手法をマルチクラス推定に用いた実験を行なった．
-Sound/image-based three-stream CNNは動画から得られた静止画像・optical flow画像・音声を入力とする動画識別ネットワークである．
-本提案手法の有効性を示すため，3つの入力それぞれ単体とその組み合わせパターン
-（静止画像単体，optical flow画像単体，音声単体，静止画像+optical flow画像，静止画像+音声，optical flow画像+音声）
-を用いた識別との比較実験を行なった．
-結果は，51.8\%で提案手法で最も高い精度が得られた．
-推定には，レスキュー犬の訓練の様子を撮影したデータセットを用いた．このデータセットは現在も作成中であり，まだ学習のデータ量が十分とは言えない．
-一人称視点動画からのマルチクラス推定というタスクと，レスキュー犬訓練データセットの複雑さのあいまったチャレンジングなタスクであることを踏まえても不十分な結果であり，今後さらに手法の改良とデータセットの拡充が必要である．
+%被災地での災害救助を補助する犬をレスキュー（災害救助）犬といい，カメラなどの計測装置を装備したレスキュー犬をサイバーレスキュー犬と言う．
+Dogs that assist disaster relief in the affected areas are called rescue dogs, and dogs equipped measuring device such as cameras are called cyber rescue dogs.
+%本研究では，犬にとりつけたセンサからサイバーレスキュー犬活動の識別を目的とする．
+In this study, we aim to identify the behavior of cyber rescue dog from the sensor attached to the dog.
+%犬一人称動画像と音声をCNNを用いて動作毎に分類するsound/image-based three-stream CNNの提案と，提案手法をマルチクラス推定に用いた実験を行なった．
+We proposed a Sound/image-based three-stream CNN that classifies dog activity from dog-centric movies and sounds.
+And experiment using the proposed method for multiclass estimation.
+%Sound/image-based three-stream CNNは動画から得られた静止画像・optical flow画像・音声を入力とする動画識別ネットワークである．
+Sound/image-based three-stream CNN is a video identification network that receives still images, optical flow images, and audio obtained from video.
+%本提案手法の有効性を示すため，3つの入力それぞれ単体とその組み合わせパターン
+%（静止画像単体，optical flow画像単体，音声単体，静止画像+optical flow画像，静止画像+音声，optical flow画像+音声）
+%を用いた識別との比較実験を行なった．
+In comparison experiments to confirm the effectiveness of the proposed method, single pattern and multiple patterns were used for each of the three inputs.
+%結果は，51.8\%で提案手法で最も高い精度が得られた．
+As a result, the highest accuracy was obtained with the proposed method at 51.8\%.
+%推定には，レスキュー犬の訓練の様子を撮影したデータセットを用いた．
+For estimation, we used a rescue dog training data set.
+%このデータセットは現在も作成中であり，まだ学習のデータ量が十分とは言えない．
+This data set is still being created, and the amount of data needed for learning is not enough.
+%一人称視点動画からのマルチクラス推定というタスクと，レスキュー犬訓練データセットの複雑さのあいまったチャレンジングなタスクであることを踏まえても不十分な結果であり，今後さらに手法の改良とデータセットの拡充が必要である．
+The result is insufficient even if Given the complex dataset of the rescue dog training and the task of multi-class estimation from dog-centric videos.
 
 \section{Introduction}
 被災地での救助活動を行う際に，人間の補助として訓練されたレスキュー犬（災害救助犬）が探査を行う場合がある．
