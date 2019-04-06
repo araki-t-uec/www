@@ -42,13 +42,23 @@ For estimation, we used a rescue dog training data set.
 This data set is still being created, and the amount of data needed for learning is not enough.
 %一人称視点動画からのマルチクラス推定というタスクと，レスキュー犬訓練データセットの複雑さのあいまったチャレンジングなタスクであることを踏まえても不十分な結果であり，今後さらに手法の改良とデータセットの拡充が必要である．
 The result is insufficient even if Given the complex dataset of the rescue dog training and the task of multi-class estimation from dog-centric videos.
+We need to further refine this method and extend the data set in the future.
 
 \section{Introduction}
-被災地での救助活動を行う際に，人間の補助として訓練されたレスキュー犬（災害救助犬）が探査を行う場合がある．
-レスキュー犬は，犬としての特性を生かして人間と協力して被災地の探索を行う．
-がれきの隙間などの狭い空間や倒壊した建物など人間には踏破困難な環境でも探査可能であり，発達した嗅覚を頼りにした救助活動が可能である．
-しかし彼らは人間に向けた言語を持たないため，人間はレスキュー犬の行動から彼らが収集した情報を理解しなくてはならない．
-現状では，レスキュー犬を指揮するハンドラーと呼ばれる人間がレスキュー犬の行動を手動でマーキングしており，その情報を消防などの指揮命令者に口頭伝達している．
+%被災地での救助活動を行う際に，人間の補助として訓練されたレスキュー犬（災害救助犬）が探査を行う場合がある．
+In rescue activities in the affected areas, trained rescue dogs may conduct surveys as human assistants.
+%レスキュー犬は人間とペアを組み，犬としての特性を生かして人間と協力して被災地の探索を行う．
+The rescue dog makes a pair with a human and investigate for a affected areas making use of the characteristics as a dog.
+%がれきの隙間などの狭い空間や倒壊した建物など人間には踏破困難な環境でも探査可能であり，発達した嗅覚を頼りにした救助活動が可能である．
+Resque dogs can investigate even in environments where it is difficult for a person to traverse on such as a narrow space and a crevice or a collapsed building.
+And a rescue operation that relies on the developed sense of smell is possible.
+%しかし彼らは人間に向けた言語を持たない.
+However, they have no language for humans.
+%ペアを組む人間はハンドラーと呼ばれ、ハンドラーはレスキュー犬の行動から彼らが収集した情報を理解しなくてはならない．
+%People in pairs with rescue dogs are called handler, and handlers must interpret the information that collected by rescue dog from there behavior. %ここよくわかりません by araki.
+People in pairs with rescue dogs are called handler, and handlers must interpret from rescue dog's behavior the information that they collected.
+%現状では，レスキュー犬を指揮するハンドラーと呼ばれる人間がレスキュー犬の行動を手動でマーキングしており，その情報を消防などの指揮命令者に口頭伝達している．
+Under the present circumstances, a handler who directs a rescue dog manually marks the action of the rescue dog and orally transmits information to a commander such as a fire department.
 このレスキュー犬との共同探索の問題点として，トリアージ（緊急度に従った手当の優先順位付け）のための周辺環境情報や，要救助者情報の不足があげられる．
 また，ハンドラーによる記録はどうしても主観的になるので客観性に欠け，さらにそれが口頭伝達されることで正確性がより欠落する．
 本研究では，レスキュー犬にセンサを装着して得られたデータを用いてレスキュー犬の行動推定を目的とする（Figure\ref{lite_model}）．
