@@ -7,11 +7,11 @@
 
 \begin{document}
 
-\title{レスキュー犬の一人称動画を用いた動作推定}
+\title{Dog-centric Activity Estimation}
 
 \affiliate{Tokyo}{Department of Informatics, The University of Electro-Communications} %{電気通信大学 大学院情報理工学研究科 情報学専攻}
 \affiliate{Tohoku}{NICHe, Tohoku University}
-\affiliate{riken}{理研AIP}
+\affiliate{riken}{Organic Physical Chemistry Laboratory} %{理研AIP}
 
  \author{Tsuyohito ARAKI}{Tokyo}[araki-t@mm.inf.uec.ac.jp]
  \author{Yuta IDE}{Tokyo}%[ide-y@mm.inf.uec.ac.jp]
@@ -29,7 +29,7 @@ In this study, we aim to identify the behavior of cyber rescue dog from the sens
 We proposed a Sound/image-based three-stream CNN that classifies dog activity from dog-centric movies and sounds.
 And experiment using the proposed method for multiclass estimation.
 %Sound/image-based three-stream CNNは動画から得られた静止画像・optical flow画像・音声を入力とする動画識別ネットワークである．
-Sound/image-based three-stream CNN is a video identification network that receives still images, optical flow images, and audio obtained from video.
+Sound/image-based three-stream CNN is a movie identification network that receives still images, optical flow images, and audio obtained from movie.
 %本提案手法の有効性を示すため，3つの入力それぞれ単体とその組み合わせパターン
 %（静止画像単体，optical flow画像単体，音声単体，静止画像+optical flow画像，静止画像+音声，optical flow画像+音声）
 %を用いた識別との比較実験を行なった．
@@ -41,7 +41,7 @@ For estimation, we used a rescue dog training data set.
 %このデータセットは現在も作成中であり，まだ学習のデータ量が十分とは言えない．
 This data set is still being created, and the amount of data needed for learning is not enough.
 %一人称視点動画からのマルチクラス推定というタスクと，レスキュー犬訓練データセットの複雑さのあいまったチャレンジングなタスクであることを踏まえても不十分な結果であり，今後さらに手法の改良とデータセットの拡充が必要である．
-The result is insufficient even if Given the complex dataset of the rescue dog training and the task of multi-class estimation from dog-centric videos.
+The result is insufficient even if Given the complex dataset of the rescue dog training and the task of multi-class estimation from dog-centric movies.
 We need to further refine this method and extend the data set in the future.
 
 \section{Introduction}
@@ -59,46 +59,88 @@ However, they have no language for humans.
 People in pairs with rescue dogs are called handler, and handlers must interpret from rescue dog's behavior the information that they collected.
 %現状では，レスキュー犬を指揮するハンドラーと呼ばれる人間がレスキュー犬の行動を手動でマーキングしており，その情報を消防などの指揮命令者に口頭伝達している．
 Under the present circumstances, a handler who directs a rescue dog manually marks the action of the rescue dog and orally transmits information to a commander such as a fire department.
-このレスキュー犬との共同探索の問題点として，トリアージ（緊急度に従った手当の優先順位付け）のための周辺環境情報や，要救助者情報の不足があげられる．
-また，ハンドラーによる記録はどうしても主観的になるので客観性に欠け，さらにそれが口頭伝達されることで正確性がより欠落する．
-本研究では，レスキュー犬にセンサを装着して得られたデータを用いてレスキュー犬の行動推定を目的とする（Figure\ref{lite_model}）．
-本研究の具体的なタスクは, 映像だけでなく音声などのデータも活用したマルチモーダル情報を用いたクラス推定である.これにより，レスキュー犬が今何をしているのか個人の主観に基づくことなく判断することが可能となり，トリアージに必要な情報が整理され，災害救助活動の効率化が期待される.
+%このレスキュー犬との共同探索の問題点として，トリアージ（緊急度に従った手当の優先順位付け）のための周辺環境情報や，要救助者情報の不足があげられる．
+As a problem of joint investigation with this rescue dog, there is a lack of information on surrounding environment and victims for triage.
+%また，ハンドラーによる記録はどうしても主観的になるので客観性に欠け，さらにそれが口頭伝達されることで正確性がより欠落する．
+And, the records by the handler are subjective, so they lack objectivity. Verbal transmission also makes them less accurate.
+%本研究では，レスキュー犬にセンサを装着して得られたデータを用いてレスキュー犬の行動推定を目的とする（Figure\ref{lite_model}）．
+In this study, we aim to estimate the behavior of rescue dogs using data obtained by attaching sensors to rescue dogs (Figure\ref{lite_model}).
+%本研究の具体的なタスクは, 映像だけでなく音声などのデータも活用したマルチモーダル情報を用いたクラス推定である.
+The specific task is class estimation using multimodal information that uses not only video but also audio data.
+%これにより，レスキュー犬が今何をしているのか個人の主観に基づくことなく判断することが可能となり，
+As a result, this makes it possible to determine mechanically what the rescue dog is doing now.
+%トリアージに必要な情報が整理され，災害救助活動の効率化が期待される.
+And, information necessary for triage is organized, disaster rescue activities will be more efficiently.
 
 \begin{figure}[tb]
  \begin{center}
 %  \includegraphics[width=7cm]{./Figures/easy_image.eps}
   \includegraphics[width=7cm]{./Figures/dogactrec.eps}
-  \caption{提案手法の概要．入力画像から複数データを抽出し，それぞれ別のストリームへ入力する．各ストリームの出力をもとに，動画のレスキュー犬行動推定結果を最終出力とする．}
+  %\caption{提案手法の概要．入力画像から複数データを抽出し，それぞれ別のストリームへ入力する．各ストリームの出力をもとに，動画のレスキュー犬行動推定結果を最終出力とする．}
+  \caption{Outline of the proposed method. Extract multiple data from the input image and enter them into different streams. Based on the output of each stream, estimate the rescue dog behavior.}
+
   \label{lite_model}
  \end{center}
 \end{figure}
 
 \section{Related Work}
-動画分類の研究に two-stream CNN ~\cite{simonyan2014two}がある.これは動画のフレームとフレームから求まる optical flow画像を個別のネットワークで学習することで動き情報を考慮した動画分類を行っている.
+%動画分類の研究に two-stream CNN ~\cite{simonyan2014two}がある.
+There are two-stream CNN as a study of video classification ~\cite{simonyan2014two}.
+%これは動画のフレームとフレームから求まる optical flow画像を個別のネットワークで学習することで動き情報を考慮した動画分類を行っている.
+It is classify videos by learn motion information from optical flow image that calculated between frame and frame.
+%レスキュー犬行動のモニタリングのために，大野, 濱田らによって装着型計測・記録装置が開発された~\cite{dog01}．
+Ohno, Shibata et al. Developed a wearable measurement recording device for monitoring of rescue dog behavior ~\cite{dog01}.
+%Figure~\ref{cyber}にレスキュー犬に装着可能な軽量な行動計測スーツを示す．
+We show that attachable device with rescue dog Figure~\ref{cyber}.
+%これを着用したレスキュー犬はサイバー救助犬とも呼ばれる．
+Rescue dogs wearing that called cyber rescue dogs.
+%各種センサを用いた計測データを記録し，リアルタイムに映像などのデータを無線配信することが可能である．
+This device can record measumented data and broadcast information as a movie and so on.
+%そのため，レスキュー犬が人の目の及ばない範囲で活動する際にもレスキュー犬の行動やその周辺環境などを把握するのに役立つ．
+It makes handler can understand the beyond rescue dog activity that over the rubble.
 
-レスキュー犬行動のモニタリングのために，大野, 濱田らによって装着型計測・記録装置が開発された~\cite{dog01}．Figure~\ref{cyber}にレスキュー犬に装着可能な軽量な行動計測スーツを示す．これを着用したレスキュー犬はサイバー救助犬とも呼ばれる．各種センサを用いた計測データを記録し，リアルタイムに映像などのデータを無線配信することが可能である．そのため，レスキュー犬が人の目の及ばない範囲で活動する際にもレスキュー犬の行動やその周辺環境などを把握するのに役立つ．
+%また，Ehsanらによる犬の一人称視点動画からの犬行動予測の研究がある~\cite{whoretthedog}．これは，犬の行動をモデリングし，犬が次にどのような道をたどり行動するかを予測している．
+Also, there are study that estimated dog activity from dog-centric video by Ehsan. at al.
+It is modeling dog activity and estimate how dogs will move.
+%しかし，これらの研究は犬の行動のモデリングであり，犬の周辺環境の推定などは行っていない．
+%また，入力は動画像のみであり，音声などのデータは利用していない．
+However, that study used only video, not used multimodal information such as audio.
+%レスキュー犬の課題には，犬の周辺環境情報や動画像からだけでは判断できない情報の取得が含まれている．
+Rescue dogs are asked more information that can be judged not only from the dog's surrounding environment information and moving images.
+%例えばレスキュー犬は要救助者を発見するとその場で待機し吠え続けるように訓練されている．
+For example, rescue dogs are trained to stay on the spot and continue to bark when they find a victim.
+%このように，動画像データからだけではなく，音声データ，および慣性データ・GPSデータなどの情報を複合的に用いてレスキュー犬の状態を判断しなければならない．
+In this way, handler must understand the surrounding environment of the rescue dog using not only video data but also information such as voice data, inertia data and GPS data in combination.
+%ただし, 本研究では動画像と音声情報のみの提供をうけたため, これらを入力とした犬の行動推定を行う.
+But, we has been provided only dog-centric motion pictures and voice information, in this study use these inputs for estimate the activity of rescue dogs.
 
-また，Ehsanらによる犬の一人称視点動画からの犬行動予測の研究がある~\cite{whoretthedog}．これは，犬の行動をモデリングし，犬が次にどのような道をたどり行動するかを予測している．
+%音声に焦点をあてた動画分類の研究にはSoundNet~\cite{aytar2016soundnet}がある.
+SoundNet as a study of movie classification focus it's sounds ~\cite{aytar2016soundnet}.
+%動画から音声と画像を取り出し，画像を教師データとし，音声は生徒データとして出力が等しくなるように学習している．
+In the SoundNet, deep convolutional sound network is trained with with visual supervision.
+%この手法は音響シーン分類，物体分類の標準ベンチマークにおいて教師あり学習の最高精度を達成した．
+This method achieved the state-of-the-art results on standard benchmarks for acoustic scene/object classification. 
+%本研究では音声のみからの行動推定は目的としない．しかし，音声の意味的情報は動画認識に重要であることが明らかにされている．
+Semantic information of audio has been shown to be important for movie recognition, we don't aimed classification from only audio. 
+%SoundNetとtwo-stream CNN を参考に, 本研究では音声識別ネットワークと two-streamネットワークを統合したアーキテクチャを構築した.
+In this study build the architecture connected two-stream network with deep audio network while refering to SountNet and two-stream CNN.
+%SoundNetが音声波形を入力とするのに対し，本研究では音声からMFCC特徴を抽出してからストリームへの入力とする点で異なっている．
+SoundNet takes an audio waveform as an input. 
+On the other hand, this study is different in that it extracts MFCC features from audio and then uses them as input to a stream.
 
-しかし，これらの研究は犬の行動のモデリングであり，犬の周辺環境の推定などは行っていない．また，入力は動画像のみであり，音声などのデータは利用していない．レスキュー犬の課題には，犬の周辺環境情報や動画像からだけでは判断できない情報の取得が含まれている．例えばレスキュー犬は要救助者を発見するとその場で待機し吠え続けるように訓練されている．
-このように，動画像データからだけではなく，音声データ，および慣性データ・GPSデータなどの情報を複合的に用いてレスキュー犬の状態を判断しなければならない．
-ただし, 本研究では動画像と音声情報のみの提供をうけたため, これらを入力とした犬の行動推定を行う.
-
-音声に焦点をあてた動画分類の研究にはSoundNet~\cite{aytar2016soundnet}がある.
-動画から音声と画像を取り出し，画像を教師データとし，音声は生徒データとして出力が等しくなるように学習している．
-この手法は音響シーン分類，物体分類の標準ベンチマークにおいて教師あり学習の最高精度を達成した．
-本研究では音声のみからの行動推定は目的としない．しかし，音声の意味的情報は動画認識に重要であることが明らかにされている．
-SoundNetとtwo-stream CNN を参考に, 本研究では音声識別ネットワークと two-streamネットワークを統合したアーキテクチャを構築した.
-SoundNetが音声波形を入力とするのに対し，本研究では音声からMFCC特徴を抽出してからストリームへの入力とする点で異なっている．
-
-音声と動画像だけでなく，加速度と速度情報を用いたマルチモーダルな学習の研究には丹野らの~\cite{tanno2019deim}がある．
-これは，情報を追加することによっての認識精度の向上や低下を報告しており，特に音声によって分類精度が向上するとされている．
-マルチモーダルな深層学習という点で本研究と同様のテーマだが，マルチクラス推定という点で本研究とは異なっている．
+%音声と動画像だけでなく，加速度と速度情報を用いたマルチモーダルな学習の研究には丹野らの~\cite{tanno2019deim}がある．
+There is research of multimodal learning using not only audio and moving pictures but also acceleration and speed information by Tanno et al ~\cite{tannno2019deim}.
+%これは，情報を追加することによっての認識精度の向上や低下を報告しており，特に音声によって分類精度が向上するとされている．
+That research reported that improvement and decrease in recognition accuracy by adding information.
+In particularly, classification accuracy is improved by audio. 
+%マルチモーダルな深層学習という点で本研究と同様のテーマだが，マルチクラス推定という点で本研究とは異なっている．
+It is the same theme as this study in terms of multimodal deep learning, but it differs from this study in terms of multiclass estimation.
 
 \begin{figure}[tb]
  \begin{center}
   \includegraphics[width=5cm]{./Figures/cyberdog.eps}
-  \caption{装着型計測・記録装置~\cite{dog01}より引用.}
+  %\caption{装着型計測・記録装置~\cite{dog01}より引用.}
+  \caption{Wearable measurement and recording device ~\cite{dog01}.}
   \label{cyber}
  \end{center}
 \end{figure}
