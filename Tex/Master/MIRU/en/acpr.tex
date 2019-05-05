@@ -146,35 +146,52 @@ It is the same theme as this study in terms of multimodal deep learning, but it 
 \end{figure}
 
 \section{Dateset}
-学習には，サイバーレスキュー犬訓練データセットを利用した．これは，訓練されているレスキュー犬に専用の計測スーツを着用させ収集したデータ群である．東北大学の大野らからその一部を提供された．
-提供されたデータは7本からなる動画で, 時間の範囲を指定するように犬行動がラベル付けされている.
-犬行動は11種(bark:吠える, cling:匂いに執着する, command:ハンドラーからの働きかけがある, eat-drink:飲食する, look\_at\_handler:ハンドラーを見る, run:走る, see\_victim:要救助者を発見した, shake:体をブルブルと震わせる, sniff:匂いを嗅ぐ, stop:脚を止める, walk-trot:歩く)あり, その一部をFigure~\ref{dataset}に示す.
-総時間は57分40秒，秒間フレーム数は29.97，総フレーム数は103,696枚である．
-分類クラスそれぞれについて時間範囲を指定する形で動画にアノテーションがされており，同時刻に複数のクラスが重なるためマルチラベルデータとして取り扱う．
-これを 6fpsにサンプリングして整形したものを学習と評価に用いた．クラス毎の出現頻度が~表\ref{cyberdataset_label}の値である．表記のためクラス名を簡略した．
-各クラス毎に約100回から9000回のサンプルがあり数値上では十分である．
-しかしこれは連続したシーンを含めての数値であり，その実は多様性に欠ける中身となっている．
-例えば，runクラスは98サンプルあるが，独立したシーンとしては3シーンにすぎず，
-bark，eat-drink，see\_victim，shakeクラスを合わせても100シーンに満たない．
+%学習には，サイバーレスキュー犬訓練データセットを利用した．
+We use the Training Cyber Rescue Dog Dataset.
+%これは，訓練されているレスキュー犬に専用の計測スーツを着用させ収集したデータ群である．東北大学の大野らからその一部を提供された．
+This is data collection about training rescue dog wearing recoding device. We are provided some piece of that datas by Ohno et al.
+%提供されたデータは7本からなる動画で, 時間の範囲を指定するように犬行動がラベル付けされている.
+Provided data consists of seven movies, each movie has three view point: dog-centric, handler-centric and third-person view.
+Each view are labeled rescue dog activities based on time lange.
+%犬行動は11種(bark:吠える, cling:匂いに執着する, command:ハンドラーからの働きかけがある, eat-drink:飲食する, look\_at\_handler:ハンドラーを見る, run:走る, see\_victim:要救助者を発見した, shake:体をブルブルと震わせる, sniff:匂いを嗅ぐ, stop:脚を止める, walk-trot:歩く)あり, その一部をFigure~\ref{dataset}に示す.
+There are 11 classes of rescue dog activities: bark, cling\_to\_something, command\_by\_handler, eat-drink, look\_at\_handler, run, see\_victim, shake\_body, sniff, stop\_legs and walk-trot.
+Figure ~\ref{dataset} show part of that.
+%分類クラスそれぞれについて時間範囲を指定する形で動画にアノテーションがされており，同時刻に複数のクラスが重なるためマルチラベルデータとして取り扱う．
+Each class annotated every movies to specifying time lange. Because multiple classes overlap at the same time, it is treated as multi-label data.
+
+%総時間は57分40秒，秒間フレーム数は29.97，総フレーム数は103,696枚である．
+Total time is 57 minutes and 40 seconds, 29.97 FPS, the number of frames is 103,696.
+%これを 6fpsにサンプリングして整形したものを学習と評価に用いた．
+We thinned the frames to 6fps for use to train and evaluation. 
+%クラス毎の出現頻度が~表\ref{cyberdataset_label}の値である．表記のためクラス名を簡略した．
+Table ~\ref{cyberdataset_label} shows the frequency of occurrence of each class. Class names are abbreviated for convenience of notation.
+%各クラス毎に約100回から9000回のサンプルがあり数値上では十分である．
+Each class has 100 to 9,000 samples, so it looks numerically good enough.
+%しかしこれは連続したシーンを含めての数値であり，その実は多様性に欠ける中身となっている．
+However, there are continuous scenes. Therefore, the content of the data is actually lacking in diversity.
+%例えば，runクラスは98サンプルあるが，独立したシーンとしては3シーンにすぎず，
+For example, the class `` run '' has 98 samples, but only 3 scenes as independent scenes.
+%bark，eat-drink，see\_victim，shakeクラスを合わせても100シーンに満たない．
+Also, the sum of scene ``bark'', ``eat-drink'', ``see\_victim'' and ``shake\_body'' is less than 100 scenes.
 
 \begin{table*}[htb]
  \begin{center}
- \caption{サイバーレスキュー犬訓練データセット 利用範囲内で計測した出現回数}\label{cyberdataset_label}
+ %\caption{サイバーレスキュー犬訓練データセット 利用範囲内で計測した出現回数}\label{cyberdataset_label}
+ \caption{Class frequency of occurrence of Training Cyber Rescue Dataset}\label{cyberdataset_label}
  \scalebox{0.95}[0.95]{
   \begin{tabular}{|l||c|c|c|c|c|c|c|c|c|c|c|}
    \hline \hline
-      クラス   & \rotatebox{90}{bark}& \rotatebox{90}{cling}&\rotatebox{90}{command}& \rotatebox{90}{eat}&\rotatebox{90}{handler}& \rotatebox{90}{run}&\rotatebox{90}{victim}& \rotatebox{90}{shake}& \rotatebox{90}{sniff}& \rotatebox{90}{stop}& \rotatebox{90}{walk} \\ \hline
+      Class name   & \rotatebox{90}{bark}& \rotatebox{90}{cling}&\rotatebox{90}{command}& \rotatebox{90}{eat}&\rotatebox{90}{handler}& \rotatebox{90}{run}&\rotatebox{90}{victim}& \rotatebox{90}{shake}& \rotatebox{90}{sniff}& \rotatebox{90}{stop}& \rotatebox{90}{walk} \\ \hline
 
 %   ラベル　& bark&cling&comm&eat&handler&run&victim&shake&sniff&stop&walk \\ \hline
-   出現回数& 1744& 1127&2439&343&  2011& 98&  1549&  239& 7719&6384&8764 \\ \hline
+   Occurrence& 1744& 1127&2439&343&  2011& 98&  1549&  239& 7719&6384&8764 \\ \hline
   \end{tabular}
  }
 \end{center}
 \end{table*}
 
-フレームの静止画像とその直後のフレームから計算したoptical flow画像, および前後15フレーム分の長さの音声の3データをフレーム毎に抽出した.
-
-%これを1/5の量にサンプリングしたものを学習と評価に用いた.
+%フレームの静止画像とその直後のフレームから計算したoptical flow画像, および前後15フレーム分の長さの音声の3データをフレーム毎に抽出した.
+Three data were extracted for each frame: still image, optical flow image calculated from immediately frame and 15 frames of audio before and after the frame.
 
 \begin{figure}[tb]
     \begin{tabular}{l}
@@ -215,7 +232,8 @@ bark，eat-drink，see\_victim，shakeクラスを合わせても100シーンに
         \end{center}
       \end{minipage}
     \end{tabular}
-    \caption{サイバーレスキュー犬訓練データセットsee victimクラス（上段）とstopクラス（下段）． 左から静止画像, optical flow画像, MFCCスペクトラムで可視化した音声である.}
+    %\caption{サイバーレスキュー犬訓練データセットsee victimクラス（上段）とstopクラス（下段）． 左から静止画像, optical flow画像, MFCCスペクトラムで可視化した音声である.}
+    \caption{Class ``see victim'' (upper) and class ``stop'' (lowwer) from Training Cyber Rescue Dataset. From the left, still image, optical flow image and audio data visualized by MFCC spectrum.}
     \label{dataset}
 \end{figure}
 
