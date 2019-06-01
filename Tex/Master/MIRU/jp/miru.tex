@@ -48,7 +48,7 @@ Sound/image-based three-stream CNNは動画から得られた静止画像・opti
 \begin{figure}[tb]
  \begin{center}
 %  \includegraphics[width=7cm]{./Figures/easy_image.eps}
-  \includegraphics[width=7cm]{./Figures/dogactrec.eps}
+  \includegraphics[width=6cm]{./Figures/dogactrec.eps}
   \caption{提案手法の概要．入力画像から複数データを抽出し，それぞれ別のストリームへ入力する．各ストリームの出力をもとに，動画のレスキュー犬行動推定結果を最終出力とする．}
   \label{lite_model}
  \end{center}
@@ -66,8 +66,7 @@ Sound/image-based three-stream CNNは動画から得られた静止画像・opti
 ただし，本研究では動画像と音声情報のみの提供をうけたため，これらを入力とした犬の行動推定を行う．
 
 犬一人称の動画像データセットにはDogCentric Activity Dataset~\cite{yumi2014first}がある．
-これは，背中にカメラを搭載した犬の散歩データセットである．犬一人称視点動画からの犬行動分類に利用されるが，音声データは収録されていない．
-また，レスキュー犬特有のクラスなどには対応しておらず，シングルクラスで分類されているため本研究では利用しない．
+これは，背中にカメラを搭載した犬の散歩データセットである．犬一人称視点動画からの犬行動分類に利用される.しかし，レスキュー犬特有のクラスなどには対応しておらず，音声データも収録されておらず，シングルクラスで分類されているため本研究では利用しない．
 
 音声に焦点をあてた動画分類の研究にはSoundNet~\cite{aytar2016soundnet}がある．
 動画から音声と画像を取り出し，画像を教師データとし，音声は生徒データとして出力が等しくなるように学習している．
@@ -75,7 +74,6 @@ Sound/image-based three-stream CNNは動画から得られた静止画像・opti
 本研究では音声のみからの行動推定は目的としない．しかし，音声の意味的情報は動画認識に重要であることが明らかにされている．
 SoundNetとtwo-stream CNN を参考に, 本研究では音声識別ネットワークと two-streamネットワークを統合したアーキテクチャを構築した.
 SoundNetが音声波形を入力とするのに対し，本研究では音声からMFCC特徴を抽出してからストリームへの入力とする点で異なっている．
-
 音声と動画像だけでなく，加速度と速度情報を用いたマルチモーダルな学習の研究には丹野らの~\cite{tanno2019deim}がある．
 これは，情報を追加することによっての認識精度の向上や低下を報告しており，特に音声によって分類精度が向上するとされている．
 マルチモーダルな深層学習という点で本研究と同様のテーマだが，マルチクラス推定という点で本研究とは異なっている．
@@ -103,7 +101,7 @@ bark，eat-drink，see\_victim，shakeクラスを合わせても100シーンに
 \begin{table*}[htb]
  \begin{center}
  \caption{サイバーレスキュー犬訓練データセット 利用範囲内で計測した出現回数}\label{cyberdataset_label}
- \scalebox{0.95}[0.95]{
+ \scalebox{0.85}[0.85]{
   \begin{tabular}{|l||c|c|c|c|c|c|c|c|c|c|c|}
    \hline \hline
       クラス   & \rotatebox{90}{bark}& \rotatebox{90}{cling}&\rotatebox{90}{command}& \rotatebox{90}{eat}&\rotatebox{90}{handler}& \rotatebox{90}{run}&\rotatebox{90}{victim}& \rotatebox{90}{shake}& \rotatebox{90}{sniff}& \rotatebox{90}{stop}& \rotatebox{90}{walk} \\ \hline
@@ -194,7 +192,7 @@ Sound/image-based three-stream CNN のアーキテクチャを図~\ref{sound3st}
 
 \begin{figure}[tb]
    \begin{center}
-    \includegraphics[scale=0.25]{./Figures/soundimage-basedthree-streamCNN.eps}
+    \includegraphics[scale=0.22]{./Figures/soundimage-basedthree-streamCNN.eps}
     \caption{Sound/image-based three-streamアーキテクチャ.音声, 静止画像, optical flow画像それぞれを入力とする3ストリームからなり, それぞれの出力を結合してクラスを推定している.}
     \label{sound3st}
    \end{center}
@@ -221,7 +219,7 @@ Sound/image-based three-stream CNN のアーキテクチャを図~\ref{sound3st}
 
 \begin{figure}[tb]
    \begin{center}
-    \includegraphics[scale=0.16]{./Figures/1d2dconv.eps}
+    \includegraphics[scale=0.13]{./Figures/1d2dconv.eps}
     \caption{1D convolutionと 2D convolutionの詳細.データは同様でも入力の形と処理が異なり, 出力の結果も異なっている.}
     \label{1d2dconv}
    \end{center}
